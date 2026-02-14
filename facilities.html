@@ -23,7 +23,7 @@
         <img src="assets/img/logo.png" alt="Logo" />
         <span class="brand__text">
           <span class="brand__name">St Theresa Medical Training College</span>
-          <span class="brand__tag">“To Love and Serve”</span>
+          <span class="brand__tag">"To Love and Serve"</span>
         </span>
       </a>
       <button class="nav-toggle" aria-label="Open menu" aria-expanded="false">☰</button>
@@ -33,7 +33,7 @@
         <a href="courses.html">Courses</a>
         <a href="faculty.html">Faculty</a>
         <a href="admissions.html">Admissions</a>
-        <a href="facilities.html">Facilities</a>
+        <a href="facilities.html" class="nav-active">Facilities</a>
         <a href="news.html">News & Events</a>
         <a href="contact.html">Contact</a>
         <a class="btn btn--small" href="admissions.html#apply">Apply Now</a>
@@ -41,96 +41,136 @@
     </div>
   </header>
 
-  <section class="section">
+  <!-- Hero Section -->
+  <section class="hero" style="--hero-image:url('assets/img/hero-facilities.jpg')">
+    <div class="hero__bg" aria-hidden="true"></div>
+    <div class="container hero__content">
+      <div class="kicker">World-Class Infrastructure</div>
+      <h1>State-of-the-Art Facilities</h1>
+      <p class="sub lead">Modern learning environments integrated with Level 5 teaching hospital for comprehensive clinical training.</p>
+      <div class="hero__actions">
+        <a class="btn btn--light" href="#gallery">Explore Facilities</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Facilities Gallery - MATCHES YOUR SCREENSHOT -->
+  <section class="section facilities-gallery" id="gallery">
     <div class="container">
-      <div class="section__head">
-        <h2>Academic Facilities</h2>
-        <p class="lead">Modern learning spaces that support skills development and academic excellence.</p>
+      <div class="section__head" style="justify-content:center; margin-bottom:3rem; text-align:center;">
+        <h2>Our World-Class Facilities</h2>
+        <p class="lead">Purpose-built for medical training excellence</p>
       </div>
 
-      <div class="grid grid--4">
-        <article class="card">
-          <img src="assets/img/placeholders/campus.jpg" alt="Lecture halls" />
-          <div class="card__body">
-            <span class="pill">Academic</span>
-            <h3>Lecture Halls</h3>
-            <p class="lead">Well-equipped classrooms with comfortable seating and audio-visual support.</p>
-            <ul class="list">
-              <li>Air-conditioned classrooms</li>
-              <li>Projectors and presentation systems</li>
-              <li>Comfortable learning environment</li>
-            </ul>
-          </div>
-        </article>
-
-        <article class="card">
-          <img src="assets/img/placeholders/lab.jpg" alt="Skills laboratory" />
-          <div class="card__body">
-            <span class="pill">Academic</span>
-            <h3>Skills Laboratory</h3>
-            <p class="lead">Hands-on nursing skills lab with training mannequins and equipment.</p>
-            <ul class="list">
-              <li>High-fidelity mannequins</li>
-              <li>Complete nursing equipment sets</li>
-              <li>Clinical procedure practice</li>
-            </ul>
-          </div>
-        </article>
-
-        <article class="card">
-          <img src="assets/img/placeholders/lab.jpg" alt="Computer lab" />
-          <div class="card__body">
-            <span class="pill">Academic</span>
-            <h3>Computer Lab</h3>
-            <p class="lead">Modern computers to support research, digital literacy, and health records training.</p>
-            <ul class="list">
-              <li>Networked computers</li>
-              <li>High-speed internet</li>
-              <li>EHR software exposure</li>
-            </ul>
-          </div>
-        </article>
-
-        <article class="card">
-          <img src="assets/img/placeholders/library.jpg" alt="Library" />
-          <div class="card__body">
-            <span class="pill">Academic</span>
-            <h3>Library</h3>
-            <p class="lead">Reference materials, textbooks, journals, and quiet study areas.</p>
-            <ul class="list">
-              <li>Medical textbooks</li>
-              <li>Current journals</li>
-              <li>Quiet reading rooms</li>
-            </ul>
-          </div>
-        </article>
-      </div>
-
-      <div class="section__head" style="margin-top:34px">
-        <h2>Clinical Training</h2>
-        <p class="lead">Students gain practical experience through clinical attachment at St Theresa Mission Hospital.</p>
-      </div>
-
-      <div class="grid grid--2">
-        <div class="card">
-          <div class="card__body">
-            <h3>Hospital Integration</h3>
-            <p class="lead">
-              Learn in real clinical settings under supervision, building competence, confidence, and professionalism.
+      <div class="facilities-grid">
+        <!-- Lecture Hall -->
+        <div class="gallery-item">
+          <img src="assets/img/facilities/lecture-hall.jpg" alt="Modern Lecture Theatre" loading="lazy">
+          <div class="gallery-overlay">
+            <h3 class="gallery-title">Modern Lecture Theatres</h3>
+            <p class="gallery-subtitle">
+              Interactive smart classrooms with 4K projectors, 
+              surround sound systems & tiered seating for 120 students
             </p>
-            <ul class="list">
-              <li>Outpatient services exposure</li>
-              <li>Inpatient ward experience</li>
-              <li>Laboratory and pharmacy rotations</li>
-              <li>Community outreach participation</li>
-            </ul>
           </div>
         </div>
-        <div class="card">
-          <img src="assets/img/hero.jpg" alt="Clinical training" />
+
+        <!-- Practical Training Lab -->
+        <div class="gallery-item">
+          <img src="assets/img/facilities/practical-training.jpg" alt="Nursing Skills Laboratory" loading="lazy">
+          <div class="gallery-overlay">
+            <h3 class="gallery-title">Nursing Skills Laboratory</h3>
+            <p class="gallery-subtitle">
+              High-fidelity simulation mannequins, IV training arms, 
+              wound care stations & full clinical procedure suites
+            </p>
+          </div>
+        </div>
+
+        <!-- Clinical Laboratory -->
+        <div class="gallery-item">
+          <img src="assets/img/facilities/clinical-lab.jpg" alt="Medical Laboratory" loading="lazy">
+          <div class="gallery-overlay">
+            <h3 class="gallery-title">Clinical Laboratories</h3>
+            <p class="gallery-subtitle">
+              Automated analyzers, microscopes, hematology workstations 
+              & biosafety level 2 facilities
+            </p>
+          </div>
+        </div>
+
+        <!-- Computer Laboratory -->
+        <div class="gallery-item">
+          <img src="assets/img/facilities/computer-lab.jpg" alt="ICT Laboratory" loading="lazy">
+          <div class="gallery-overlay">
+            <h3 class="gallery-title">ICT & Health Records Lab</h3>
+            <p class="gallery-subtitle">
+              40-station computer lab with EHR software, 
+              hospital management systems & high-speed connectivity
+            </p>
+          </div>
+        </div>
+
+        <!-- Library -->
+        <div class="gallery-item">
+          <img src="assets/img/facilities/library.jpg" alt="Medical Library" loading="lazy">
+          <div class="gallery-overlay">
+            <h3 class="gallery-title">Digital Medical Library</h3>
+            <p class="gallery-subtitle">
+              5,000+ medical textbooks, e-journals access, 
+              individual study carrels & group discussion rooms
+            </p>
+        </div>
+        </div>
+
+        <!-- Hospital Integration -->
+        <div class="gallery-item">
+          <img src="assets/img/facilities/hospital.jpg" alt="Hospital Clinical Training" loading="lazy">
+          <div class="gallery-overlay">
+            <h3 class="gallery-title">Level 5 Teaching Hospital</h3>
+            <p class="gallery-subtitle">
+              Direct clinical rotations at St Theresa Mission Hospital 
+              (200+ bed capacity) with supervised patient care
+            </p>
+          </div>
+        </div>
+
+        <!-- Student Hostel -->
+        <div class="gallery-item">
+          <img src="assets/img/facilities/hostel.jpg" alt="Student Accommodation" loading="lazy">
+          <div class="gallery-overlay">
+            <h3 class="gallery-title">On-Campus Accommodation</h3>
+            <p class="gallery-subtitle">
+              Modern hostels with WiFi, laundry facilities, 
+              recreation areas & 24/7 security
+            </p>
+          </div>
+        </div>
+
+        <!-- Sports Facilities -->
+        <div class="gallery-item">
+          <img src="assets/img/facilities/sports.jpg" alt="Sports Facilities" loading="lazy">
+          <div class="gallery-overlay">
+            <h3 class="gallery-title">Sports & Recreation</h3>
+            <p class="gallery-subtitle">
+              Full-size football pitch, basketball/volleyball courts, 
+              gym facilities & student wellness center
+            </p>
+          </div>
         </div>
       </div>
+    </div>
+  </section>
 
+  <!-- CTA Section -->
+  <section class="section section--soft">
+    <div class="container" style="text-align:center; max-width:800px; margin:auto;">
+      <h2 style="margin-bottom:1rem;">Ready to Experience Our Facilities?</h2>
+      <p class="lead">Schedule a campus tour or apply for September 2026 intake today.</p>
+      <div style="display:flex; gap:1rem; justify-content:center; flex-wrap:wrap; margin-top:2rem;">
+        <a class="btn btn--light" href="tel:+254727811041">📞 Schedule Tour</a>
+        <a class="btn btn--ghost" href="admissions.html#apply">Apply Now</a>
+      </div>
     </div>
   </section>
 
@@ -141,7 +181,11 @@
       <div><h3>Contact</h3><p><strong>Phone:</strong> <a href="tel:+254727811041">+254 727 811 041</a><br><strong>Email:</strong> <a href="mailto:info@sttheresahosp-kiirua.com">info@sttheresahosp-kiirua.com</a></p></div>
       <div><h3>Apply</h3><a class="btn btn--light" href="admissions.html#apply">Apply Now</a></div>
     </div>
-    <div class="footer__bottom"><div class="container"><small>© <span id="year"></span> St Theresa Medical Training College.</small></div></div>
+    <div class="footer__bottom">
+      <div class="container">
+        <small>© <span id="year"></span> St Theresa Medical Training College.</small>
+      </div>
+    </div>
   </footer>
 
   <script src="assets/js/main.js"></script>
