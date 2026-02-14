@@ -1,0 +1,123 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Contact – St Theresa Medical Training College</title>
+  <link rel="stylesheet" href="assets/css/styles.css" />
+</head>
+<body>
+  <div class="topbar">
+    <div class="container topbar__inner">
+      <div class="topbar__left">
+        <span class="ico">📞</span> <a href="tel:+254727811041">+254 727 811 041</a>
+        <span class="ico">✉️</span> <a href="mailto:info@sttheresahosp-kiirua.com">info@sttheresahosp-kiirua.com</a>
+      </div>
+      <div class="topbar__right">Mon - Fri: 8:00 AM - 5:00 PM</div>
+    </div>
+  </div>
+
+  <header class="header">
+    <div class="container header__inner">
+      <a class="brand" href="index.html">
+        <img src="assets/img/logo.png" alt="Logo" />
+        <span class="brand__text">
+          <span class="brand__name">St Theresa Medical Training College</span>
+          <span class="brand__tag">“To Love and Serve”</span>
+        </span>
+      </a>
+      <button class="nav-toggle" aria-label="Open menu" aria-expanded="false">☰</button>
+      <nav class="nav">
+        <a href="index.html">Home</a>
+        <a href="about.html">About Us</a>
+        <a href="courses.html">Courses</a>
+        <a href="faculty.html">Faculty</a>
+        <a href="admissions.html">Admissions</a>
+        <a href="facilities.html">Facilities</a>
+        <a href="news.html">News & Events</a>
+        <a href="contact.html">Contact</a>
+        <a class="btn btn--small" href="admissions.html#apply">Apply Now</a>
+      </nav>
+    </div>
+  </header>
+
+  <section class="section section--soft">
+    <div class="container grid grid--2" style="align-items:start">
+      <div class="contact-panel">
+        <h2>Talk To Us</h2>
+        <div class="contact-row">
+          <div class="ico">🕒</div>
+          <div><strong>We are Open</strong><br>Mon - Fri: 8:00 AM - 5:00 PM</div>
+        </div>
+        <div class="contact-row">
+          <div class="ico">📞</div>
+          <div><strong>Phone</strong><br>
+            <a href="tel:+254727811041" style="color:#fff;text-decoration:underline">+254 727 811 041</a><br>
+            <a href="tel:+254703726321" style="color:#fff;text-decoration:underline">+254 703 726 321</a>
+          </div>
+        </div>
+        <div class="contact-row">
+          <div class="ico">✉️</div>
+          <div><strong>Email</strong><br>
+            <a href="mailto:info@sttheresahosp-kiirua.com" style="color:#fff;text-decoration:underline">info@sttheresahosp-kiirua.com</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card__body">
+          <h3>Send Us a Message</h3>
+          <p class="lead">This form is static. If you want submissions, we’ll wire it to a service (Formspree/Resend) later.</p>
+
+          <form onsubmit="event.preventDefault(); alert('Form submission is disabled on this static demo.');">
+            <div class="grid grid--2">
+              <div>
+                <label><strong>Full Name</strong></label>
+                <input required style="width:100%;padding:12px;border-radius:12px;border:1px solid var(--border)" />
+              </div>
+              <div>
+                <label><strong>Email</strong></label>
+                <input type="email" required style="width:100%;padding:12px;border-radius:12px;border:1px solid var(--border)" />
+              </div>
+            </div>
+            <div style="margin-top:12px">
+              <label><strong>Subject</strong></label>
+              <input required style="width:100%;padding:12px;border-radius:12px;border:1px solid var(--border)" />
+            </div>
+            <div style="margin-top:12px">
+              <label><strong>Message</strong></label>
+              <textarea required rows="5" style="width:100%;padding:12px;border-radius:12px;border:1px solid var(--border)"></textarea>
+            </div>
+            <div style="margin-top:14px">
+              <button class="btn" type="submit">Send Message</button>
+            </div>
+          </form>
+
+          <div style="margin-top:18px">
+            <h3>Location</h3>
+            <p class="lead">Kiirua, Meru County (update with exact address line if needed).</p>
+            <div class="card" style="border-radius:14px">
+              <div class="card__body" style="color:var(--muted)">
+                Map embed placeholder (add Google Maps iframe here).
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="container footer__grid grid grid--4">
+      <div><h3>St Theresa Medical Training College</h3><p>A constituent college of St Theresa Mission Hospital – Kiirua.</p></div>
+      <div><h3>Quick Links</h3><ul><li><a href="courses.html">Courses</a></li><li><a href="admissions.html">Admissions</a></li><li><a href="news.html">News & Events</a></li></ul></div>
+      <div><h3>Contact</h3><p><strong>Phone:</strong> <a href="tel:+254727811041">+254 727 811 041</a><br><strong>Email:</strong> <a href="mailto:info@sttheresahosp-kiirua.com">info@sttheresahosp-kiirua.com</a></p></div>
+      <div><h3>Apply</h3><a class="btn btn--light" href="admissions.html#apply">Apply Now</a></div>
+    </div>
+    <div class="footer__bottom"><div class="container"><small>© <span id="year"></span> St Theresa Medical Training College.</small></div></div>
+  </footer>
+
+  <script src="assets/js/main.js"></script>
+</body>
+</html>
