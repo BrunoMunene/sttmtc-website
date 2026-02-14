@@ -23,7 +23,7 @@
         <img src="assets/img/logo.png" alt="Logo" />
         <span class="brand__text">
           <span class="brand__name">St Theresa Medical Training College</span>
-          <span class="brand__tag">“To Love and Serve”</span>
+          <span class="brand__tag">"To Love and Serve"</span>
         </span>
       </a>
       <button class="nav-toggle" aria-label="Open menu" aria-expanded="false">☰</button>
@@ -32,7 +32,7 @@
         <a href="about.html">About Us</a>
         <a href="courses.html">Courses</a>
         <a href="faculty.html">Faculty</a>
-        <a href="admissions.html">Admissions</a>
+        <a href="admissions.html" class="nav-active">Admissions</a>
         <a href="facilities.html">Facilities</a>
         <a href="news.html">News & Events</a>
         <a href="contact.html">Contact</a>
@@ -41,90 +41,183 @@
     </div>
   </header>
 
+  <!-- NEW: Hero Section -->
+  <section class="hero" style="--hero-image:url('assets/img/hero-admissions.jpg')" id="apply">
+    <div class="hero__bg" aria-hidden="true"></div>
+    <div class="container hero__content">
+      <div class="kicker">2026 September Intake</div>
+      <h1>Applications Now Open</h1>
+      <p class="sub lead">Limited spaces for KRCHN Nursing, Medical Laboratory, and Health Records programs. Deadline: March 31, 2026.</p>
+      <div class="hero__actions">
+        <a class="btn btn--light" href="#intake">View Programs</a>
+        <a class="btn btn--ghost" href="#application-form">Apply Online</a>
+      </div>
+      <div class="stats grid grid--3">
+        <div class="stat"><strong>March 31</strong><span>Deadline</span></div>
+        <div class="stat"><strong>0700 626 189</strong><span>Admissions Hotline</span></div>
+        <div class="stat"><strong>150</strong><span>Total Spaces</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Current Intake Programs -->
+  <section class="section section--soft" id="intake">
+    <div class="container">
+      <div class="section__head">
+        <h2>Available Programs - 2026 Intake</h2>
+        <p class="lead">Choose your healthcare career path.</p>
+      </div>
+
+      <div class="grid grid--3">
+        <article class="card">
+          <img src="assets/img/placeholders/nursing.jpg" alt="Nursing" class="card__img" />
+          <div class="card__body">
+            <span class="pill pill--urgent">80 Spaces</span>
+            <h3>Diploma in Nursing (KRCHN)</h3>
+            <div class="meta"><span>⏱ 3½ Years</span> <span>💰 KSh 85,000/yr</span></div>
+            <p style="margin:0">KCSE C(plain) with C in English/Kiswahili, Biology, C- in Chemistry/Physics/Math</p>
+          </div>
+          <div class="card__cta"><a class="btn btn--light" href="#application-form">Apply Now</a></div>
+        </article>
+
+        <article class="card">
+          <img src="assets/img/placeholders/lab.jpg" alt="Laboratory" class="card__img" />
+          <div class="card__body">
+            <span class="pill pill--urgent">40 Spaces</span>
+            <h3>Certificate in Medical Laboratory</h3>
+            <div class="meta"><span>⏱ 2 Years</span> <span>💰 KSh 75,000/yr</span></div>
+            <p style="margin:0">KCSE C-(minus) with C in English/Kiswahili, Biology, Chemistry/Physics/Math</p>
+          </div>
+          <div class="card__cta"><a class="btn btn--light" href="#application-form">Apply Now</a></div>
+        </article>
+
+        <article class="card">
+          <img src="assets/img/placeholders/records.jpg" alt="Health Records" class="card__img" />
+          <div class="card__body">
+            <span class="pill pill--urgent">30 Spaces</span>
+            <h3>Diploma in Health Records & IT</h3>
+            <div class="meta"><span>⏱ 3 Years</span> <span>💰 KSh 70,000/yr</span></div>
+            <p style="margin:0">KCSE C(plain) with C in English/Kiswahili, Biology, Mathematics</p>
+          </div>
+          <div class="card__cta"><a class="btn btn--light" href="#application-form">Apply Now</a></div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- Requirements & Process -->
   <section class="section">
     <div class="container">
       <div class="section__head">
-        <h2>Admissions</h2>
-        <p class="lead">Application guidance, entry requirements, and how to submit your documents.</p>
+        <h2>Admission Requirements</h2>
       </div>
 
       <div class="grid grid--2">
         <div class="card">
           <div class="card__body">
-            <h3>Minimum Academic Requirements (KRCHN)</h3>
+            <h3>Academic Requirements</h3>
             <ul class="list">
-              <li>At least KCSE aggregate C (Plain)</li>
-              <li>Mandatory subjects: C in Biology; C in English or Kiswahili</li>
-              <li>Additional subjects: C- (Minus) in Physics, Chemistry, or Mathematics</li>
+              <li>Original KCSE Certificate & Result Slip</li>
+              <li>National ID / Passport / Birth Certificate copy</li>
+              <li>2 recent passport-sized photographs</li>
+              <li>KSh 1,000 application fee receipt</li>
+              <li>Completed application form</li>
             </ul>
-
-            <h3 style="margin-top:16px">How to Apply</h3>
-            <ol class="list">
-              <li>Choose a programme from the Courses page.</li>
-              <li>Prepare required documents (ID, KCSE certificate/results slip, etc.).</li>
-              <li>Submit via email or contact the admissions office.</li>
-              <li>Await confirmation and reporting instructions.</li>
-            </ol>
           </div>
         </div>
 
         <div class="card">
-          <img src="assets/img/intake-poster.jpg" alt="Intake poster" />
-        </div>
-      </div>
-
-      <div class="section" id="apply" style="padding-bottom:0">
-        <div class="grid grid--2">
-          <div class="contact-panel">
-            <h2>Apply Now</h2>
-            <div class="contact-row">
-              <div class="ico">🕒</div>
-              <div><strong>Office Hours</strong><br>Mon - Fri: 8:00 AM - 5:00 PM</div>
-            </div>
-            <div class="contact-row">
-              <div class="ico">📞</div>
-              <div><strong>Call Us</strong><br><a href="tel:0700626189" style="color:#fff;text-decoration:underline">0700 626 189</a></div>
-            </div>
-            <div class="contact-row">
-              <div class="ico">✉️</div>
-              <div><strong>Submit via</strong><br><a href="mailto:info@sttheresamedcollege.co.ke" style="color:#fff;text-decoration:underline">info@sttheresamedcollege.co.ke</a></div>
-            </div>
-          </div>
-
-          <div class="card">
-            <div class="card__body">
-              <h3>What to Include</h3>
-              <ul class="list">
-                <li>Full names (as per ID)</li>
-                <li>Programme applying for</li>
-                <li>KCSE results and subject grades</li>
-                <li>Phone number and email</li>
-              </ul>
-
-              <h3 style="margin-top:16px">Downloads</h3>
-              <p class="lead">Add your PDF links here once ready.</p>
-              <ul class="list">
-                <li><a href="#" aria-disabled="true">Application Form (PDF)</a></li>
-                <li><a href="#" aria-disabled="true">Prospectus (PDF)</a></li>
-              </ul>
-
-              <div style="margin-top:18px">
-                <a class="btn" href="contact.html">Contact Admissions</a>
-              </div>
-            </div>
+          <div class="card__body">
+            <h3>Application Steps</h3>
+            <ol class="list">
+              <li>Review program requirements above</li>
+              <li>Complete online form or download PDF</li>
+              <li>Pay KSh 1,000 non-refundable fee (MPESA till: coming soon)</li>
+              <li>Submit documents to admissions office</li>
+              <li>Attend interview (April 2026)</li>
+            </ol>
           </div>
         </div>
       </div>
+    </div>
+  </section>
 
+  <!-- NEW: Application Form -->
+  <section class="section section--soft" id="application-form">
+    <div class="container grid grid--2" style="align-items:center">
+      <div>
+        <div class="section__head">
+          <h2>Online Application</h2>
+          <p class="lead">Complete in 2 minutes. Our admissions team will contact you within 24 hours.</p>
+        </div>
+        <div class="contact-row">
+          <span class="ico">📞</span> <strong>Need help?</strong> Call <a href="tel:0700626189">0700 626 189</a>
+        </div>
+      </div>
+
+      <div class="card">
+        <form class="apply-form" action="#" method="POST">
+          <div class="form-row">
+            <input type="text" name="fullname" placeholder="Full Name *" required />
+            <input type="tel" name="phone" placeholder="Phone Number *" required />
+          </div>
+          <div class="form-row">
+            <input type="email" name="email" placeholder="Email Address" />
+            <input type="text" name="kcse" placeholder="KCSE Index Number *" required />
+          </div>
+          <div class="form-row">
+            <select name="program" required>
+              <option value="">Select Program *</option>
+              <option>Diploma in Nursing (KRCHN)</option>
+              <option>Certificate in Medical Laboratory</option>
+              <option>Diploma in Health Records & IT</option>
+            </select>
+            <input type="date" name="dob" placeholder="Date of Birth" required />
+          </div>
+          <div style="margin-top:1rem">
+            <textarea name="message" placeholder="Any additional information or questions..." rows="3" style="width:100%"></textarea>
+          </div>
+          <button type="submit" class="btn btn--light" style="width:100%; margin-top:1rem">Submit Application</button>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- Fees & Dates -->
+  <section class="section">
+    <div class="container">
+      <div class="section__head">
+        <h2>Tuition Fees & Timeline</h2>
+      </div>
+      <div class="grid grid--2">
+        <div class="card">
+          <h3>Annual Tuition (2026)</h3>
+          <ul class="list list--compact">
+            <li><strong>Nursing (KRCHN):</strong> KSh 85,000</li>
+            <li><strong>Medical Laboratory:</strong> KSh 75,000</li>
+            <li><strong>Health Records:</strong> KSh 70,000</li>
+            <li><em>Additional: uniforms, books, medical insurance</em></li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3>Important Dates</h3>
+          <ul class="list list--compact">
+            <li>📅 <strong>Applications Open:</strong> Feb 1, 2026</li>
+            <li>📅 <strong>Final Deadline:</strong> March 31, 2026</li>
+            <li>📅 <strong>Interviews:</strong> April 15-30, 2026</li>
+            <li>📅 <strong>Reporting Date:</strong> September 1, 2026</li>
+          </ul>
+        </div>
+      </div>
     </div>
   </section>
 
   <footer class="footer">
     <div class="container footer__grid grid grid--4">
       <div><h3>St Theresa Medical Training College</h3><p>A constituent college of St Theresa Mission Hospital – Kiirua.</p></div>
-      <div><h3>Quick Links</h3><ul><li><a href="courses.html">Courses</a></li><li><a href="faculty.html">Faculty</a></li><li><a href="facilities.html">Facilities</a></li></ul></div>
-      <div><h3>Contact</h3><p><strong>Phone:</strong> <a href="tel:+254727811041">+254 727 811 041</a><br><strong>Email:</strong> <a href="mailto:info@sttheresahosp-kiirua.com">info@sttheresahosp-kiirua.com</a></p></div>
-      <div><h3>Apply</h3><a class="btn btn--light" href="#apply">Apply Now</a></div>
+      <div><h3>Admissions</h3><ul><li><a href="#intake">Programs</a></li><li><a href="#application-form">Apply</a></li><li><a href="courses.html">Courses</a></li></ul></div>
+      <div><h3>Admissions Contact</h3><p><strong>📞 0700 626 189</strong><br><strong>✉️</strong> <a href="mailto:info@sttheresahosp-kiirua.com">info@sttheresahosp-kiirua.com</a></p></div>
+      <div><h3>Apply Today</h3><a class="btn btn--light" href="#application-form">Start Application</a></div>
     </div>
     <div class="footer__bottom"><div class="container"><small>© <span id="year"></span> St Theresa Medical Training College.</small></div></div>
   </footer>
