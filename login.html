@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Student Login – St Theresa MTC</title>
+    <link rel="stylesheet" href="assets/css/styles.css" />
+    <style>
+        .login-card {
+            max-width: 450px;
+            margin: 60px auto;
+            padding: 40px;
+            border-radius: var(--radius-lg);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+            background: #fff;
+        }
+        .login-header { text-align: center; margin-bottom: 30px; }
+        .login-header img { width: 80px; margin-bottom: 15px; }
+        .form-group { margin-bottom: 20px; }
+        .form-group label { display: block; margin-bottom: 8px; font-weight: 600; color: var(--text-main); }
+        .form-control { 
+            width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 8px; 
+            font-size: 1rem; transition: border-color 0.3s;
+        }
+        .form-control:focus { border-color: var(--brand); outline: none; }
+        .login-footer { text-align: center; margin-top: 20px; font-size: 0.9rem; color: var(--muted); }
+    </style>
+</head>
+<body style="background-color: #f4f7f9; display: flex; align-items: center; min-height: 100vh;">
+
+    <div class="container">
+        <div class="login-card">
+            <div class="login-header">
+                <a href="index.html"><img src="assets/img/logo.png" alt="Logo"></a>
+                <h2>Student Portal</h2>
+                <p>Please sign in to access your account</p>
+            </div>
+
+            <form action="portal.html" method="GET">
+                <div class="form-group">
+                    <label>Student ID / Admission No.</label>
+                    <input type="text" class="form-control" placeholder="e.g., ST/NUR/2026/001" required>
+                </div>
+                <div class="form-group">
+                    <label>Password</label>
+                    <input type="password" class="form-control" placeholder="••••••••" required>
+                </div>
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 25px;">
+                    <label style="font-size: 0.85rem; cursor: pointer;">
+                        <input type="checkbox"> Remember me
+                    </label>
+                    <a href="#" style="font-size: 0.85rem; color: var(--brand);">Forgot Password?</a>
+                </div>
+                <button type="submit" class="btn" style="width: 100%; border: none;">Sign In</button>
+            </form>
+
+            <div class="login-footer">
+                <p>Issues logging in? Contact the ICT Department.</p>
+                <a href="index.html" style="text-decoration: none; color: var(--brand); font-weight: 600;">← Back to Home</a>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>

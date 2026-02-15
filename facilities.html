@@ -5,6 +5,62 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Facilities – St Theresa Medical Training College</title>
   <link rel="stylesheet" href="assets/css/styles.css" />
+  <style>
+    /* Specific styling for the Facilities Gallery */
+    .facilities-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+      gap: 25px;
+      margin-top: 30px;
+    }
+    .gallery-item {
+      position: relative;
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      height: 400px;
+      box-shadow: var(--shadow-md);
+      background: #eee;
+    }
+    .gallery-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    .gallery-item:hover img {
+      transform: scale(1.08);
+    }
+    .gallery-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(11, 79, 138, 0.9) 0%, rgba(11, 79, 138, 0.4) 50%, transparent 100%);
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: 30px;
+      color: #fff;
+      opacity: 0.95;
+    }
+    .gallery-title { color: #fff; margin-bottom: 10px; font-size: 1.6rem; font-weight: 700; }
+    .gallery-subtitle { font-size: 1rem; line-height: 1.5; opacity: 0.9; }
+
+    /* Feature Box for Hospital Integration */
+    .hospital-feature {
+      background: var(--brand);
+      color: white;
+      border-radius: var(--radius-lg);
+      padding: 50px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 40px;
+      align-items: center;
+      margin-top: 60px;
+    }
+    @media (max-width: 768px) {
+      .hospital-feature { grid-template-columns: 1fr; padding: 30px; }
+      .gallery-item { height: 300px; }
+    }
+  </style>
 </head>
 <body>
   <div class="topbar">
@@ -22,169 +78,111 @@
       <a class="brand" href="index.html">
         <img src="assets/img/logo.png" alt="Logo" />
         <span class="brand__text">
-          <span class="brand__name">St Theresa Medical Training College</span>
+          <span class="brand__name">St Theresa MTC</span>
           <span class="brand__tag">"To Love and Serve"</span>
         </span>
       </a>
-      <button class="nav-toggle" aria-label="Open menu" aria-expanded="false">☰</button>
+      <button class="nav-toggle">☰</button>
       <nav class="nav">
         <a href="index.html">Home</a>
         <a href="about.html">About Us</a>
         <a href="courses.html">Courses</a>
-        <a href="faculty.html">Faculty</a>
         <a href="admissions.html">Admissions</a>
         <a href="facilities.html" class="nav-active">Facilities</a>
-        <a href="news.html">News & Events</a>
+        <a href="news.html">News</a>
         <a href="contact.html">Contact</a>
         <a class="btn btn--small" href="admissions.html#apply">Apply Now</a>
       </nav>
     </div>
   </header>
 
-  <!-- Hero Section -->
-  <section class="hero" style="--hero-image:url('assets/img/hero-facilities.jpg')">
-    <div class="hero__bg" aria-hidden="true"></div>
+  <section class="hero" style="background-image: linear-gradient(rgba(11, 79, 138, 0.75), rgba(11, 79, 138, 0.75)), url('assets/img/photo-1562774053-701939374585.jpg'); background-size: cover; background-position: center;">
     <div class="container hero__content">
-      <div class="kicker">World-Class Infrastructure</div>
-      <h1>State-of-the-Art Facilities</h1>
-      <p class="sub lead">Modern learning environments integrated with Level 5 teaching hospital for comprehensive clinical training.</p>
-      <div class="hero__actions">
-        <a class="btn btn--light" href="#gallery">Explore Facilities</a>
-      </div>
+      <div class="kicker" style="color:#fff;">Training for Excellence</div>
+      <h1 style="color:#fff;">World-Class Infrastructure</h1>
+      <p class="sub lead" style="color:#fff;">A modern campus designed to foster academic rigor and clinical expertise.</p>
     </div>
   </section>
 
-  <!-- Facilities Gallery - MATCHES YOUR SCREENSHOT -->
-  <section class="section facilities-gallery" id="gallery">
+  <section class="section" id="gallery">
     <div class="container">
-      <div class="section__head" style="justify-content:center; margin-bottom:3rem; text-align:center;">
-        <h2>Our World-Class Facilities</h2>
-        <p class="lead">Purpose-built for medical training excellence</p>
+      <div class="section__head" style="text-align:center;">
+        <h2>Campus Resources</h2>
+        <p class="lead">Explore the environments where our students grow into medical leaders.</p>
       </div>
 
       <div class="facilities-grid">
-        <!-- Lecture Hall -->
         <div class="gallery-item">
-          <img src="assets/img/facilities/lecture-hall.jpg" alt="Modern Lecture Theatre" loading="lazy">
+          <img src="assets/img/photo-1551076805-e1869033e561.jpeg" alt="Skills Lab">
           <div class="gallery-overlay">
-            <h3 class="gallery-title">Modern Lecture Theatres</h3>
-            <p class="gallery-subtitle">
-              Interactive smart classrooms with 4K projectors, 
-              surround sound systems & tiered seating for 120 students
-            </p>
+            <h3 class="gallery-title">Clinical Skills Lab</h3>
+            <p class="gallery-subtitle">High-fidelity simulation tools for hands-on nursing and laboratory training.</p>
           </div>
         </div>
 
-        <!-- Practical Training Lab -->
         <div class="gallery-item">
-          <img src="assets/img/facilities/practical-training.jpg" alt="Nursing Skills Laboratory" loading="lazy">
+          <img src="assets/img/photo-1521587760476-6c12a4b040da.jpg" alt="Library">
           <div class="gallery-overlay">
-            <h3 class="gallery-title">Nursing Skills Laboratory</h3>
-            <p class="gallery-subtitle">
-              High-fidelity simulation mannequins, IV training arms, 
-              wound care stations & full clinical procedure suites
-            </p>
+            <h3 class="gallery-title">Modern Library</h3>
+            <p class="gallery-subtitle">A quiet sanctuary for research with extensive medical journals and digital resources.</p>
           </div>
         </div>
 
-        <!-- Clinical Laboratory -->
         <div class="gallery-item">
-          <img src="assets/img/facilities/clinical-lab.jpg" alt="Medical Laboratory" loading="lazy">
+          <img src="assets/img/photo-1555854877-bab0e564b8d5.jpg" alt="Hostels">
           <div class="gallery-overlay">
-            <h3 class="gallery-title">Clinical Laboratories</h3>
-            <p class="gallery-subtitle">
-              Automated analyzers, microscopes, hematology workstations 
-              & biosafety level 2 facilities
-            </p>
+            <h3 class="gallery-title">On-Campus Hostels</h3>
+            <p class="gallery-subtitle">Safe and comfortable student residences just a walking distance from classes.</p>
           </div>
         </div>
 
-        <!-- Computer Laboratory -->
         <div class="gallery-item">
-          <img src="assets/img/facilities/computer-lab.jpg" alt="ICT Laboratory" loading="lazy">
+          <img src="assets/img/photo-1497366216548-37526070297c.jpg" alt="Admin">
           <div class="gallery-overlay">
-            <h3 class="gallery-title">ICT & Health Records Lab</h3>
-            <p class="gallery-subtitle">
-              40-station computer lab with EHR software, 
-              hospital management systems & high-speed connectivity
-            </p>
+            <h3 class="gallery-title">Administrative Wing</h3>
+            <p class="gallery-subtitle">A professional atmosphere providing support for students and faculty.</p>
           </div>
         </div>
+      </div>
 
-        <!-- Library -->
-        <div class="gallery-item">
-          <img src="assets/img/facilities/library.jpg" alt="Medical Library" loading="lazy">
-          <div class="gallery-overlay">
-            <h3 class="gallery-title">Digital Medical Library</h3>
-            <p class="gallery-subtitle">
-              5,000+ medical textbooks, e-journals access, 
-              individual study carrels & group discussion rooms
-            </p>
+      <div class="hospital-feature">
+        <div>
+          <h2>Level 5 Hospital Integration</h2>
+          <p class="lead" style="color: rgba(255,255,255,0.9);">Unlike many colleges, St Theresa MTC is located within the St Theresa Mission Hospital complex. This gives our students:</p>
+          <ul class="list" style="margin-top: 20px; color: white;">
+            <li>Daily exposure to real patient scenarios.</li>
+            <li>Mentorship from practicing medical specialists.</li>
+            <li>Seamless transition from classroom to clinical rotation.</li>
+            <li>Access to hospital diagnostics and surgical theaters.</li>
+          </ul>
         </div>
-        </div>
-
-        <!-- Hospital Integration -->
-        <div class="gallery-item">
-          <img src="assets/img/facilities/hospital.jpg" alt="Hospital Clinical Training" loading="lazy">
-          <div class="gallery-overlay">
-            <h3 class="gallery-title">Level 5 Teaching Hospital</h3>
-            <p class="gallery-subtitle">
-              Direct clinical rotations at St Theresa Mission Hospital 
-              (200+ bed capacity) with supervised patient care
-            </p>
-          </div>
-        </div>
-
-        <!-- Student Hostel -->
-        <div class="gallery-item">
-          <img src="assets/img/facilities/hostel.jpg" alt="Student Accommodation" loading="lazy">
-          <div class="gallery-overlay">
-            <h3 class="gallery-title">On-Campus Accommodation</h3>
-            <p class="gallery-subtitle">
-              Modern hostels with WiFi, laundry facilities, 
-              recreation areas & 24/7 security
-            </p>
-          </div>
-        </div>
-
-        <!-- Sports Facilities -->
-        <div class="gallery-item">
-          <img src="assets/img/facilities/sports.jpg" alt="Sports Facilities" loading="lazy">
-          <div class="gallery-overlay">
-            <h3 class="gallery-title">Sports & Recreation</h3>
-            <p class="gallery-subtitle">
-              Full-size football pitch, basketball/volleyball courts, 
-              gym facilities & student wellness center
-            </p>
-          </div>
+        <div>
+          <img src="assets/img/photo-1519494026892-80bbd2d6fd0d.jpg" alt="Hospital Station" style="border-radius: 10px; box-shadow: 0 10px 30px rgba(0,0,0,0.3);">
         </div>
       </div>
     </div>
   </section>
 
-  <!-- CTA Section -->
   <section class="section section--soft">
-    <div class="container" style="text-align:center; max-width:800px; margin:auto;">
-      <h2 style="margin-bottom:1rem;">Ready to Experience Our Facilities?</h2>
-      <p class="lead">Schedule a campus tour or apply for September 2026 intake today.</p>
-      <div style="display:flex; gap:1rem; justify-content:center; flex-wrap:wrap; margin-top:2rem;">
-        <a class="btn btn--light" href="tel:+254727811041">📞 Schedule Tour</a>
-        <a class="btn btn--ghost" href="admissions.html#apply">Apply Now</a>
+    <div class="container" style="text-align:center;">
+      <h2>See It For Yourself</h2>
+      <p class="lead">We welcome prospective students and parents for campus tours every weekday.</p>
+      <div style="margin-top: 30px;">
+        <a class="btn btn--light" href="contact.html">Book a Tour</a>
+        <a class="btn" href="admissions.html#apply" style="margin-left: 15px;">Apply Today</a>
       </div>
     </div>
   </section>
 
   <footer class="footer">
     <div class="container footer__grid grid grid--4">
-      <div><h3>St Theresa Medical Training College</h3><p>A constituent college of St Theresa Mission Hospital – Kiirua.</p></div>
-      <div><h3>Quick Links</h3><ul><li><a href="courses.html">Courses</a></li><li><a href="admissions.html">Admissions</a></li><li><a href="contact.html">Contact</a></li></ul></div>
-      <div><h3>Contact</h3><p><strong>Phone:</strong> <a href="tel:+254727811041">+254 727 811 041</a><br><strong>Email:</strong> <a href="mailto:info@sttheresahosp-kiirua.com">info@sttheresahosp-kiirua.com</a></p></div>
-      <div><h3>Apply</h3><a class="btn btn--light" href="admissions.html#apply">Apply Now</a></div>
+      <div><h3>STTMTC</h3><p>Training healthcare professionals to love and serve.</p></div>
+      <div><h3>Navigation</h3><ul><li><a href="courses.html">Courses</a></li><li><a href="news.html">Latest News</a></li></ul></div>
+      <div><h3>Location</h3><p>Kiirua, Meru County<br>Kenya</p></div>
+      <div><a class="btn btn--light" href="admissions.html#apply">Start Application</a></div>
     </div>
     <div class="footer__bottom">
-      <div class="container">
-        <small>© <span id="year"></span> St Theresa Medical Training College.</small>
-      </div>
+      <div class="container"><small>© 2026 St Theresa Medical Training College.</small></div>
     </div>
   </footer>
 

@@ -5,6 +5,18 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>News & Events – St Theresa Medical Training College</title>
   <link rel="stylesheet" href="assets/css/styles.css" />
+  <style>
+    /* Specific styling for the horizontal event cards */
+    @media (max-width: 768px) {
+      .event-card-horizontal {
+        flex-direction: column !important;
+      }
+      .event-card-horizontal img {
+        width: 100% !important;
+        height: 200px !important;
+      }
+    }
+  </style>
 </head>
 <body>
   <div class="topbar">
@@ -41,172 +53,107 @@
     </div>
   </header>
 
-  <!-- NEW: Hero Section -->
-  <section class="hero" style="--hero-image:url('assets/img/hero-news.jpg')">
-    <div class="hero__bg" aria-hidden="true"></div>
+  <section class="hero" style="background-image: linear-gradient(rgba(11, 79, 138, 0.8), rgba(11, 79, 138, 0.8)), url('assets/img/photo-1562774053-701939374585.jpg'); background-size: cover; background-position: center;">
     <div class="container hero__content">
-      <div class="kicker">Latest Updates</div>
-      <h1>College News & Events</h1>
-      <p class="sub lead">Stay informed about admissions, academic achievements, and campus events at St Theresa Medical Training College.</p>
+      <div class="kicker" style="color: #fff; opacity: 0.9;">Latest Updates</div>
+      <h1 style="color: #fff;">College News & Events</h1>
+      <p class="sub lead" style="color: #fff;">Stay informed about admissions, academic achievements, and campus events.</p>
       <div class="hero__actions">
-        <a class="btn btn--light" href="#latest">Latest News</a>
-        <a class="btn btn--ghost" href="#events">Upcoming Events</a>
+        <a class="btn" href="#latest">Latest News</a>
+        <a class="btn btn--light" href="#events">Upcoming Events</a>
       </div>
     </div>
   </section>
 
-  <!-- Featured News -->
   <section class="section" id="latest">
     <div class="container">
       <div class="section__head">
         <h2>Featured News</h2>
-        <a class="btn btn--light btn--small" href="#all-news">View All</a>
       </div>
 
       <div class="grid grid--3">
         <article class="card">
-          <img src="assets/img/placeholders/inauguration.jpg" alt="College inauguration" class="card__img" />
+          <img src="assets/img/photo-1519494026892-80bbd2d6fd0d.jpg" alt="Inauguration" class="card__img" />
           <div class="card__body">
-            <span class="pill pill--urgent">Historic Milestone</span>
-            <h3>St Theresa Medical Training College Officially Inaugurated</h3>
-            <div class="meta">
-              <span>📅 August 22, 2025</span>
-              <span>👥 500+ attendees</span>
+            <span class="pill">Historic Milestone</span>
+            <h3>St Theresa MTC Officially Inaugurated</h3>
+            <div class="meta" style="margin-bottom: 10px; font-size: 0.85rem; color: #666;">
+              <span>📅 August 2025</span>
             </div>
-            <p style="margin:0">Celebration marked with great pomp and color as the college opens after 13 years of planning and development.</p>
+            <p>A landmark celebration as we officially opened our doors to the next generation of medical professionals.</p>
           </div>
-          <div class="card__cta">
-            <a class="btn btn--light" href="#inauguration">Read Full Story</a>
-          </div>
+          <div class="card__cta"><a class="btn btn--light btn--small" href="#">Read More</a></div>
         </article>
 
         <article class="card">
-          <img src="assets/img/placeholders/admissions.jpg" alt="Admissions open" class="card__img" />
+          <img src="assets/img/photo-1434030216411-0b793f4b4173.jpeg" alt="Admissions" class="card__img" />
           <div class="card__body">
-            <span class="pill pill--urgent">NOW OPEN</span>
-            <h3>2026 September Intake Applications</h3>
-            <div class="meta">
-              <span>📅 February 14, 2026</span>
-              <span>🎯 150 spaces available</span>
+            <span class="pill pill--urgent">Admission</span>
+            <h3>September 2026 Intake Now Open</h3>
+            <div class="meta" style="margin-bottom: 10px; font-size: 0.85rem; color: #666;">
+              <span>📅 February 2026</span>
             </div>
-            <p style="margin:0">KRCHN Nursing, Medical Laboratory, and Health Records programs. Deadline: March 31st.</p>
+            <p>Applications are now being accepted for Nursing, Lab Tech, and Health Records programs. Apply before March 31st.</p>
           </div>
-          <div class="card__cta">
-            <a class="btn btn--light" href="admissions.html#apply">Apply Now</a>
-          </div>
+          <div class="card__cta"><a class="btn btn--light btn--small" href="admissions.html">Apply Online</a></div>
         </article>
 
         <article class="card">
-          <img src="assets/img/placeholders/knec-results.jpg" alt="Exam results" class="card__img" />
+          <img src="assets/img/photo-1497633762265-9d179a990aa6.jpeg" alt="Exam results" class="card__img" />
           <div class="card__body">
-            <span class="pill">Academic Excellence</span>
-            <h3>First Cohort Achieves 94% KNEC Pass Rate</h3>
-            <div class="meta">
-              <span>📅 February 8, 2026</span>
-              <span>🥇 Top regional ranking</span>
+            <span class="pill" style="background: #e3f2fd; color: #0d47a1;">Academic</span>
+            <h3>First Cohort Achieves 94% Pass Rate</h3>
+            <div class="meta" style="margin-bottom: 10px; font-size: 0.85rem; color: #666;">
+              <span>📅 Jan 2026</span>
             </div>
-            <p style="margin:0">Outstanding performance across all programs in inaugural national examinations.</p>
+            <p>Our inaugural students have set a high bar with exceptional performance in the national clinical exams.</p>
           </div>
-          <div class="card__cta">
-            <a class="btn btn--light" href="#results">Read More</a>
-          </div>
+          <div class="card__cta"><a class="btn btn--light btn--small" href="#">View Results</a></div>
         </article>
       </div>
     </div>
   </section>
 
-  <!-- Upcoming Events -->
   <section class="section section--soft" id="events">
     <div class="container">
       <div class="section__head">
         <h2>Upcoming Events</h2>
-        <p class="lead">Mark your calendar for these important dates.</p>
       </div>
 
       <div class="grid grid--2">
-        <article class="card">
+        <article class="card event-card-horizontal" style="display: flex; flex-direction: row; align-items: stretch; overflow: hidden;">
+          <img src="assets/img/photo-1497366216548-37526070297c.jpg" alt="Campus Tour" style="width: 40%; object-fit: cover;" />
           <div class="card__body">
-            <span class="pill" style="background:#E9FFF0;color:#0B7A2A">Monthly</span>
-            <h3>Open Day & Campus Tours</h3>
-            <div class="meta">
-              <span>📅 Every 2nd Saturday</span>
-              <span>🕘 9:00 AM - 2:00 PM</span>
-              <span>📍 Main Campus, Kiirua</span>
-            </div>
-            <p style="margin:0">Meet faculty, tour facilities, and discover our programs. No appointment needed.</p>
-          </div>
-          <div class="card__cta">
-            <a class="btn btn--light" href="tel:+254727811041">Call to Confirm</a>
+            <span class="pill">Campus Life</span>
+            <h3>Open Day & Tours</h3>
+            <p>Visit us every 2nd Saturday of the month for guided tours and career talks.</p>
+            <a href="contact.html" class="btn btn--light btn--small">Book a Visit</a>
           </div>
         </article>
 
-        <article class="card">
+        <article class="card event-card-horizontal" style="display: flex; flex-direction: row; align-items: stretch; overflow: hidden;">
+          <img src="assets/img/photo-1551076805-e1869033e561.jpeg" alt="Lab Workshop" style="width: 40%; object-fit: cover;" />
           <div class="card__body">
-            <span class="pill">📅 March 15</span>
-            <h3>Annual Sports Day 2026</h3>
-            <div class="meta">
-              <span>🕘 8:00 AM - 5:00 PM</span>
-              <span>📍 College Grounds</span>
-              <span>🎖️ All students invited</span>
-            </div>
-            <p style="margin:0">Athletics, team sports, and alumni reunion. Registration opens February.</p>
-          </div>
-          <div class="card__cta">
-            <a class="btn btn--light" href="contact.html">Get Involved</a>
+            <span class="pill">Workshop</span>
+            <h3>Clinical Skills Week</h3>
+            <p>Practical intensive week for all year 1 students starting March 15th, 2026.</p>
+            <a href="#" class="btn btn--light btn--small">Learn More</a>
           </div>
         </article>
-      </div>
-    </div>
-  </section>
-
-  <!-- All News Stream -->
-  <section class="section" id="all-news">
-    <div class="container">
-      <div class="section__head">
-        <h2>All News Updates</h2>
-      </div>
-
-      <div class="grid" style="gap:14px">
-        <div class="news-item">
-          <img src="assets/img/placeholders/lab-new.jpg" alt="New lab" />
-          <div>
-            <div class="small">Facilities • January 20, 2026</div>
-            <h3>New Clinical Simulation Laboratory Opens</h3>
-            <p class="lead" style="margin:0">State-of-the-art facility enhances hands-on training for nursing and laboratory students.</p>
-          </div>
-        </div>
-
-        <div class="news-item">
-          <img src="assets/img/placeholders/students.jpg" alt="Student orientation" />
-          <div>
-            <div class="small">Orientation • December 15, 2025</div>
-            <h3>150 Students Welcomed in First Orientation</h3>
-            <p class="lead" style="margin:0">Inaugural student cohort begins training with ceremony led by Principal Sr. Mary Wanjiku.</p>
-          </div>
-        </div>
-
-        <div class="news-item">
-          <img src="assets/img/placeholders/community.jpg" alt="Community outreach" />
-          <div>
-            <div class="small">Community • November 28, 2025</div>
-            <h3>Students Launch First Community Health Outreach</h3>
-            <p class="lead" style="margin:0">Health screening camps reach 500+ Kiirua residents in partnership with mission hospital.</p>
-          </div>
-        </div>
       </div>
     </div>
   </section>
 
   <footer class="footer">
     <div class="container footer__grid grid grid--4">
-      <div><h3>St Theresa Medical Training College</h3><p>A constituent college of St Theresa Mission Hospital – Kiirua.</p></div>
-      <div><h3>News & Events</h3><ul><li><a href="#latest">Latest News</a></li><li><a href="#events">Events</a></li><li><a href="admissions.html">Admissions</a></li></ul></div>
-      <div><h3>Contact</h3><p><strong>Phone:</strong> <a href="tel:+254727811041">+254 727 811 041</a><br><strong>Email:</strong> <a href="mailto:info@sttheresahosp-kiirua.com">info@sttheresahosp-kiirua.com</a></p></div>
+      <div><h3>STTMTC</h3><p>A constituent college of St Theresa Mission Hospital – Kiirua.</p></div>
+      <div><h3>Quick Links</h3><ul><li><a href="admissions.html">Admissions</a></li><li><a href="facilities.html">Facilities</a></li><li><a href="gallery.html">Gallery</a></li></ul></div>
+      <div><h3>Contact</h3><p>📞 0727 811 041<br>✉️ info@sttheresahosp-kiirua.com</p></div>
       <div><h3>Apply</h3><a class="btn btn--light" href="admissions.html#apply">Apply Now</a></div>
     </div>
     <div class="footer__bottom">
       <div class="container">
-        <small>© <span id="year"></span> St Theresa Medical Training College.</small>
+        <small>© 2026 St Theresa Medical Training College.</small>
       </div>
     </div>
   </footer>

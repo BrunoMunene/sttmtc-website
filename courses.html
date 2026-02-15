@@ -5,6 +5,30 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Courses – St Theresa Medical Training College</title>
   <link rel="stylesheet" href="assets/css/styles.css" />
+  <style>
+    /* Ensure the list looks clean within cards */
+    .list { padding-left: 20px; margin-bottom: 15px; }
+    .list li { font-size: 0.95rem; margin-bottom: 5px; color: var(--text-main); }
+    
+    /* Mobile Menu Logic Fix */
+    @media (max-width: 768px) {
+      .nav {
+        display: none;
+        flex-direction: column;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 100%;
+        background: #fff;
+        padding: 20px;
+        box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        z-index: 999;
+      }
+      .nav.is-active { display: flex; }
+      .nav a { padding: 12px 0; border-bottom: 1px solid #eee; }
+      .nav-toggle { display: block !important; cursor: pointer; }
+    }
+  </style>
 </head>
 <body>
 
@@ -27,124 +51,88 @@
           <span class="brand__tag">“To Love and Serve”</span>
         </span>
       </a>
-      <button class="nav-toggle" aria-label="Open menu" aria-expanded="false">☰</button>
-      <nav class="nav" aria-label="Primary navigation">
+      <button class="nav-toggle" id="mobile-toggle" aria-label="Open menu">☰</button>
+      <nav class="nav" id="primary-nav">
         <a href="index.html">Home</a>
         <a href="about.html">About Us</a>
-        <a href="courses.html">Courses</a>
-        <a href="faculty.html">Faculty</a>
-        <a href="admissions.html">Admissions</a>
+        <a href="courses.html" class="nav-active">Courses</a>
         <a href="facilities.html">Facilities</a>
-        <a href="news.html">News & Events</a>
-        <a href="contact.html">Contact</a>
+        <a href="news.html">News</a>
+        <a href="login.html" style="color: var(--brand); font-weight: bold;">Student Portal</a>
         <a class="btn btn--small" href="admissions.html#apply">Apply Now</a>
       </nav>
     </div>
   </header>
 
-  <section class="hero" style="--hero-image:url('assets/img/programs-hero.jpg')">
-    <div class="hero__bg" aria-hidden="true"></div>
+  <section class="hero hero--small" style="background-image: linear-gradient(rgba(11, 79, 138, 0.8), rgba(11, 79, 138, 0.8)), url('assets/img/programs-hero.jpg'); background-size: cover; background-position: center;">
     <div class="container hero__content">
-      <div class="kicker">St Theresa Medical Training College</div>
-      <h1>Our Programs</h1>
-      <p class="sub">Discover our programmes designed to prepare students for a successful career in healthcare through rigorous academics and hands-on practical experience.</p>
+      <div class="kicker">Excellence in Medical Education</div>
+      <h1>Our Academic Programs</h1>
+      <p class="sub">Rigorous training designed to shape compassionate and competent healthcare specialists.</p>
     </div>
   </section>
 
   <section class="section">
     <div class="container">
       <div class="section__head">
-        <h2>Certificate Programs</h2>
-        <p class="lead">Two-year programs designed to equip you with essential skills for entry-level healthcare positions.</p>
+        <h2>Diploma & Certificate Programs</h2>
+        <p class="lead">Accredited curricula blending theoretical depth with clinical mastery.</p>
       </div>
 
       <div class="grid grid--3">
         <article class="card" id="community-health-nursing">
           <div class="card__body">
-            <span class="pill">Certificate</span>
-            <h3>Certificate in Community Health Nursing</h3>
-            <div class="meta"><span>⏱ 2 Years</span><span>🎓 Full-time</span></div>
+            <span class="pill">Nursing</span>
+            <h3>Community Health Nursing</h3>
+            <div class="meta"><span>⏱ 3 Years (Diploma)</span></div>
 
-            <h4 style="margin:14px 0 6px">Program Highlights</h4>
+            <h4 style="margin:18px 0 8px; font-size: 1rem;">Entry Requirements</h4>
             <ul class="list">
-              <li>Practical training at St Theresa Mission Hospital</li>
-              <li>Community outreach programs</li>
-              <li>Focus on preventive healthcare and health education</li>
+              <li>KCSE Mean Grade C (Plain)</li>
+              <li>C (Plain) in Biology & English/Kiswahili</li>
+              <li>C- in Chemistry/Physics/Math</li>
             </ul>
 
-            <h4 style="margin:14px 0 6px">Entry Requirements</h4>
-            <ul class="list">
-              <li>KCSE aggregate C (Plain) or equivalent</li>
-              <li>Mandatory subjects: C in Biology; C in English or Kiswahili</li>
-              <li>Additional subjects: C- in Physics, Chemistry, or Mathematics</li>
-            </ul>
-
-            <h4 style="margin:14px 0 6px">Career Opportunities</h4>
-            <div class="meta">
-              <span class="pill" style="background:#F1F7FF;color:#0B4F8A">Community Health Nurse</span>
-              <span class="pill" style="background:#F1F7FF;color:#0B4F8A">School Nurse</span>
-              <span class="pill" style="background:#F1F7FF;color:#0B4F8A">NGO Health Worker</span>
-            </div>
+            <h4 style="margin:14px 0 8px; font-size: 1rem;">Clinical Exposure</h4>
+            <p style="font-size: 0.9rem;">Direct placement at St Theresa Mission Hospital for maternity, pediatric, and surgical rotations.</p>
           </div>
           <div class="card__cta"><a class="btn" href="admissions.html#apply">Apply Now →</a></div>
         </article>
 
         <article class="card" id="medical-lab">
           <div class="card__body">
-            <span class="pill">Certificate</span>
-            <h3>Certificate in Medical Laboratory Technology</h3>
-            <div class="meta"><span>⏱ 2 Years</span><span>🎓 Full-time</span></div>
+            <span class="pill">Laboratory</span>
+            <h3>Medical Lab Technology</h3>
+            <div class="meta"><span>⏱ 3 Years (Diploma)</span></div>
 
-            <h4 style="margin:14px 0 6px">Program Highlights</h4>
-            <ul class="list">
-              <li>Hands-on experience with modern lab equipment</li>
-              <li>Clinical attachments in hospital laboratories</li>
-              <li>Training in quality control and safety protocols</li>
-            </ul>
-
-            <h4 style="margin:14px 0 6px">Entry Requirements</h4>
+            <h4 style="margin:18px 0 8px; font-size: 1rem;">Entry Requirements</h4>
             <ul class="list">
               <li>KCSE Mean Grade C (Plain)</li>
-              <li>C (Plain) in Biology and Chemistry</li>
-              <li>C (Plain) in English and Mathematics</li>
+              <li>C (Plain) in Biology, Chemistry, English/Kiswahili</li>
+              <li>C (Plain) in Mathematics/Physics</li>
             </ul>
 
-            <h4 style="margin:14px 0 6px">Career Opportunities</h4>
-            <div class="meta">
-              <span class="pill" style="background:#F1F7FF;color:#0B4F8A">Lab Technician</span>
-              <span class="pill" style="background:#F1F7FF;color:#0B4F8A">Blood Bank Tech</span>
-              <span class="pill" style="background:#F1F7FF;color:#0B4F8A">Research Assistant</span>
-            </div>
+            <h4 style="margin:14px 0 8px; font-size: 1rem;">Clinical Exposure</h4>
+            <p style="font-size: 0.9rem;">Practice in modern hematology, microbiology, and biochemistry hospital labs.</p>
           </div>
           <div class="card__cta"><a class="btn" href="admissions.html#apply">Apply Now →</a></div>
         </article>
 
         <article class="card" id="health-records">
           <div class="card__body">
-            <span class="pill">Certificate</span>
-            <h3>Certificate in Health Records & Information Technology</h3>
-            <div class="meta"><span>⏱ 2 Years</span><span>🎓 Full-time</span></div>
+            <span class="pill">Health ICT</span>
+            <h3>Health Records & IT</h3>
+            <div class="meta"><span>⏱ 2 Years (Certificate)</span></div>
 
-            <h4 style="margin:14px 0 6px">Program Highlights</h4>
-            <ul class="list">
-              <li>Training in electronic health records systems</li>
-              <li>Medical coding and classification</li>
-              <li>Health data analysis and reporting</li>
-            </ul>
-
-            <h4 style="margin:14px 0 6px">Entry Requirements</h4>
+            <h4 style="margin:18px 0 8px; font-size: 1rem;">Entry Requirements</h4>
             <ul class="list">
               <li>KCSE Mean Grade C- (Minus)</li>
-              <li>C- (Minus) in English</li>
-              <li>C- (Minus) in Mathematics</li>
+              <li>C- (Minus) in English & Mathematics</li>
+              <li>D+ (Plus) in Biology</li>
             </ul>
 
-            <h4 style="margin:14px 0 6px">Career Opportunities</h4>
-            <div class="meta">
-              <span class="pill" style="background:#F1F7FF;color:#0B4F8A">Health Records Officer</span>
-              <span class="pill" style="background:#F1F7FF;color:#0B4F8A">Data Entry Specialist</span>
-              <span class="pill" style="background:#F1F7FF;color:#0B4F8A">Medical Coder</span>
-            </div>
+            <h4 style="margin:14px 0 8px; font-size: 1rem;">Career Path</h4>
+            <p style="font-size: 0.9rem;">Training in EMR (Electronic Medical Records), medical coding, and data analytics.</p>
           </div>
           <div class="card__cta"><a class="btn" href="admissions.html#apply">Apply Now →</a></div>
         </article>
@@ -161,31 +149,48 @@
       <div>
         <h3>Quick Links</h3>
         <ul>
-          <li><a href="courses.html">Courses</a></li>
-          <li><a href="admissions.html">Admissions</a></li>
+          <li><a href="about.html">About Us</a></li>
+          <li><a href="login.html">Student Portal</a></li>
           <li><a href="facilities.html">Facilities</a></li>
         </ul>
       </div>
       <div>
         <h3>Contact</h3>
         <p>
-          <strong>Phone:</strong> <a href="tel:+254727811041">+254 727 811 041</a><br>
-          <strong>Phone:</strong> <a href="tel:+254703726321">+254 703 726 321</a><br>
-          <strong>Email:</strong> <a href="mailto:info@sttheresahosp-kiirua.com">info@sttheresahosp-kiirua.com</a>
+          Kiirua, Meru County<br>
+          <strong>Tel:</strong> 0727 811 041<br>
+          <strong>Email:</strong> info@sttheresahosp-kiirua.com
         </p>
       </div>
       <div>
-        <h3>Apply</h3>
         <a class="btn btn--light" href="admissions.html#apply">Apply Now</a>
       </div>
     </div>
     <div class="footer__bottom">
       <div class="container">
-        <small>© <span id="year"></span> St Theresa Medical Training College.</small>
+        <small>© 2026 St Theresa Medical Training College. All rights reserved.</small>
       </div>
     </div>
   </footer>
 
-  <script src="assets/js/main.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const toggle = document.getElementById('mobile-toggle');
+      const nav = document.getElementById('primary-nav');
+
+      toggle.addEventListener('click', function() {
+        nav.classList.toggle('is-active');
+        toggle.innerHTML = nav.classList.contains('is-active') ? '✕' : '☰';
+      });
+
+      // Close menu if clicking outside
+      document.addEventListener('click', function(e) {
+        if (!toggle.contains(e.target) && !nav.contains(e.target)) {
+          nav.classList.remove('is-active');
+          toggle.innerHTML = '☰';
+        }
+      });
+    });
+  </script>
 </body>
 </html>
