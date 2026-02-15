@@ -223,6 +223,29 @@ a {
 .btn--light:hover {
   background: var(--bg-soft) !important;
 }
+/* --- Student Portal Specific Styling --- */
+.nav a[href="login.html"] {
+  color: var(--brand) !important;
+  font-weight: 800 !important; /* Makes it heavier than other links */
+  background: transparent !important; /* Keep it as a text link */
+  border: 1px solid transparent !important;
+  margin-right: 8px; /* Gap between Portal and Apply Now */
+  transition: all 0.3s ease;
+}
+
+.nav a[href="login.html"]:hover {
+  color: var(--brand-2) !important;
+  background: var(--bg-soft) !important;
+  border-color: var(--border) !important;
+  transform: translateY(-1px);
+}
+
+/* Ensure the Apply Now button remains the primary focus */
+.nav .btn {
+  /* This inherits your .btn styles above but ensures no override 
+     from standard nav link properties */
+  margin-left: 5px;
+}
 
 /* --- Footer --- */
 .footer { background: var(--brand); color: #fff; padding: 60px 0 20px; }
