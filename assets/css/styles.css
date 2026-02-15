@@ -183,17 +183,46 @@ a {
 .gallery-item:hover img { transform: scale(1.1); }
 
 /* --- Buttons --- */
+/* --- Updated Button Styles --- */
 .btn {
-  display: inline-block;
+  display: inline-flex; /* Changed to inline-flex for better alignment */
+  align-items: center;
+  justify-content: center;
   padding: 0.8rem 1.5rem;
   border-radius: var(--radius);
-  background: var(--brand);
-  color: #fff;
+  background: var(--brand) !important; /* Solid Deep Blue */
+  color: #ffffff !important;           /* Solid White Text */
   font-weight: 700;
+  text-decoration: none;
+  border: none;
+  transition: all 0.3s ease;
+  cursor: pointer;
+  visibility: visible !important;
+  opacity: 1 !important;
 }
 
-.btn--small { padding: 0.4rem 1rem; font-size: 0.85rem; }
-.btn--light { background: #fff; color: var(--brand); border: 1px solid var(--border); }
+.btn:hover {
+  background: var(--brand-2) !important;
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-lg);
+}
+
+/* Small variation (used in your menu) */
+.btn--small { 
+  padding: 0.5rem 1.2rem; 
+  font-size: 0.875rem; 
+}
+
+/* Light variation for secondary buttons */
+.btn--light { 
+  background: #ffffff !important; 
+  color: var(--brand) !important; 
+  border: 1px solid var(--border) !important; 
+}
+
+.btn--light:hover {
+  background: var(--bg-soft) !important;
+}
 
 /* --- Footer --- */
 .footer { background: var(--brand); color: #fff; padding: 60px 0 20px; }
