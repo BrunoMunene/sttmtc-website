@@ -6,7 +6,39 @@
   <title>News & Events – St Theresa Medical Training College</title>
   <link rel="stylesheet" href="assets/css/styles.css" />
   <style>
-    /* Specific styling for the horizontal event cards */
+    /* Slider Styling for the Accreditation News */
+    .news-slider {
+      position: relative;
+      width: 100%;
+      height: 250px;
+      overflow: hidden;
+    }
+    .slides {
+      display: flex;
+      width: 600%; /* 6 images */
+      height: 100%;
+      animation: slide-animation 20s infinite;
+    }
+    .slides img {
+      width: 16.66%; /* 1/6th of the width */
+      height: 100%;
+      object-fit: cover;
+    }
+    @keyframes slide-animation {
+      0% { transform: translateX(0); }
+      15% { transform: translateX(0); }
+      20% { transform: translateX(-16.66%); }
+      35% { transform: translateX(-16.66%); }
+      40% { transform: translateX(-33.33%); }
+      55% { transform: translateX(-33.33%); }
+      60% { transform: translateX(-50%); }
+      75% { transform: translateX(-50%); }
+      80% { transform: translateX(-66.66%); }
+      95% { transform: translateX(-66.66%); }
+      100% { transform: translateX(0); }
+    }
+
+    /* Horizontal Card Fixes */
     @media (max-width: 768px) {
       .event-card-horizontal {
         flex-direction: column !important;
@@ -22,8 +54,8 @@
   <div class="topbar">
     <div class="container topbar__inner">
       <div class="topbar__left">
-        <span class="ico">📞</span> <a href="tel:+254727811041">+254 727 811 041</a>
-        <span class="ico">✉️</span> <a href="mailto:info@sttheresahosp-kiirua.com">info@sttheresahosp-kiirua.com</a>
+        <span class="ico">📞</span> <a href="tel:+254700626189">+254 700 626 189</a>
+        <span class="ico">✉️</span> <a href="mailto:info@sttheresamedcollege.co.ke">info@sttheresamedcollege.co.ke</a>
       </div>
       <div class="topbar__right">Mon - Fri: 8:00 AM - 5:00 PM</div>
     </div>
@@ -53,15 +85,11 @@
     </div>
   </header>
 
-  <section class="hero" style="background-image: linear-gradient(rgba(11, 79, 138, 0.8), rgba(11, 79, 138, 0.8)), url('assets/img/photo-1562774053-701939374585.jpg'); background-size: cover; background-position: center;">
+  <section class="hero" style="background-image: linear-gradient(rgba(11, 79, 138, 0.8), rgba(11, 79, 138, 0.8)), url('assets/img/hero-bg.jpg'); background-size: cover; background-position: center;">
     <div class="container hero__content">
-      <div class="kicker" style="color: #fff; opacity: 0.9;">Latest Updates</div>
-      <h1 style="color: #fff;">College News & Events</h1>
-      <p class="sub lead" style="color: #fff;">Stay informed about admissions, academic achievements, and campus events.</p>
-      <div class="hero__actions">
-        <a class="btn" href="#latest">Latest News</a>
-        <a class="btn btn--light" href="#events">Upcoming Events</a>
-      </div>
+      <div class="kicker" style="color: #fff; opacity: 0.9;">Excellence in Action</div>
+      <h1 style="color: #fff;">College News & Announcements</h1>
+      <p class="sub lead" style="color: #fff;">Celebrating milestones in medical quality and academic achievement.</p>
     </div>
   </section>
 
@@ -72,43 +100,39 @@
       </div>
 
       <div class="grid grid--3">
-        <article class="card">
-          <img src="assets/img/photo-1519494026892-80bbd2d6fd0d.jpg" alt="Inauguration" class="card__img" />
-          <div class="card__body">
-            <span class="pill">Historic Milestone</span>
-            <h3>St Theresa MTC Officially Inaugurated</h3>
-            <div class="meta" style="margin-bottom: 10px; font-size: 0.85rem; color: #666;">
-              <span>📅 August 2025</span>
+        <article class="card" style="grid-column: span 2;">
+          <div class="news-slider">
+            <div class="slides">
+              <img src="assets/img/lab1.jpg" alt="Lab Accreditation Celebartion">
+              <img src="assets/img/lab2.jpg" alt="Laboratory Equipment">
+              <img src="assets/img/lab3.jpg" alt="Lab Team">
+              <img src="assets/img/lab4.jpg" alt="Accreditation Certificate">
+              <img src="assets/img/lab6.jpg" alt="NPHL Event">
             </div>
-            <p>A landmark celebration as we officially opened our doors to the next generation of medical professionals.</p>
           </div>
-          <div class="card__cta"><a class="btn btn--light btn--small" href="#">Read More</a></div>
+          <div class="card__body">
+            <span class="pill" style="background: #2e7d32; color: #fff;">Quality Milestone</span>
+            <h3>STMH-K Laboratory Achieves International ISO 15189 Accreditation</h3>
+            <div class="meta" style="margin-bottom: 10px; font-size: 0.85rem; color: #666;">
+              <span>📅 February 2026</span>
+            </div>
+            <p>
+              We are proud to announce that the St Theresa Mission Hospital Laboratory has been officially accredited by <strong>KENAS (Kenya Accreditation Service)</strong>. This prestigious ISO 15189:2012 certification recognizes our laboratory's commitment to international standards of quality and technical competence.
+            </p>
+            <p style="font-size: 0.95rem; color: #444;">
+              For our students at St Theresa MTC, this means training in a facility that guarantees efficiency, patient safety, and globally recognized service delivery. Special thanks to our dedicated Lab team and partners at NPHL, Global Fund, and AMREF for supporting this journey toward clinical excellence.
+            </p>
+          </div>
         </article>
 
         <article class="card">
           <img src="assets/img/photo-1434030216411-0b793f4b4173.jpeg" alt="Admissions" class="card__img" />
           <div class="card__body">
             <span class="pill pill--urgent">Admission</span>
-            <h3>September 2026 Intake Now Open</h3>
-            <div class="meta" style="margin-bottom: 10px; font-size: 0.85rem; color: #666;">
-              <span>📅 February 2026</span>
-            </div>
-            <p>Applications are now being accepted for Nursing, Lab Tech, and Health Records programs. Apply before March 31st.</p>
+            <h3>September 2026 Intake</h3>
+            <p>Enroll today in our Nursing, Clinical Medicine, or Lab Technology programs. Hands-on training in our ISO-accredited labs awaits you.</p>
           </div>
-          <div class="card__cta"><a class="btn btn--light btn--small" href="admissions.html">Apply Online</a></div>
-        </article>
-
-        <article class="card">
-          <img src="assets/img/photo-1497633762265-9d179a990aa6.jpeg" alt="Exam results" class="card__img" />
-          <div class="card__body">
-            <span class="pill" style="background: #e3f2fd; color: #0d47a1;">Academic</span>
-            <h3>First Cohort Achieves 94% Pass Rate</h3>
-            <div class="meta" style="margin-bottom: 10px; font-size: 0.85rem; color: #666;">
-              <span>📅 Jan 2026</span>
-            </div>
-            <p>Our inaugural students have set a high bar with exceptional performance in the national clinical exams.</p>
-          </div>
-          <div class="card__cta"><a class="btn btn--light btn--small" href="#">View Results</a></div>
+          <div class="card__cta"><a class="btn btn--light btn--small" href="admissions.html">Apply Now</a></div>
         </article>
       </div>
     </div>
@@ -117,27 +141,25 @@
   <section class="section section--soft" id="events">
     <div class="container">
       <div class="section__head">
-        <h2>Upcoming Events</h2>
+        <h2>Recent & Upcoming Events</h2>
       </div>
 
       <div class="grid grid--2">
         <article class="card event-card-horizontal" style="display: flex; flex-direction: row; align-items: stretch; overflow: hidden;">
-          <img src="assets/img/photo-1497366216548-37526070297c.jpg" alt="Campus Tour" style="width: 40%; object-fit: cover;" />
+          <img src="img/lab1.jpg" alt="Accreditation Celebration" style="width: 40%; object-fit: cover;" />
           <div class="card__body">
-            <span class="pill">Campus Life</span>
-            <h3>Open Day & Tours</h3>
-            <p>Visit us every 2nd Saturday of the month for guided tours and career talks.</p>
-            <a href="contact.html" class="btn btn--light btn--small">Book a Visit</a>
+            <span class="pill">Celebration</span>
+            <h3>NPHL Commemoration</h3>
+            <p>Our team recently attended the National Public Health Laboratories event to celebrate our lab's milestone.</p>
           </div>
         </article>
 
         <article class="card event-card-horizontal" style="display: flex; flex-direction: row; align-items: stretch; overflow: hidden;">
           <img src="assets/img/photo-1551076805-e1869033e561.jpeg" alt="Lab Workshop" style="width: 40%; object-fit: cover;" />
           <div class="card__body">
-            <span class="pill">Workshop</span>
-            <h3>Clinical Skills Week</h3>
-            <p>Practical intensive week for all year 1 students starting March 15th, 2026.</p>
-            <a href="#" class="btn btn--light btn--small">Learn More</a>
+            <span class="pill">Academic</span>
+            <h3>Clinical Skills Intensive</h3>
+            <p>Hands-on practical week for Year 1 students begins March 15th, 2026 in the main lab.</p>
           </div>
         </article>
       </div>
@@ -146,10 +168,26 @@
 
   <footer class="footer">
     <div class="container footer__grid grid grid--4">
-      <div><h3>STTMTC</h3><p>A constituent college of St Theresa Mission Hospital – Kiirua.</p></div>
-      <div><h3>Quick Links</h3><ul><li><a href="admissions.html">Admissions</a></li><li><a href="facilities.html">Facilities</a></li><li><a href="gallery.html">Gallery</a></li></ul></div>
-      <div><h3>Contact</h3><p>📞 0727 811 041<br>✉️ info@sttheresahosp-kiirua.com</p></div>
-      <div><h3>Apply</h3><a class="btn btn--light" href="admissions.html#apply">Apply Now</a></div>
+      <div>
+        <h3>STTMTC</h3>
+        <p>A constituent college of St Theresa Mission Hospital – Kiirua. Training world-class professionals in ISO-accredited facilities.</p>
+      </div>
+      <div>
+        <h3>Quick Links</h3>
+        <ul>
+          <li><a href="admissions.html">Admissions</a></li>
+          <li><a href="facilities.html">Facilities</a></li>
+          <li><a href="news.html">Latest News</a></li>
+        </ul>
+      </div>
+      <div>
+        <h3>Contact</h3>
+        <p>📞 +254 700 626 189<br>✉️ info@sttheresamedcollege.co.ke</p>
+      </div>
+      <div>
+        <h3>Join Us</h3>
+        <a class="btn btn--light" href="admissions.html#apply">Start Application</a>
+      </div>
     </div>
     <div class="footer__bottom">
       <div class="container">
