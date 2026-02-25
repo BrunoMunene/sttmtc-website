@@ -159,6 +159,7 @@ a {
   color: var(--brand);
   cursor: pointer;
   padding: 5px;
+  z-index: 1100; /* Ensure button is above menu */
 }
 
 @media (max-width: 1024px) {
@@ -181,10 +182,12 @@ a {
     border-bottom: 4px solid var(--brand);
     box-shadow: var(--shadow-xl);
     gap: 0;
+    z-index: 1050; /* Ensure it's higher than the hero overlay */
   }
 
+  /* CRITICAL: Force display when JS adds the class */
   .nav.nav--open { 
-    display: flex; 
+    display: flex !important; 
     animation: slideIn 0.3s ease-out;
   }
   
@@ -227,7 +230,7 @@ a {
         rgba(11, 79, 138, 0.45), 
         rgba(11, 79, 138, 0.25)
     );
-    z-index: 1;
+    z-index: 1; /* Keep low so nav stays on top */
 }
 
 .hero__content { 
