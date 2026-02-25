@@ -5,38 +5,46 @@
 
 document.addEventListener('DOMContentLoaded', () => {
     
-    // 1. Mobile Navigation Toggle (Enhanced for Mobile Touch)
-    const navToggle = document.querySelector(".nav-toggle");
-    const navMenu = document.querySelector(".nav");
+    // 1. Mobile Navigation Toggle (Synced with is-active class)
+    const navToggle = document.getElementById("mobile-toggle") || document.querySelector(".nav-toggle");
+    const navMenu = document.getElementById("primary-nav") || document.querySelector(".nav");
 
     if (navToggle && navMenu) {
         const toggleMenu = (e) => {
-            // Prevent potential double-triggering on mobile devices
-            if (e) e.preventDefault();
+            // Check if it's a click on an anchor tag to let it bubble
+            if (e.target.tagName === 'A') return;
             
-            navMenu.classList.toggle("nav--open");
+            navMenu.classList.toggle("is-active");
             
-            const isOpen = navMenu.classList.contains("nav--open");
+            const isOpen = navMenu.classList.contains("is-active");
             navToggle.setAttribute("aria-expanded", isOpen);
             
             // Switch icon between Hamburger (☰) and Close (✕)
             navToggle.textContent = isOpen ? '✕' : '☰';
             
-            // Optional: Prevent body scroll when menu is open
+            // Prevent body scroll when menu is open on mobile
             document.body.style.overflow = isOpen ? 'hidden' : '';
         };
 
-        // Listen for both click and touchstart for faster response on phones
         navToggle.addEventListener("click", toggleMenu);
 
         // Close menu when a link is clicked
         navMenu.querySelectorAll('a').forEach(link => {
             link.addEventListener('click', () => {
-                navMenu.classList.remove("nav--open");
+                navMenu.classList.remove("is-active");
                 navToggle.textContent = '☰';
                 navToggle.setAttribute("aria-expanded", "false");
                 document.body.style.overflow = '';
             });
+        });
+
+        // Close menu when clicking outside the header
+        document.addEventListener('click', (e) => {
+            if (!navToggle.contains(e.target) && !navMenu.contains(e.target) && navMenu.classList.contains("is-active")) {
+                navMenu.classList.remove("is-active");
+                navToggle.textContent = '☰';
+                document.body.style.overflow = '';
+            }
         });
     }
 
@@ -45,7 +53,6 @@ document.addEventListener('DOMContentLoaded', () => {
     
     document.querySelectorAll(".nav a").forEach(link => {
         const linkHref = link.getAttribute("href");
-        // Check if path matches or if it's the root/home
         if (linkHref === currentPath || (currentPath === "" && linkHref === "index.html")) {
             link.classList.add("nav-active");
         } else {
