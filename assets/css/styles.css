@@ -55,6 +55,7 @@ body {
   line-height: 1.6;
   margin: 0;
   -webkit-font-smoothing: antialiased;
+  overflow-x: hidden; 
 }
 
 img { max-width: 100%; display: block; height: auto; }
@@ -86,14 +87,24 @@ a {
   padding: var(--space-sm) 0;
 }
 
+@media (max-width: 600px) {
+  .topbar__right { display: none; }
+}
+
 /* --- Header & Navigation --- */
 .header {
   position: sticky;
   top: 0;
   z-index: 1000;
-  background: #fff;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
   border-bottom: 2px solid var(--border);
-  box-shadow: var(--shadow);
+  transition: all 0.3s ease;
+}
+
+.header--scrolled {
+  padding: 5px 0;
+  box-shadow: var(--shadow-lg);
 }
 
 .header__inner {
@@ -103,163 +114,63 @@ a {
   padding: 0.5rem 0;
 }
 
-.brand { display: flex; align-items: center; gap: 10px; }
-.brand img { width: 50px; }
-.brand__name { font-weight: 800; color: var(--brand); display: block; }
-.brand__tag { font-size: 0.75rem; color: var(--brand-2); font-style: italic; }
+.brand { display: flex; align-items: center; gap: 12px; }
+.brand img { 
+    height: 65px; 
+    width: auto; 
+    object-fit: contain; 
+}
+.brand__name { font-weight: 800; color: var(--brand); display: block; line-height: 1.2; }
+.brand__tag { font-size: 0.7rem; color: var(--brand-2); font-style: italic; display: block; max-width: 250px; }
 
-.nav { display: flex; gap: 10px; align-items: center; }
+.nav { display: flex; gap: 5px; align-items: center; }
 .nav a {
-  padding: 0.5rem 1rem;
+  padding: 0.5rem 0.8rem;
   font-weight: 600;
   color: var(--brand);
   border-radius: var(--radius);
+  font-size: 0.95rem;
 }
 
 .nav a:hover, .nav a.nav-active {
-  background: var(--brand);
+  background: var(--brand-2);
   color: #fff;
 }
 
+/* Student Portal Link styling */
+.portal-link {
+    color: var(--brand) !important;
+    font-weight: 700 !important;
+    border: 1px solid var(--border);
+    margin-right: 5px;
+}
+
+.portal-link:hover {
+    background: var(--bg-soft) !important;
+    color: var(--brand-2) !important;
+}
+
+/* --- Responsive Mobile Menu --- */
 .nav-toggle {
   display: none;
-  font-size: 1.5rem;
+  font-size: 1.8rem;
   background: none;
-  color: var(--brand);
-}
-
-/* --- Hero Section --- */
-.hero {
-  padding: 120px 0;
-  color: #fff;
-  text-align: center;
-  background-size: cover;
-  background-position: center;
-  position: relative;
-}
-
-.hero__content { position: relative; z-index: 2; }
-.kicker { font-weight: 700; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 10px; }
-.hero h1 { font-family: var(--font-head); font-size: clamp(2rem, 5vw, 3.5rem); margin: 0; }
-
-/* --- Stats Bar --- */
-.stats {
-  display: flex;
-  justify-content: center;
-  gap: 30px;
-  margin-top: 40px;
-  flex-wrap: wrap;
-}
-.stat strong { display: block; font-size: 2rem; }
-
-/* --- Grid & Cards --- */
-.section { padding: 80px 0; }
-.grid { display: grid; gap: 2rem; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); }
-
-.card {
-  background: #fff;
-  border: 1px solid var(--border);
-  border-radius: var(--radius-lg);
-  overflow: hidden;
-  transition: 0.3s;
-}
-
-.card:hover { transform: translateY(-5px); box-shadow: var(--shadow-lg); }
-.card__img { width: 100%; height: 200px; object-fit: cover; }
-.card__body { padding: 1.5rem; }
-
-/* --- Gallery Grid --- */
-.home-gallery {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-  gap: 1rem;
-}
-.gallery-item {
-  height: 250px;
-  border-radius: var(--radius);
-  overflow: hidden;
-}
-.gallery-item img { width: 100%; height: 100%; object-fit: cover; transition: 0.5s; }
-.gallery-item:hover img { transform: scale(1.1); }
-
-/* --- Buttons --- */
-/* --- Updated Button Styles --- */
-.btn {
-  display: inline-flex; /* Changed to inline-flex for better alignment */
-  align-items: center;
-  justify-content: center;
-  padding: 0.8rem 1.5rem;
-  border-radius: var(--radius);
-  background: var(--brand) !important; /* Solid Deep Blue */
-  color: #ffffff !important;           /* Solid White Text */
-  font-weight: 700;
-  text-decoration: none;
   border: none;
-  transition: all 0.3s ease;
+  color: var(--brand);
   cursor: pointer;
-  visibility: visible !important;
-  opacity: 1 !important;
+  padding: 5px;
 }
 
-.btn:hover {
-  background: var(--brand-2) !important;
-  transform: translateY(-2px);
-  box-shadow: var(--shadow-lg);
+@media (max-width: 1024px) {
+  .brand__tag { display: none; }
+  .brand img { height: 50px; }
 }
 
-/* Small variation (used in your menu) */
-.btn--small { 
-  padding: 0.5rem 1.2rem; 
-  font-size: 0.875rem; 
-}
-
-/* Light variation for secondary buttons */
-.btn--light { 
-  background: #ffffff !important; 
-  color: var(--brand) !important; 
-  border: 1px solid var(--border) !important; 
-}
-
-.btn--light:hover {
-  background: var(--bg-soft) !important;
-}
-/* --- Student Portal Specific Styling --- */
-.nav a[href="login.html"] {
-  color: var(--brand) !important;
-  font-weight: 800 !important; /* Makes it heavier than other links */
-  background: transparent !important; /* Keep it as a text link */
-  border: 1px solid transparent !important;
-  margin-right: 8px; /* Gap between Portal and Apply Now */
-  transition: all 0.3s ease;
-}
-
-.nav a[href="login.html"]:hover {
-  color: var(--brand-2) !important;
-  background: var(--bg-soft) !important;
-  border-color: var(--border) !important;
-  transform: translateY(-1px);
-}
-
-/* Ensure the Apply Now button remains the primary focus */
-.nav .btn {
-  /* This inherits your .btn styles above but ensures no override 
-     from standard nav link properties */
-  margin-left: 5px;
-}
-
-/* --- Footer --- */
-.footer { background: var(--brand); color: #fff; padding: 60px 0 20px; }
-.footer__grid { margin-bottom: 40px; }
-.footer ul { list-style: none; padding: 0; }
-.footer a { color: rgba(255,255,255,0.8); }
-.footer a:hover { color: #fff; }
-
-/* --- RESPONSIVE MOBILE MENU --- */
 @media (max-width: 992px) {
   .nav-toggle { display: block; }
   
   .nav {
-    display: none; /* Hidden by default */
+    display: none; 
     position: absolute;
     top: 100%;
     left: 0;
@@ -267,17 +178,136 @@ a {
     background: #fff;
     flex-direction: column;
     padding: 20px;
-    border-bottom: 3px solid var(--brand);
-    box-shadow: var(--shadow-lg);
+    border-bottom: 4px solid var(--brand);
+    box-shadow: var(--shadow-xl);
+    gap: 0;
   }
 
-  .nav.is-active {
-    display: flex; /* Script toggles this */
+  .nav.nav--open { 
+    display: flex; 
+    animation: slideIn 0.3s ease-out;
   }
   
+  @keyframes slideIn {
+    from { opacity: 0; transform: translateY(-10px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
   .nav a {
     width: 100%;
-    padding: 12px;
+    padding: 15px;
     border-bottom: 1px solid var(--border-light);
+    border-radius: 0;
   }
+  
+  .nav .btn {
+    margin-top: 15px;
+    width: 100%;
+  }
+}
+
+/* --- Hero Section (Visibility Enhanced) --- */
+.hero {
+  padding: 140px 0;
+  color: #fff;
+  text-align: center;
+  background-size: cover;
+  background-position: center;
+  position: relative;
+  overflow: hidden;
+  background-color: #000; /* Fallback for loading */
+}
+
+/* LIGHTER overlay to show background images better */
+.hero::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+        rgba(11, 79, 138, 0.45), 
+        rgba(11, 79, 138, 0.25)
+    );
+    z-index: 1;
+}
+
+.hero__content { 
+    position: relative; 
+    z-index: 2; 
+    /* Text shadow to maintain readability over lighter images */
+    text-shadow: 0 2px 15px rgba(0, 0, 0, 0.6);
+}
+
+.hero h1 { 
+    font-family: var(--font-head); 
+    font-size: clamp(2.2rem, 6vw, 4rem); 
+    line-height: 1.1; 
+    margin-bottom: 20px; 
+    font-weight: 800;
+}
+
+/* --- Buttons --- */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.9rem 2rem;
+  border-radius: var(--radius);
+  background: var(--brand) !important;
+  color: #ffffff !important;
+  font-weight: 700;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  border: none;
+  box-shadow: var(--shadow);
+}
+
+.btn:hover {
+  background: var(--brand-2) !important;
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-lg);
+}
+
+.btn--small { padding: 0.6rem 1.4rem; font-size: 0.85rem; }
+.btn--light { background: #fff !important; color: var(--brand) !important; border: 1px solid var(--border) !important; }
+
+/* --- Footer --- */
+.footer { background: var(--brand); color: #fff; padding: 80px 0 20px; }
+.footer__grid { display: grid; gap: 40px; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); margin-bottom: 40px; }
+.footer h3 { color: #fff; margin-bottom: 20px; font-size: 1.25rem; }
+.footer ul { list-style: none; padding: 0; margin: 0; }
+.footer ul li { margin-bottom: 10px; }
+.footer a { color: rgba(255,255,255,0.7); font-size: 0.95rem; }
+.footer a:hover { color: #fff; padding-left: 5px; }
+
+.footer__bottom { border-top: 1px solid rgba(255,255,255,0.1); padding-top: 20px; margin-top: 40px; opacity: 0.8; }
+.footer__bottom-inner {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.developer-credit {
+    opacity: 0.7;
+    font-size: 0.8rem;
+}
+
+.developer-credit a {
+    color: #fff;
+    font-weight: 600;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+}
+
+.developer-credit a:hover {
+    opacity: 1;
+    color: var(--brand-2);
+}
+
+/* On mobile, center both lines */
+@media (max-width: 768px) {
+    .footer__bottom-inner {
+        flex-direction: column;
+        text-align: center;
+    }
 }

@@ -1,21 +1,65 @@
-// Mobile nav toggle
-const toggle = document.querySelector(".nav-toggle");
-const nav = document.querySelector(".nav");
-if (toggle && nav) {
-  toggle.addEventListener("click", () => {
-    nav.classList.toggle("is-open");
-    const expanded = nav.classList.contains("is-open");
-    toggle.setAttribute("aria-expanded", expanded ? "true" : "false");
-  });
-}
+/**
+ * STTMTC Main Interactive Script
+ * Handles Mobile Navigation, Active States, and UI Enhancements
+ */
 
-// Footer year
-const y = document.getElementById("year");
-if (y) y.textContent = new Date().getFullYear();
+document.addEventListener('DOMContentLoaded', () => {
+    
+    // 1. Mobile Navigation Toggle
+    const navToggle = document.querySelector(".nav-toggle");
+    const navMenu = document.querySelector(".nav");
 
-// Set active nav link by pathname
-const path = (location.pathname.split("/").pop() || "index.html").toLowerCase();
-document.querySelectorAll(".nav a").forEach(a => {
-  const href = (a.getAttribute("href") || "").toLowerCase();
-  if (href === path) a.classList.add("active");
+    if (navToggle && navMenu) {
+        navToggle.addEventListener("click", () => {
+            // Toggle the open class
+            navMenu.classList.toggle("nav--open");
+            
+            // Sync accessibility attributes
+            const isOpen = navMenu.classList.contains("nav--open");
+            navToggle.setAttribute("aria-expanded", isOpen);
+            
+            // Switch icon between Hamburger (☰) and Close (✕)
+            navToggle.textContent = isOpen ? '✕' : '☰';
+        });
+
+        // Close menu when a link is clicked (useful for one-page sections)
+        navMenu.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                navMenu.classList.remove("nav--open");
+                navToggle.textContent = '☰';
+                navToggle.setAttribute("aria-expanded", "false");
+            });
+        });
+    }
+
+    // 2. Set Active Navigation Link
+    // Normalizes paths to ensure "index.html" or "/" both highlight "Home"
+    const currentPath = window.location.pathname.split("/").pop() || "index.html";
+    
+    document.querySelectorAll(".nav a").forEach(link => {
+        const linkHref = link.getAttribute("href");
+        if (linkHref === currentPath) {
+            link.classList.add("nav-active");
+        } else {
+            link.classList.remove("nav-active");
+        }
+    });
+
+    // 3. Dynamic Footer Year
+    const yearDisplay = document.getElementById("year");
+    if (yearDisplay) {
+        yearDisplay.textContent = new Date().getFullYear();
+    }
+
+    // 4. Header Scroll Effect
+    // Adds a shadow and shrinks padding when the user scrolls down
+    const header = document.querySelector(".header");
+    window.addEventListener("scroll", () => {
+        if (window.scrollY > 50) {
+            header.classList.add("header--scrolled");
+        } else {
+            header.classList.remove("header--scrolled");
+        }
+    });
+
 });
