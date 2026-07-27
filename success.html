@@ -1,63 +1,211 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Application Received – St Theresa MTC</title>
-  <link rel="stylesheet" href="assets/css/styles.css" />
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>Application Received — St Theresa Medical Training College</title>
+  <link rel="stylesheet" href="assets/css/styles.css"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"/>
   <style>
-    .success-card {
-      max-width: 650px;
-      margin: 100px auto;
-      text-align: center;
-      padding: 50px;
-      background: white;
-      border-radius: 20px;
-      box-shadow: var(--shadow-xl);
+    .success-wrap{
+      min-height:70vh;display:flex;align-items:center;justify-content:center;
+      padding:60px 24px;background:var(--bg-soft,#F0F4F9)
     }
-    .check-icon {
-      width: 80px;
-      height: 80px;
-      background: #28a745;
-      color: white;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 40px;
-      margin: 0 auto 30px;
+    .success-card{
+      background:#fff;border-radius:20px;padding:48px 40px;
+      max-width:580px;width:100%;text-align:center;
+      box-shadow:0 8px 40px rgba(11,79,138,.12)
     }
-    .next-steps {
-      text-align: left;
-      margin-top: 30px;
-      padding-top: 30px;
-      border-top: 1px solid #eee;
+    .success-icon{
+      width:80px;height:80px;border-radius:50%;
+      background:linear-gradient(135deg,#10B981,#059669);
+      display:flex;align-items:center;justify-content:center;
+      font-size:2.2rem;margin:0 auto 24px;
+      box-shadow:0 8px 24px rgba(16,185,129,.3)
     }
+    .success-card h1{
+      font-family:var(--font-head,'Georgia',serif);
+      font-size:1.7rem;color:#0B4F8A;margin-bottom:12px
+    }
+    .success-card p{color:#64748B;line-height:1.75;margin-bottom:8px}
+    .ref-box{
+      background:#EEF5FC;border:1.5px solid #BFDBFE;border-radius:10px;
+      padding:14px 20px;margin:20px 0;
+      font-size:.88rem;color:#073769
+    }
+    .ref-box strong{font-size:1.05rem;display:block;margin-bottom:4px}
+    .next-steps{
+      background:#F8FAFC;border-radius:10px;padding:20px;
+      text-align:left;margin:20px 0
+    }
+    .next-steps h4{
+      font-size:.82rem;font-weight:700;text-transform:uppercase;
+      letter-spacing:.08em;color:#0B4F8A;margin-bottom:12px
+    }
+    .next-steps ol{padding-left:18px;color:#374151;font-size:.88rem;line-height:1.9}
+    .contact-strip{
+      display:flex;flex-wrap:wrap;gap:10px;justify-content:center;
+      margin-top:24px;padding-top:20px;border-top:1px solid #E2E8F0;
+      font-size:.82rem;color:#64748B
+    }
+    .contact-strip a{color:#0B4F8A;font-weight:600;text-decoration:none}
+    .btn-home{
+      display:inline-block;margin-top:24px;
+      padding:12px 28px;background:#0B4F8A;color:#fff;
+      border-radius:10px;font-weight:600;font-size:.9rem;
+      text-decoration:none;transition:background .2s
+    }
+    .btn-home:hover{background:#073769}
   </style>
 </head>
-<body style="background: #f8fafc;">
+<body>
 
-  <div class="container">
-    <div class="success-card">
-      <div class="check-icon">✓</div>
-      <h1>Application Submitted!</h1>
-      <p class="lead">Thank you for applying to St Theresa Medical Training College. Your preliminary details for the <strong>September 2026 Intake</strong> have been recorded.</p>
+<!-- TOPBAR -->
+<div class="topbar">
+  <div class="container topbar__inner">
+    <div class="topbar__left">
+      <span class="ico">📞</span><a href="tel:+254700626189">+254 700 626 189</a>
+      <span class="ico">✉️</span><a href="mailto:info@sttheresamedcollege.co.ke">info@sttheresamedcollege.co.ke</a>
+    </div>
+    <div class="topbar__right"><span>Mon – Fri: 8:00 AM – 5:00 PM</span></div>
+  </div>
+</div>
 
-      <div class="next-steps">
-        <h3>What happens next?</h3>
-        <ul style="list-style: none; padding: 0;">
-          <li style="margin-bottom: 15px;">📅 <strong>Review:</strong> Our admissions office will verify your KCSE index number within 2 working days.</li>
-          <li style="margin-bottom: 15px;">📞 <strong>Contact:</strong> You will receive a call or SMS regarding the interview schedule (April 2026).</li>
-          <li style="margin-bottom: 15px;">✉️ <strong>Documents:</strong> Please prepare your original certificates for physical verification.</li>
-        </ul>
+<!-- HEADER -->
+<header class="header" id="site-header">
+  <div class="container header__inner">
+    <a class="brand" href="index.html">
+      <img loading="lazy" src="assets/img/logo.png" alt="St Theresa Medical Training College Logo"/>
+      <span class="brand__text">
+        <span class="brand__name">St Theresa Medical Training College</span>
+        <span class="brand__tag">"Nurturing Excellence in Healthcare for Love &amp; Service"</span>
+      </span>
+    </a>
+    <button class="nav-toggle" id="mobile-toggle" aria-label="Toggle menu" aria-expanded="false">☰</button>
+    <nav class="nav" id="primary-nav">
+      <a href="index.html">Home</a>
+      <a href="about.html">About Us</a>
+      <a href="courses.html">Courses</a>
+      <a href="faculty.html">Faculty</a>
+      <a href="admissions.html" class="nav-active">Admissions</a>
+      <a href="facilities.html">Facilities</a>
+      <a href="news.html">News &amp; Events</a>
+      <a href="contact.html">Contact</a>
+      <a class="btn btn--small" href="https://app.cloudschool.co.ke/student/login" target="_blank" rel="noopener noreferrer">Student Portal</a>
+      <a class="btn btn--small" href="https://app.cloudschool.co.ke/admissionv2?cid=EHh39WoJGF3mbosOj1vLHg==">Apply Now</a>
+    </nav>
+  </div>
+</header>
+
+<!-- SUCCESS CONTENT -->
+<div class="success-wrap">
+  <div class="success-card">
+
+    <div class="success-icon">✓</div>
+
+    <h1>Application Received!</h1>
+    <p>Thank you for applying to St Theresa Medical Training College. Your application for the
+       <strong>Diploma in Community Health Nursing (KRCHN)</strong> has been successfully submitted.</p>
+
+    <!-- Reference number injected by JS from URL param or API response -->
+    <div class="ref-box" id="ref-box" style="display:none">
+      <strong id="ref-number">APP-2026-0001</strong>
+      Keep this reference number for your records
+    </div>
+
+    <div class="next-steps">
+      <h4>📋 What Happens Next</h4>
+      <ol>
+        <li>Our Admissions Office will review your application</li>
+        <li>Shortlisted applicants are contacted by phone or email</li>
+        <li>Interviews are conducted in <strong>April 2026</strong></li>
+        <li>Successful candidates receive an official admission letter</li>
+        <li>Orientation Day: <strong>September 8, 2026</strong></li>
+      </ol>
+    </div>
+
+    <p style="font-size:.85rem">
+      If you provided your email address, a confirmation has been sent to your inbox.<br/>
+      Please also check your spam/junk folder.
+    </p>
+
+    <div class="contact-strip">
+      <span>Questions? Call us:</span>
+      <a href="tel:+254700626189">+254 700 626 189</a>
+      <span>·</span>
+      <a href="tel:+254742344322">+254 742 344 322</a>
+      <span>·</span>
+      <a href="mailto:admissions@sttheresamedcollege.co.ke">admissions@sttheresamedcollege.co.ke</a>
+    </div>
+
+    <a href="index.html" class="btn-home">← Back to Homepage</a>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="container footer__grid">
+    <div>
+      <div class="footer__brand">
+        <!-- Logo fix: filter makes coloured logo visible on dark footer background -->
+        <img loading="lazy" src="assets/img/logo.png" alt="STTMTC-K Logo"
+             style="filter:brightness(0) invert(1)"
+             onerror="this.style.display='none';this.nextElementSibling.style.display='inline'"/>
+        <span style="display:none;color:#fff;font-weight:700">STTMTC</span>
+        <span class="footer__brand-name">STTMTC-K</span>
       </div>
-
-      <div style="margin-top: 40px; display: flex; gap: 15px; justify-content: center;">
-        <a href="index.html" class="btn">Go to Homepage</a>
-        <a href="tel:0700626189" class="btn btn--ghost">Call Admissions</a>
-      </div>
+      <p>A constituent college of St Theresa Mission Hospital – Kiirua, Meru County.</p>
+    </div>
+    <div>
+      <h3>Quick Links</h3>
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="courses.html">Courses</a></li>
+        <li><a href="admissions.html">Admissions</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </div>
+    <div>
+      <h3>Admissions Office</h3>
+      <p>
+        📍 Kiirua, off Meru-Nanyuki Road<br/>
+        📞 <a href="tel:+254700626189">+254 700 626 189</a><br/>
+        📞 <a href="tel:+254742344322">+254 742 344 322</a><br/>
+        ✉️ <a href="mailto:admissions@sttheresamedcollege.co.ke">admissions@sttheresamedcollege.co.ke</a>
+      </p>
+    </div>
+    <div>
+      <h3>Apply Again?</h3>
+      <p>Did something go wrong? Resubmit your application.</p>
+      <a class="btn btn--light" href="https://app.cloudschool.co.ke/admissionv2?cid=EHh39WoJGF3mbosOj1vLHg==" style="margin-top:14px">New Application</a>
     </div>
   </div>
+  <div class="footer__bottom">
+    <div class="container footer__bottom-inner">
+      <small>&copy; <span id="year"></span> St Theresa Medical Training College. All Rights Reserved.</small>
+      <small class="developer-credit">Developed by <a href="#" target="_blank" rel="noopener">Infranova Systems</a></small>
+    </div>
+  </div>
+</footer>
 
+<!-- WhatsApp float -->
+<a href="https://wa.me/254700626189" class="wa-float" target="_blank" rel="noopener" aria-label="Chat on WhatsApp">
+  <i class="fab fa-whatsapp"></i>
+</a>
+<button class="back-top" id="back-top" aria-label="Back to top">↑</button>
+
+<script src="assets/js/main.js"></script>
+<script>
+  // Show reference number if passed as URL param: success.html?ref=APP-2026-0042
+  // OR stored in sessionStorage by the fetch handler in admissions.html
+  const ref = new URLSearchParams(window.location.search).get('ref')
+            || sessionStorage.getItem('app_reference');
+
+  if (ref) {
+    document.getElementById('ref-number').textContent = ref;
+    document.getElementById('ref-box').style.display = 'block';
+    sessionStorage.removeItem('app_reference'); // clean up
+  }
+</script>
 </body>
 </html>

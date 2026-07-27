@@ -5,211 +5,285 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Facilities – St Theresa Medical Training College</title>
   <link rel="stylesheet" href="assets/css/styles.css" />
-  <style>
-    /* Specific styling for the Facilities Gallery */
-    .facilities-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-      gap: 25px;
-      margin-top: 30px;
-    }
-    .gallery-item {
-      position: relative;
-      border-radius: var(--radius-lg);
-      overflow: hidden;
-      height: 400px;
-      box-shadow: var(--shadow-md);
-      background: #eee;
-    }
-    .gallery-item img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
-    }
-    .gallery-item:hover img {
-      transform: scale(1.08);
-    }
-    .gallery-overlay {
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(to top, rgba(11, 79, 138, 0.9) 0%, rgba(11, 79, 138, 0.4) 50%, transparent 100%);
-      display: flex;
-      flex-direction: column;
-      justify-content: flex-end;
-      padding: 30px;
-      color: #fff;
-      opacity: 0.95;
-    }
-    .gallery-title { color: #fff; margin-bottom: 10px; font-size: 1.6rem; font-weight: 700; }
-    .gallery-subtitle { font-size: 1rem; line-height: 1.5; opacity: 0.9; }
-
-    /* Feature Box for Hospital Integration */
-    .hospital-feature {
-      background: var(--brand);
-      color: white;
-      border-radius: var(--radius-lg);
-      padding: 50px;
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 40px;
-      align-items: center;
-      margin-top: 60px;
-    }
-    @media (max-width: 768px) {
-      .hospital-feature { grid-template-columns: 1fr; padding: 30px; }
-      .gallery-item { height: 300px; }
-    }
-  </style>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
 </head>
 <body>
+
   <div class="topbar">
     <div class="container topbar__inner">
       <div class="topbar__left">
-        <span class="ico">📞</span> <a href="tel:+254700626189">+254 700 626 189</a>
-        <span class="ico">✉️</span> <a href="mailto:info@sttheresamedcollege.co.ke">info@sttheresamedcollege.co.ke</a>
+        <span class="ico">📞</span><a href="tel:+254700626189">+254 700 626 189</a>
+        <span class="ico">✉️</span><a href="mailto:info@sttheresamedcollege.co.ke">info@sttheresamedcollege.co.ke</a>
       </div>
-      <div class="topbar__right">Mon - Fri: 8:00 AM - 5:00 PM</div>
+      <div class="topbar__right"><span>Mon – Fri: 8:00 AM – 5:00 PM</span></div>
     </div>
   </div>
 
- <header class="header">
+  <header class="header" id="site-header">
     <div class="container header__inner">
-        <a class="brand" href="index.html">
-            <img src="assets/img/logo.png" alt="St Theresa Medical Training College logo" />
-            <span class="brand__text">
-                <span class="brand__name">St Theresa Medical Training College</span>
-                <span class="brand__tag">“Nurturing Excellence in Healthcare for Love & Service”</span>
-            </span>
-        </a>
-
-        <button class="nav-toggle" id="mobile-toggle" aria-label="Open menu" aria-expanded="false">☰</button>
-
-        <nav class="nav" id="primary-nav" aria-label="Primary navigation">
-            <a href="index.html">Home</a>
-            <a href="about.html">About Us</a>
-            <a href="courses.html">Courses</a>
-            <a href="faculty.html">Faculty</a>
-            <a href="admissions.html">Admissions</a>
-            <a href="facilities.html">Facilities</a>
-            <a href="news.html">News & Events</a>
-            <a href="contact.html">Contact</a>
-            <a href="login.html" class="portal-link">Student Portal</a>
-            <a class="btn btn--small" href="admissions.html#apply">Apply Now</a>
-        </nav>
+      <a class="brand" href="index.html">
+        <img loading="lazy" src="assets/img/logo.png" alt="St Theresa Medical Training College Logo" />
+        <span class="brand__text">
+          <span class="brand__name">St Theresa Medical Training College</span>
+          <span class="brand__tag">"Nurturing Excellence in Healthcare for Love &amp; Service"</span>
+        </span>
+      </a>
+      <button class="nav-toggle" id="mobile-toggle" aria-label="Toggle menu" aria-expanded="false">☰</button>
+      <nav class="nav" id="primary-nav">
+              <a href="index.html">Home</a>
+      <div class="nav-item">
+        <a href="about.html">About</a>
+        <div class="nav-dropdown">
+          <div class="dd-label">The College</div>
+          <a href="about.html"><span class="dd-icon">🏫</span>About STTMTC</a>
+          <a href="about.html#vision"><span class="dd-icon">🎯</span>Vision &amp; Mission</a>
+          <a href="about.html#principal"><span class="dd-icon">👩‍⚕️</span>Principal's Message</a>
+          <div class="dd-divider"></div>
+          <a href="about.html#management"><span class="dd-icon">👥</span>Management Team</a>
+          <a href="news.html"><span class="dd-icon">📢</span>News &amp; Events</a>
+        </div>
+      </div>
+      <a href="courses.html">Courses</a>
+      <a href="faculty.html">Faculty</a>
+      <div class="nav-item">
+        <a href="admissions.html">Admissions</a>
+        <div class="nav-dropdown">
+          <div class="dd-label">How to Join</div>
+          <a href="https://app.cloudschool.co.ke/admissionv2?cid=EHh39WoJGF3mbosOj1vLHg=="><span class="dd-icon">📝</span>Apply Online</a>
+          <a href="admissions.html#requirements"><span class="dd-icon">📋</span>Entry Requirements</a>
+          <a href="admissions.html#fees"><span class="dd-icon">💰</span>Fee Structure</a>
+          <div class="dd-divider"></div>
+          <div class="dd-label">Downloads</div>
+          <a href="assets/downloads/prospectus.pdf" target="_blank"><span class="dd-icon">📘</span>Prospectus</a>
+          <a href="assets/downloads/admission-form.pdf" target="_blank"><span class="dd-icon">📄</span>Admission Form</a>
+          <a href="assets/downloads/fee-structure.pdf" target="_blank"><span class="dd-icon">💳</span>Fee Structure</a>
+        </div>
+      </div>
+      <a href="facilities.html">Facilities</a>
+      <div class="nav-item">
+        <a href="#">Resources</a>
+        <div class="nav-dropdown">
+          <div class="dd-label">Student Resources</div>
+          <a href="assets/downloads/student-handbook.pdf" target="_blank"><span class="dd-icon">📖</span>Student Handbook</a>
+          <a href="assets/downloads/academic-calendar.pdf" target="_blank"><span class="dd-icon">📅</span>Academic Calendar</a>
+          <a href="assets/downloads/rules-regulations.pdf" target="_blank"><span class="dd-icon">📜</span>Rules &amp; Regulations</a>
+          <div class="dd-divider"></div>
+          <a href="contact.html#faq"><span class="dd-icon">❓</span>FAQs</a>
+        </div>
+      </div>
+      <a href="facilities.html" class="nav-active">Facilities</a>
+      <a href="news.html">News</a>
+      <a href="contact.html">Contact</a>
+      <a class="btn btn--small" href="https://app.cloudschool.co.ke/student/login" target="_blank" rel="noopener noreferrer">🎓 Student Portal</a>
+        <a class="btn btn--small" href="https://app.cloudschool.co.ke/admissionv2?cid=EHh39WoJGF3mbosOj1vLHg==">Apply Now</a>
+      </nav>
     </div>
-</header>
+  </header>
 
-  <section class="hero" style="background-image: url('assets/img/hos1.jpg'); background-size: cover; background-position: center;">
-    <div class="container hero__content">
-      <div class="kicker" style="color:#fff;">Clinical Excellence</div>
-      <h1 style="color:#fff;">World-Class Infrastructure</h1>
-      <p class="sub lead" style="color:#fff;">A modern campus integrated within a Level 5 Teaching and Referral Hospital.</p>
+  <!-- HERO -->
+  <section class="hero hero--clean" style="background-image:url('assets/img/hos1.jpg');">
+  <div class="hero-caption">
+    <span class="hero-caption__tag">World-Class Infrastructure</span>
+    <h1 class="hero-caption__title">Our Campus &amp;<br/>Facilities</h1>
+    <p class="hero-caption__desc">A modern campus fully integrated within a Level 5 Teaching Hospital — where students learn by doing, every single day.</p>
+  </div>
+</section>
+
+  <!-- FACILITIES GRID -->
+  <section class="section" id="gallery">
+    <div class="container">
+      <div class="section__head reveal">
+        <div class="kicker">Campus Resources</div>
+        <h2>Our Training Environments</h2>
+        <p class="lead">Explore the world-class facilities where our students grow into confident, competent medical professionals.</p>
+      </div>
+      <div class="grid grid--2">
+        <div class="overlay-card reveal reveal-delay-1">
+          <img loading="lazy" src="assets/img/hos1.jpg" alt="St Theresa Mission Hospital" />
+          <div class="overlay-card__body">
+            <h3>STMH-K Level 5 Hospital</h3>
+            <p>A fully-operational Level 5 Teaching &amp; Referral facility serving as our primary clinical training ground. Students access real wards, theatres, and ICUs daily.</p>
+          </div>
+        </div>
+        <div class="overlay-card reveal reveal-delay-2">
+          <img loading="lazy" src="assets/img/clinical-skills-lab.jpg" alt="ISO Accredited Laboratory" />
+          <div class="overlay-card__body">
+            <h3>ISO 15189 Accredited Lab</h3>
+            <p>KENAS-certified to international standards. Our medical laboratory is one of a handful in Kenya to hold ISO 15189:2012 accreditation — ensuring world-class training.</p>
+          </div>
+        </div>
+        <div class="overlay-card reveal reveal-delay-1">
+          <img loading="lazy" src="assets/img/lib.jpeg" alt="Medical Library" />
+          <div class="overlay-card__body">
+            <h3>Medical Library &amp; Resource Centre</h3>
+            <p>An extensive collection of medical literature, research journals, and high-speed digital research terminals for academic excellence.</p>
+          </div>
+        </div>
+        <div class="overlay-card reveal reveal-delay-2">
+          <img loading="lazy" src="assets/img/hostel.jpeg" alt="Student Hostels" />
+          <div class="overlay-card__body">
+            <h3>On-Campus Hostels</h3>
+            <p>Safe, comfortable, and spiritually nurturing student residences within the secure campus perimeter. Fully catered and supervised.</p>
+          </div>
+        </div>
+      </div>
     </div>
   </section>
 
-  <section class="section" id="gallery">
+  <!-- HOSPITAL INTEGRATION -->
+  <section class="section section--soft">
     <div class="container">
-      <div class="section__head" style="text-align:center;">
-        <h2>Campus Resources</h2>
-        <p class="lead">Explore the world-class environments where our students grow into medical leaders.</p>
-      </div>
-
-      <div class="facilities-grid">
-        <div class="gallery-item">
-          <img src="assets/img/hos1.jpg" alt="St Theresa Mission Hospital">
-          <div class="gallery-overlay">
-            <h3 class="gallery-title">STMH-K Hospital</h3>
-            <p class="gallery-subtitle">A Level 5 Teaching & Referral facility serving as our primary clinical training ground.</p>
-          </div>
-        </div>
-
-        <div class="gallery-item">
-          <img src="assets/img/labb1.jpeg" alt="Skills Lab">
-          <div class="gallery-overlay">
-            <h3 class="gallery-title">Clinical Skills Lab</h3>
-            <p class="gallery-subtitle">Advanced simulation tools for hands-on nursing, clinical medicine, and laboratory training.</p>
-          </div>
-        </div>
-
-        <div class="gallery-item">
-          <img src="assets/img/lib.jpeg" alt="Library">
-          <div class="gallery-overlay">
-            <h3 class="gallery-title">Medical Library</h3>
-            <p class="gallery-subtitle">Extensive collection of medical literature and high-speed digital research terminals.</p>
-          </div>
-        </div>
-
-        <div class="gallery-item">
-          <img src="assets/img/photo-1555854877-bab0e564b8d5.jpg" alt="Hostels">
-          <div class="gallery-overlay">
-            <h3 class="gallery-title">On-Campus Hostels</h3>
-            <p class="gallery-subtitle">Safe, comfortable, and spiritual student residences within the secure campus perimeter.</p>
-          </div>
-        </div>
-      </div>
-
-      <div class="hospital-feature">
+      <div class="info-block reveal">
         <div>
+          <div class="kicker" style="background:rgba(255,255,255,0.15); color:rgba(255,255,255,0.9);">Unique Advantage</div>
           <h2>Level 5 Hospital Integration</h2>
-          <p class="lead" style="color: rgba(255,255,255,0.9);">St Theresa MTC is uniquely positioned within the St Theresa Mission Hospital complex, offering a seamless training ecosystem:</p>
-          <ul class="list" style="margin-top: 20px; color: white;">
-            <li>Direct access to ISO 15189:2012 Accredited Laboratories.</li>
-            <li>Real-time exposure to complex surgical and medical cases.</li>
-            <li>Mentorship from the Hospital's multidisciplinary team of specialists.</li>
-            <li>Priority clinical rotations in specialized units (ICU, Renal, Theatre).</li>
+          <p>St Theresa Medical Training College is uniquely positioned within the St Theresa Mission Hospital complex, offering a seamless training ecosystem where students move from classroom to clinical environment in minutes — not semesters.</p>
+          <ul class="list" style="margin-top:20px;">
+            <li>Direct access to ISO 15189:2012 Accredited Laboratories (KENAS certified)</li>
+            <li>Real-time exposure to complex surgical, medical &amp; obstetric cases</li>
+            <li>Mentorship from the Hospital's multidisciplinary team of specialists</li>
+            <li>Priority clinical rotations in ICU, Renal, Theatre &amp; Maternity units</li>
+            <li>Community health outreach and field service learning programs</li>
           </ul>
         </div>
         <div>
-          <img src="assets/img/hos1.jpg" alt="Hospital Clinical Area" style="border-radius: 10px; box-shadow: 0 10px 30px rgba(0,0,0,0.3);">
+          <img loading="lazy" src="assets/img/clinical-area.jpeg" alt="Hospital Clinical Area" />
         </div>
       </div>
     </div>
   </section>
 
+  <!-- FEATURE HIGHLIGHTS -->
+  <section class="section">
+    <div class="container">
+      <div class="section__head reveal">
+        <div class="kicker">More on Campus</div>
+        <h2>Everything You Need to Succeed</h2>
+        <p class="lead">Beyond the wards and labs, our campus is designed to support students academically, socially, and spiritually.</p>
+      </div>
+      <div class="grid grid--4 feature-grid">
+        <div class="feature-card reveal reveal-delay-1">
+          <div class="icon">🧪</div>
+          <h3>Skills Simulation Lab</h3>
+          <p>Advanced mannequins, IV trainers, and simulation tools for hands-on clinical procedure practice before real-world ward placement.</p>
+        </div>
+        <div class="feature-card reveal reveal-delay-2">
+          <div class="icon">💻</div>
+          <h3>ICT &amp; Computer Lab</h3>
+          <p>Modern workstations with internet access, EMR software training platforms, and digital health information systems.</p>
+        </div>
+        <div class="feature-card reveal reveal-delay-3">
+          <div class="icon">🍽️</div>
+          <h3>Student Cafeteria</h3>
+          <p>Affordable, nutritious meals prepared fresh daily within the campus compound. Special dietary needs accommodated.</p>
+        </div>
+        <div class="feature-card reveal reveal-delay-4">
+          <div class="icon">🏃</div>
+          <h3>Recreation Grounds</h3>
+          <p>Football pitch, volleyball courts, and open recreation areas ensuring students stay physically active and mentally balanced.</p>
+        </div>
+        <div class="feature-card reveal reveal-delay-1">
+          <div class="icon">📖</div>
+          <h3>Digital Library Access</h3>
+          <p>Subscriptions to online medical journals, HINARI database access, and a growing collection of physical medical textbooks.</p>
+        </div>
+        <div class="feature-card reveal reveal-delay-2">
+          <div class="icon">⛪</div>
+          <h3>Chapel &amp; Spiritual Formation</h3>
+          <p>A serene on-campus chapel for prayer, reflection, and faith formation — central to our holistic education philosophy.</p>
+        </div>
+        <div class="feature-card reveal reveal-delay-3">
+          <div class="icon">🚌</div>
+          <h3>Transport Links</h3>
+          <p>Easy road access from Meru Town via the Meru-Nanyuki Highway. Regular matatu services serving the Kiirua route.</p>
+        </div>
+        <div class="feature-card reveal reveal-delay-4">
+          <div class="icon">🔒</div>
+          <h3>Secure Campus</h3>
+          <p>24-hour security personnel and controlled access within the Mission Hospital compound, ensuring a safe learning environment.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- LIBRARY & LAB DETAIL -->
   <section class="section section--soft">
-    <div class="container" style="text-align:center;">
-      <h2>Visit Our Campus</h2>
-      <p class="lead">Experience the integration of high-level healthcare and professional medical training.</p>
-      <div style="margin-top: 30px;">
-        <a class="btn btn--light" href="contact.html">Book a Guided Tour</a>
-        <a class="btn" href="admissions.html#apply" style="margin-left: 15px;">Apply Today</a>
+    <div class="container two-col">
+      <div class="reveal">
+        <img loading="lazy" src="assets/img/medical-library.jpeg" alt="Medical Library" class="img-rounded" />
+      </div>
+      <div class="reveal reveal-delay-2">
+        <div class="kicker">Knowledge Hub</div>
+        <h2>Medical Library &amp; Resource Centre</h2>
+        <p class="lead">Our medical library provides students with the reference materials and research tools they need to excel academically and clinically.</p>
+        <ul class="list mt-md">
+          <li>Over 2,000 medical textbooks and reference volumes</li>
+          <li>Subscriptions to peer-reviewed journals via HINARI</li>
+          <li>Dedicated quiet study rooms and group discussion spaces</li>
+          <li>High-speed internet terminals for digital research</li>
+          <li>Photocopying and printing services on-site</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- HOSTELS DETAIL -->
+  <section class="section">
+    <div class="container two-col">
+      <div class="reveal">
+        <div class="kicker">Student Residence</div>
+        <h2>On-Campus Student Hostels</h2>
+        <p class="lead">Safe, comfortable, and spiritually nurturing accommodation within the secure Mission Hospital campus perimeter.</p>
+        <p style="margin-top:14px;">Our hostels are designed to complement the academic journey — clean, well-maintained rooms with study desks, reliable water supply, and pastoral care from the Little Sisters of St. Therese.</p>
+        <ul class="list mt-md">
+          <li>Separate male and female hostels</li>
+          <li>24-hour security and campus curfew</li>
+          <li>Common room with TV and recreation facilities</li>
+          <li>On-site laundry facilities</li>
+          <li>Spiritual direction and pastoral support available</li>
+        </ul>
+        <a class="btn mt-md" href="contact.html">Enquire About Accommodation</a>
+      </div>
+      <div class="reveal reveal-delay-2">
+        <img loading="lazy" src="assets/img/hostel.jpeg" alt="Student Hostels" class="img-rounded" />
+      </div>
+    </div>
+  </section>
+
+  <!-- VISIT CTA -->
+  <section class="cta-band">
+    <div class="container reveal">
+      <h2>Come and See for Yourself</h2>
+      <p>Experience the integration of high-level healthcare and professional medical training. Book a guided campus tour today.</p>
+      <div style="display:flex; gap:14px; justify-content:center; flex-wrap:wrap;">
+        <a class="btn btn--light" href="contact.html">Book a Campus Tour</a>
+        <a class="btn btn--ghost" href="https://app.cloudschool.co.ke/admissionv2?cid=EHh39WoJGF3mbosOj1vLHg==">Apply Today</a>
       </div>
     </div>
   </section>
 
   <footer class="footer">
-    <div class="container footer__grid grid grid--4">
-      <div>
-        <h3>STTMTC</h3>
-        <p>A constituent college of St Theresa Mission Hospital – Kiirua. Training healthcare professionals to love and serve.</p>
-      </div>
-      <div>
-        <h3>Quick Links</h3>
-        <ul>
-          <li><a href="courses.html">Programmes</a></li>
-          <li><a href="facilities.html">Campus Life</a></li>
-          <li><a href="news.html">Announcements</a></li>
-        </ul>
-      </div>
-      <div>
-        <h3>Location</h3>
-        <p>Kiirua, along Meru-Nanyuki Road<br>Buuri Sub-County, Meru</p>
-      </div>
-      <div>
-        <h3>Contact</h3>
-        <p>📞 +254 700 626 189<br>✉️ info@sttheresamedcollege.co.ke</p>
-      </div>
+    <div class="container footer__grid">
+      <div><div class="footer__brand">
+      <img loading="lazy" src="assets/img/logo.png" alt="STTMTC-K" class="footer__logo-white" onerror="this.style.display='none'"><span class="footer__brand-name">STTMTC-K</span></div><p>A constituent college of St Theresa Mission Hospital – Kiirua, Meru County.</p></div>
+      <div><h3>Quick Links</h3><ul><li><a href="courses.html">Programmes</a></li><li><a href="gallery.html">Gallery</a></li><li><a href="news.html">Announcements</a></li></ul></div>
+      <div><h3>Location</h3><p>📍 Kiirua, along Meru-Nanyuki Road<br>Buuri Sub-County, Meru<br>📞 <a href="tel:+254700626189">+254 700 626 189</a></p></div>
+      <div><h3>Apply</h3><a class="btn btn--light" href="https://app.cloudschool.co.ke/admissionv2?cid=EHh39WoJGF3mbosOj1vLHg==" style="margin-top:8px;">Apply Now</a></div>
     </div>
-    <div class="footer__bottom">
-    <div class="container footer__bottom-inner">
-        <small>© <span id="year"></span> St Theresa Medical Training College. All Rights Reserved.</small>
-        <small class="developer-credit">
-            Developed by <a href="https://yourlink.com" target="_blank" rel="noopener">Infranova Systems</a>
-        </small>
-    </div>
-</div>
+    <div class="footer__bottom"><div class="container footer__bottom-inner"><small>&copy; <span id="year"></span> STTMTC-K. All Rights Reserved.</small><small class="developer-credit">Developed by <a href="#" target="_blank" rel="noopener">Infranova Systems</a></small></div></div>
   </footer>
+  <!-- WHATSAPP FLOAT -->
+  <a href="https://wa.me/254700626189" class="wa-float" target="_blank" rel="noopener" aria-label="Chat on WhatsApp">
+    <i class="fab fa-whatsapp"></i>
+  </a>
+
+  <!-- BACK TO TOP -->
+  <button class="back-top" id="back-top" aria-label="Back to top">↑</button>
+
+  <!-- LIGHTBOX -->
+  <div class="lightbox" id="lightbox">
+    <img class="lightbox__img" id="lightbox-img" src="" alt="" />
+  </div>
 
   <script src="assets/js/main.js"></script>
 </body>

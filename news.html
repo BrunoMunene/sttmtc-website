@@ -1,207 +1,540 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>News & Events – St Theresa Medical Training College</title>
-  <link rel="stylesheet" href="assets/css/styles.css" />
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <meta name="description" content="Latest news, events, and announcements from St Theresa Medical Training College — Kiirua, Meru County."/>
+  <title>News &amp; Events — St Theresa Medical Training College</title>
+  <link rel="stylesheet" href="assets/css/styles.css"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"/>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
   <style>
-    /* Slider Styling for the Accreditation News */
-    .news-slider {
-      position: relative;
-      width: 100%;
-      height: 250px;
+    /* ── NEWS PAGE SPECIFIC ─────────────────────────────── */
+    .news-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      gap: 24px;
+      margin-bottom: 32px;
+    }
+    .news-card {
+      background: #fff;
+      border-radius: var(--radius-xl, 20px);
       overflow: hidden;
-    }
-    .slides {
+      box-shadow: var(--shadow, 0 4px 16px rgba(11,79,138,.08));
       display: flex;
-      width: 600%; /* 6 images */
-      height: 100%;
-      animation: slide-animation 20s infinite;
+      flex-direction: column;
+      transition: transform .3s ease, box-shadow .3s ease;
     }
-    .slides img {
-      width: 16.66%; /* 1/6th of the width */
-      height: 100%;
-      object-fit: cover;
+    .news-card:hover {
+      transform: translateY(-5px);
+      box-shadow: var(--shadow-lg, 0 20px 60px rgba(11,79,138,.15));
     }
-    @keyframes slide-animation {
-      0% { transform: translateX(0); }
-      15% { transform: translateX(0); }
-      20% { transform: translateX(-16.66%); }
-      35% { transform: translateX(-16.66%); }
-      40% { transform: translateX(-33.33%); }
-      55% { transform: translateX(-33.33%); }
-      60% { transform: translateX(-50%); }
-      75% { transform: translateX(-50%); }
-      80% { transform: translateX(-66.66%); }
-      95% { transform: translateX(-66.66%); }
-      100% { transform: translateX(0); }
+    .news-card__img {
+      height: 200px;
+      overflow: hidden;
+      position: relative;
+      flex-shrink: 0;
+    }
+    .news-card__img img {
+      width: 100%; height: 100%;
+      object-fit: cover; display: block;
+      transition: transform .4s ease;
+    }
+    .news-card:hover .news-card__img img { transform: scale(1.05); }
+    .news-card__img-placeholder {
+      width: 100%; height: 100%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 3.5rem;
+    }
+    .news-card__body {
+      padding: 20px 22px;
+      flex: 1; display: flex; flex-direction: column;
+    }
+    .news-card__meta {
+      display: flex; align-items: center;
+      justify-content: space-between;
+      margin-bottom: 10px; flex-wrap: wrap; gap: 6px;
+    }
+    .news-card__cat {
+      font-size: .7rem; font-weight: 700;
+      text-transform: uppercase; letter-spacing: .08em;
+      color: var(--brand-2, #2F7DD1);
+    }
+    .news-card__date {
+      font-size: .74rem;
+      color: var(--muted, #64748B);
+    }
+    .news-card__title {
+      font-size: 1rem; font-weight: 700;
+      color: var(--text-main, #0F172A);
+      margin-bottom: 8px; line-height: 1.35;
+    }
+    .news-card__excerpt {
+      font-size: .85rem;
+      color: var(--text-body, #334155);
+      line-height: 1.65; flex: 1;
+    }
+    .news-card__footer {
+      margin-top: 16px; padding-top: 14px;
+      border-top: 1px solid var(--border, #E2E8F0);
+      display: flex; align-items: center;
+      justify-content: space-between;
+    }
+    .news-card__author {
+      font-size: .76rem;
+      color: var(--muted, #64748B);
     }
 
-    /* Horizontal Card Fixes */
-    @media (max-width: 768px) {
-      .event-card-horizontal {
-        flex-direction: column !important;
-      }
-      .event-card-horizontal img {
-        width: 100% !important;
-        height: 200px !important;
-      }
+    /* Featured post — wide card */
+    .news-featured {
+      grid-column: 1 / -1;
+      display: grid;
+      grid-template-columns: 1.3fr 1fr;
+      min-height: 320px;
+    }
+    .news-featured .news-card__img { height: auto; }
+    .news-featured .news-card__title { font-size: 1.35rem; }
+    .news-featured .news-card__excerpt { font-size: .9rem; }
+
+    /* Category filter bar */
+    .filter-bar {
+      display: flex; gap: 8px; flex-wrap: wrap;
+      margin-bottom: 28px;
+    }
+    .filter-pill {
+      padding: 7px 18px;
+      border: 1.5px solid var(--border, #E2E8F0);
+      border-radius: 100px;
+      background: #fff;
+      font-family: inherit; font-size: .82rem;
+      font-weight: 600; color: var(--muted, #64748B);
+      cursor: pointer; transition: all .2s;
+    }
+    .filter-pill.active,
+    .filter-pill:hover {
+      background: var(--brand, #0B4F8A);
+      color: #fff; border-color: var(--brand, #0B4F8A);
+    }
+
+    /* Loading state */
+    .news-skeleton {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      gap: 24px;
+    }
+    .skeleton-card {
+      background: #fff; border-radius: 20px;
+      overflow: hidden; box-shadow: var(--shadow);
+    }
+    .skeleton-img { height: 200px; background: linear-gradient(90deg,#f0f4f9 25%,#e2e8f0 50%,#f0f4f9 75%); background-size: 200% 100%; animation: shimmer 1.4s infinite; }
+    .skeleton-body { padding: 20px; }
+    .skeleton-line { height: 12px; border-radius: 6px; background: linear-gradient(90deg,#f0f4f9 25%,#e2e8f0 50%,#f0f4f9 75%); background-size: 200% 100%; animation: shimmer 1.4s infinite; margin-bottom: 10px; }
+    .skeleton-line.w-60 { width: 60%; }
+    .skeleton-line.w-80 { width: 80%; }
+    @keyframes shimmer { 0%{background-position:200% 0} 100%{background-position:-200% 0} }
+
+    /* Empty / error state */
+    .news-empty {
+      text-align: center; padding: 56px 20px;
+      grid-column: 1 / -1;
+      color: var(--muted, #64748B);
+    }
+    .news-empty .icon { font-size: 3rem; margin-bottom: 14px; }
+
+    /* Article modal */
+    .article-modal {
+      display: none; position: fixed; inset: 0;
+      background: rgba(0,0,0,.55); z-index: 800;
+      align-items: flex-start; justify-content: center;
+      padding: 40px 20px; overflow-y: auto;
+    }
+    .article-modal.open { display: flex; }
+    .article-box {
+      background: #fff; border-radius: 20px;
+      width: 100%; max-width: 680px;
+      box-shadow: 0 20px 60px rgba(0,0,0,.25);
+      animation: fadeUp .3s ease;
+      margin: auto;
+    }
+    @keyframes fadeUp { from{opacity:0;transform:translateY(20px)} to{opacity:1;transform:translateY(0)} }
+    .article-box__img {
+      height: 280px; border-radius: 20px 20px 0 0;
+      overflow: hidden; position: relative;
+    }
+    .article-box__img img { width:100%;height:100%;object-fit:cover;display:block; }
+    .article-box__img-placeholder {
+      width:100%;height:100%;
+      display:flex;align-items:center;justify-content:center;font-size:5rem;
+    }
+    .article-box__body { padding: 28px 32px 32px; }
+    .article-box__close {
+      position: absolute; top: 14px; right: 14px;
+      background: rgba(0,0,0,.5); color: #fff;
+      border: none; border-radius: 50%;
+      width: 36px; height: 36px; font-size: 1.2rem;
+      cursor: pointer; display: flex; align-items: center;
+      justify-content: center; z-index: 2;
+    }
+    .article-box__cat { font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--brand-2);margin-bottom:8px; }
+    .article-box__title { font-family:var(--font-head,'Georgia',serif);font-size:1.6rem;font-weight:700;margin-bottom:10px;line-height:1.2; }
+    .article-box__meta { font-size:.78rem;color:var(--muted);margin-bottom:20px; }
+    .article-box__content { font-size:.93rem;line-height:1.82;color:var(--text-body,#334155); }
+    .article-box__content p { margin-bottom:14px; }
+
+    @media(max-width:768px) {
+      .news-featured { grid-template-columns:1fr; }
+      .news-featured .news-card__img { height: 220px; }
+      .article-box__body { padding:20px; }
     }
   </style>
 </head>
 <body>
-  <div class="topbar">
-    <div class="container topbar__inner">
-      <div class="topbar__left">
-        <span class="ico">📞</span> <a href="tel:+254700626189">+254 700 626 189</a>
-        <span class="ico">✉️</span> <a href="mailto:info@sttheresamedcollege.co.ke">info@sttheresamedcollege.co.ke</a>
-      </div>
-      <div class="topbar__right">Mon - Fri: 8:00 AM - 5:00 PM</div>
+
+<!-- TOPBAR -->
+<div class="topbar">
+  <div class="container topbar__inner">
+    <div class="topbar__left">
+      <span class="ico">📞</span><a href="tel:+254700626189">+254 700 626 189</a>
+      <span class="ico">✉️</span><a href="mailto:info@sttheresamedcollege.co.ke">info@sttheresamedcollege.co.ke</a>
     </div>
+    <div class="topbar__right"><span>Mon – Fri: 8:00 AM – 5:00 PM</span></div>
   </div>
+</div>
 
-<header class="header">
-    <div class="container header__inner">
-        <a class="brand" href="index.html">
-            <img src="assets/img/logo.png" alt="St Theresa Medical Training College logo" />
-            <span class="brand__text">
-                <span class="brand__name">St Theresa Medical Training College</span>
-                <span class="brand__tag">“Nurturing Excellence in Healthcare for Love & Service”</span>
-            </span>
-        </a>
-
-        <button class="nav-toggle" id="mobile-toggle" aria-label="Open menu" aria-expanded="false">☰</button>
-
-        <nav class="nav" id="primary-nav" aria-label="Primary navigation">
-            <a href="index.html">Home</a>
-            <a href="about.html">About Us</a>
-            <a href="courses.html">Courses</a>
-            <a href="faculty.html">Faculty</a>
-            <a href="admissions.html">Admissions</a>
-            <a href="facilities.html">Facilities</a>
-            <a href="news.html">News & Events</a>
-            <a href="contact.html">Contact</a>
-            <a href="login.html" class="portal-link">Student Portal</a>
-            <a class="btn btn--small" href="admissions.html#apply">Apply Now</a>
-        </nav>
-    </div>
+<!-- NAVBAR -->
+<header class="header" id="site-header">
+  <div class="container header__inner">
+    <a class="brand" href="index.html">
+      <img loading="lazy" src="assets/img/logo.png" alt="St Theresa Medical Training College Logo"/>
+      <span class="brand__text">
+        <span class="brand__name">St Theresa Medical Training College</span>
+        <span class="brand__tag">"Nurturing Excellence in Healthcare for Love &amp; Service"</span>
+      </span>
+    </a>
+    <button class="nav-toggle" id="mobile-toggle" aria-label="Toggle menu" aria-expanded="false">☰</button>
+    <nav class="nav" id="primary-nav">
+      <a href="index.html">Home</a>
+      <div class="nav-item">
+        <a href="about.html">About Us</a>
+        <div class="nav-dropdown">
+          <div class="dd-label">The College</div>
+          <a href="about.html"><span class="dd-icon">🏫</span>About STTMTC-K</a>
+          <a href="about.html#vision"><span class="dd-icon">🎯</span>Vision &amp; Mission</a>
+          <a href="about.html#principal"><span class="dd-icon">👩‍⚕️</span>Principal's Message</a>
+          <div class="dd-divider"></div>
+          <a href="about.html#management"><span class="dd-icon">👥</span>Management Team</a>
+          <a href="news.html"><span class="dd-icon">📢</span>News &amp; Events</a>
+        </div>
+      </div>
+      <a href="courses.html">Courses</a>
+      <a href="faculty.html">Faculty</a>
+      <div class="nav-item">
+        <a href="admissions.html">Admissions</a>
+        <div class="nav-dropdown">
+          <div class="dd-label">How to Join</div>
+          <a href="https://app.cloudschool.co.ke/admissionv2?cid=EHh39WoJGF3mbosOj1vLHg=="><span class="dd-icon">📝</span>Apply Online</a>
+          <a href="admissions.html#requirements"><span class="dd-icon">📋</span>Entry Requirements</a>
+          <a href="admissions.html#fees"><span class="dd-icon">💰</span>Fee Structure</a>
+          <div class="dd-divider"></div>
+          <div class="dd-label">Downloads</div>
+          <a href="assets/downloads/prospectus.pdf" target="_blank"><span class="dd-icon">📘</span>Prospectus</a>
+          <a href="assets/downloads/admission-form.pdf" target="_blank"><span class="dd-icon">📄</span>Admission Form</a>
+          <a href="assets/downloads/fee-structure.pdf" target="_blank"><span class="dd-icon">💳</span>Fee Structure</a>
+        </div>
+      </div>
+      <a href="facilities.html">Facilities</a>
+      <div class="nav-item">
+        <a href="#">Resources</a>
+        <div class="nav-dropdown">
+          <div class="dd-label">Student Resources</div>
+          <a href="assets/downloads/student-handbook.pdf" target="_blank"><span class="dd-icon">📖</span>Student Handbook</a>
+          <a href="assets/downloads/academic-calendar.pdf" target="_blank"><span class="dd-icon">📅</span>Academic Calendar</a>
+          <a href="assets/downloads/rules-regulations.pdf" target="_blank"><span class="dd-icon">📜</span>Rules &amp; Regulations</a>
+          <div class="dd-divider"></div>
+          <a href="contact.html#faq"><span class="dd-icon">❓</span>FAQs</a>
+        </div>
+      </div>
+      <a href="news.html" class="nav-active">News &amp; Events</a>
+      <a href="contact.html">Contact</a>
+      <a class="btn btn--small" href="https://app.cloudschool.co.ke/student/login" target="_blank" rel="noopener noreferrer">Student Portal</a>
+      <a class="btn btn--small" href="https://app.cloudschool.co.ke/admissionv2?cid=EHh39WoJGF3mbosOj1vLHg==">Apply Now</a>
+    </nav>
+  </div>
 </header>
 
-  <section class="hero" style="background-image: url('assets/img/news1.jpg'); background-size: cover; background-position: center;">
-    <div class="container hero__content">
-      <div class="kicker" style="color: #fff; opacity: 0.9;">Excellence in Action</div>
-      <h1 style="color: #fff;">College News & Announcements</h1>
-      <p class="sub lead" style="color: #fff;">Celebrating milestones in medical quality and academic achievement.</p>
+<!-- HERO -->
+<section class="hero hero--clean" style="background-image:url('assets/img/lab6.jpg');">
+  <div class="hero-caption hero-caption--sm">
+    <span class="hero-caption__tag">Stay Informed</span>
+    <h1 class="hero-caption__title">News &amp; Events</h1>
+    <p class="hero-caption__desc">Latest announcements, milestones, and events from St Theresa Medical Training College.</p>
+  </div>
+</section>
+
+<!-- MAIN CONTENT -->
+<section class="section">
+  <div class="container">
+
+    <!-- Category filter -->
+    <div class="filter-bar" id="filter-bar">
+      <button class="filter-pill active" onclick="filterNews('all',this)">All</button>
+      <button class="filter-pill" onclick="filterNews('Admissions',this)">📝 Admissions</button>
+      <button class="filter-pill" onclick="filterNews('Academic',this)">📚 Academic</button>
+      <button class="filter-pill" onclick="filterNews('Events',this)">📅 Events</button>
+      <button class="filter-pill" onclick="filterNews('Achievement',this)">🏅 Achievement</button>
+      <button class="filter-pill" onclick="filterNews('Community',this)">🌿 Community</button>
+      <button class="filter-pill" onclick="filterNews('Notice',this)">📢 Notice</button>
     </div>
-  </section>
 
-  <section class="section" id="latest">
-    <div class="container">
-      <div class="section__head">
-        <h2>Featured News</h2>
-      </div>
-
-      <div class="grid grid--3">
-        <article class="card" style="grid-column: span 2;">
-          <div class="news-slider">
-            <div class="slides">
-              <img src="assets/img/lab1.jpg" alt="Lab Accreditation Celebartion">
-              <img src="assets/img/lab2.jpg" alt="Laboratory Equipment">
-              <img src="assets/img/lab3.jpg" alt="Lab Team">
-              <img src="assets/img/lab4.jpg" alt="Accreditation Certificate">
-              <img src="assets/img/lab6.jpg" alt="NPHL Event">
-            </div>
-          </div>
-          <div class="card__body">
-            <span class="pill" style="background: #2e7d32; color: #fff;">Quality Milestone</span>
-            <h3>STMH-K Laboratory Achieves International ISO 15189 Accreditation</h3>
-            <div class="meta" style="margin-bottom: 10px; font-size: 0.85rem; color: #666;">
-              <span>📅 February 2026</span>
-            </div>
-            <p>
-              We are proud to announce that the St Theresa Mission Hospital Laboratory has been officially accredited by <strong>KENAS (Kenya Accreditation Service)</strong>. This prestigious ISO 15189:2012 certification recognizes our laboratory's commitment to international standards of quality and technical competence.
-            </p>
-            <p style="font-size: 0.95rem; color: #444;">
-              For our students at St Theresa MTC, this means training in a facility that guarantees efficiency, patient safety, and globally recognized service delivery. Special thanks to our dedicated Lab team and partners at NPHL, Global Fund, and AMREF for supporting this journey toward clinical excellence.
-            </p>
-          </div>
-        </article>
-
-        <article class="card">
-          <img src="assets/img/photo-1434030216411-0b793f4b4173.jpeg" alt="Admissions" class="card__img" />
-          <div class="card__body">
-            <span class="pill pill--urgent">Admission</span>
-            <h3>September 2026 Intake</h3>
-            <p>Enroll today in our Nursing, Clinical Medicine, or Lab Technology programs. Hands-on training in our ISO-accredited labs awaits you.</p>
-          </div>
-          <div class="card__cta"><a class="btn btn--light btn--small" href="admissions.html">Apply Now</a></div>
-        </article>
-      </div>
+    <!-- Loading skeletons -->
+    <div class="news-skeleton" id="news-skeleton">
+      <div class="skeleton-card"><div class="skeleton-img"></div><div class="skeleton-body"><div class="skeleton-line w-60"></div><div class="skeleton-line"></div><div class="skeleton-line w-80"></div><div class="skeleton-line w-60"></div></div></div>
+      <div class="skeleton-card"><div class="skeleton-img"></div><div class="skeleton-body"><div class="skeleton-line w-60"></div><div class="skeleton-line"></div><div class="skeleton-line w-80"></div><div class="skeleton-line w-60"></div></div></div>
+      <div class="skeleton-card"><div class="skeleton-img"></div><div class="skeleton-body"><div class="skeleton-line w-60"></div><div class="skeleton-line"></div><div class="skeleton-line w-80"></div><div class="skeleton-line w-60"></div></div></div>
     </div>
-  </section>
 
-  <section class="section section--soft" id="events">
-    <div class="container">
-      <div class="section__head">
-        <h2>Recent & Upcoming Events</h2>
-      </div>
+    <!-- News grid (populated by JS) -->
+    <div class="news-grid" id="news-grid" style="display:none"></div>
 
-      <div class="grid grid--2">
-        <article class="card event-card-horizontal" style="display: flex; flex-direction: row; align-items: stretch; overflow: hidden;">
-          <img src="img/lab1.jpg" alt="Accreditation Celebration" style="width: 40%; object-fit: cover;" />
-          <div class="card__body">
-            <span class="pill">Celebration</span>
-            <h3>NPHL Commemoration</h3>
-            <p>Our team recently attended the National Public Health Laboratories event to celebrate our lab's milestone.</p>
-          </div>
-        </article>
+  </div>
+</section>
 
-        <article class="card event-card-horizontal" style="display: flex; flex-direction: row; align-items: stretch; overflow: hidden;">
-          <img src="assets/img/photo-1551076805-e1869033e561.jpeg" alt="Lab Workshop" style="width: 40%; object-fit: cover;" />
-          <div class="card__body">
-            <span class="pill">Academic</span>
-            <h3>Clinical Skills Intensive</h3>
-            <p>Hands-on practical week for Year 1 students begins March 15th, 2026 in the main lab.</p>
-          </div>
-        </article>
-      </div>
+<!-- CTA -->
+<section class="cta-band">
+  <div class="container">
+    <h2>Ready to Join STTMTC-K?</h2>
+    <p>Applications for September 2026 are open. 80 spaces available — apply early.</p>
+    <div style="display:flex;gap:14px;justify-content:center;flex-wrap:wrap;">
+      <a class="btn btn--light" href="https://app.cloudschool.co.ke/admissionv2?cid=EHh39WoJGF3mbosOj1vLHg==">Apply Online Now</a>
+      <a class="btn btn--ghost" href="contact.html">Ask a Question</a>
     </div>
-  </section>
+  </div>
+</section>
 
-  <footer class="footer">
-    <div class="container footer__grid grid grid--4">
-      <div>
-        <h3>STTMTC</h3>
-        <p>A constituent college of St Theresa Mission Hospital – Kiirua. Training world-class professionals in ISO-accredited facilities.</p>
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="container footer__grid">
+    <div>
+      <div class="footer__brand">
+        <img loading="lazy" src="assets/img/logo.png" alt="STTMTC-K" class="footer__logo-white" onerror="this.style.display='none'"/>
+        <span class="footer__brand-name">STTMTC-K</span>
       </div>
-      <div>
-        <h3>Quick Links</h3>
-        <ul>
-          <li><a href="admissions.html">Admissions</a></li>
-          <li><a href="facilities.html">Facilities</a></li>
-          <li><a href="news.html">Latest News</a></li>
-        </ul>
-      </div>
-      <div>
-        <h3>Contact</h3>
-        <p>📞 +254 700 626 189<br>✉️ info@sttheresamedcollege.co.ke</p>
-      </div>
-      <div>
-        <h3>Join Us</h3>
-        <a class="btn btn--light" href="admissions.html#apply">Start Application</a>
-      </div>
+      <p>A constituent college of St Theresa Mission Hospital – Kiirua, Meru County.</p>
     </div>
-    <div class="footer__bottom">
+    <div>
+      <h3>Quick Links</h3>
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html">About Us</a></li>
+        <li><a href="courses.html">Courses</a></li>
+        <li><a href="admissions.html">Admissions</a></li>
+        <li><a href="facilities.html">Facilities</a></li>
+        <li><a href="contact.html">Contact</a></li>
+        <li><a href="https://app.cloudschool.co.ke/student/login" target="_blank" rel="noopener" style="color:#D4AF37;font-weight:700;">Student Portal</a></li>
+      </ul>
+    </div>
+    <div>
+      <h3>Categories</h3>
+      <ul>
+        <li><a href="#" onclick="filterNews('Admissions',null);return false;">Admissions</a></li>
+        <li><a href="#" onclick="filterNews('Academic',null);return false;">Academic</a></li>
+        <li><a href="#" onclick="filterNews('Events',null);return false;">Events</a></li>
+        <li><a href="#" onclick="filterNews('Achievement',null);return false;">Achievements</a></li>
+        <li><a href="#" onclick="filterNews('Community',null);return false;">Community</a></li>
+        <li><a href="#" onclick="filterNews('Notice',null);return false;">Notices</a></li>
+      </ul>
+    </div>
+    <div>
+      <h3>Contact</h3>
+      <p>📍 Kiirua, Meru County<br/>📞 <a href="tel:+254700626189">+254 700 626 189</a><br/>✉️ <a href="mailto:info@sttheresamedcollege.co.ke">info@sttheresamedcollege.co.ke</a></p>
+    </div>
+  </div>
+  <div class="footer__bottom">
     <div class="container footer__bottom-inner">
-        <small>© <span id="year"></span> St Theresa Medical Training College. All Rights Reserved.</small>
-        <small class="developer-credit">
-            Developed by <a href="https://yourlink.com" target="_blank" rel="noopener">Infranova Systems</a>
-        </small>
+      <small>&copy; <span id="year"></span> St Theresa Medical Training College. All Rights Reserved.</small>
+      <small class="developer-credit">Developed by <a href="https://infranovasystems.com" target="_blank" rel="noopener">Infranova Systems</a></small>
     </div>
-</div>
-  </footer>
+  </div>
+</footer>
 
-  <script src="assets/js/main.js"></script>
+<a href="https://wa.me/254700626189" class="wa-float" target="_blank" rel="noopener" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+<button class="back-top" id="back-top" aria-label="Back to top">↑</button>
+
+<!-- ARTICLE MODAL -->
+<div class="article-modal" id="article-modal" onclick="if(event.target===this)closeArticle()">
+  <div class="article-box">
+    <div class="article-box__img" id="modal-img">
+      <button class="article-box__close" onclick="closeArticle()">✕</button>
+    </div>
+    <div class="article-box__body">
+      <div class="article-box__cat" id="modal-cat"></div>
+      <h2 class="article-box__title" id="modal-title"></h2>
+      <div class="article-box__meta" id="modal-meta"></div>
+      <div class="article-box__content" id="modal-content"></div>
+    </div>
+  </div>
+</div>
+
+<script src="assets/js/main.js"></script>
+<script>
+'use strict';
+
+const SUPABASE_URL  = 'https://czfcwayqlbpjnrtkenpy.supabase.co';
+const SUPABASE_ANON = 'YOUR_ANON_KEY_HERE';
+
+const sb = supabase.createClient(SUPABASE_URL, SUPABASE_ANON);
+
+let allPosts   = [];
+let activeFilter = 'all';
+
+const CAT_ICONS = {
+  Admissions:'📝', Academic:'📚', Events:'📅',
+  Achievement:'🏅', Community:'🌿', Notice:'📢', General:'📌'
+};
+const CAT_COLORS = {
+  Admissions:'#EF4444', Academic:'#3B82F6', Events:'#8B5CF6',
+  Achievement:'#F59E0B', Community:'#10B981', Notice:'#0EA5E9', General:'#64748B'
+};
+
+/* ── LOAD POSTS ─────────────────────────────────────────── */
+async function loadNews() {
+  const { data, error } = await sb
+    .from('sttmtc_news')
+    .select('id,title,excerpt,content,category,image_url,author,is_featured,published_at')
+    .eq('is_published', true)
+    .order('published_at', { ascending: false });
+
+  document.getElementById('news-skeleton').style.display = 'none';
+  document.getElementById('news-grid').style.display = 'grid';
+
+  if (error || !data?.length) {
+    renderEmpty();
+    return;
+  }
+
+  allPosts = data;
+  renderPosts(allPosts);
+}
+
+/* ── RENDER POSTS ───────────────────────────────────────── */
+function renderPosts(posts) {
+  const grid = document.getElementById('news-grid');
+
+  if (!posts.length) {
+    grid.innerHTML = `<div class="news-empty"><div class="icon">📭</div><p>No posts in this category yet. Check back soon.</p></div>`;
+    return;
+  }
+
+  grid.innerHTML = posts.map((p, i) => {
+    const isFeatured = p.is_featured && i === 0 && activeFilter === 'all';
+    const date = p.published_at
+      ? new Date(p.published_at).toLocaleDateString('en-KE', {day:'2-digit',month:'long',year:'numeric'})
+      : '';
+
+    const imgHtml = p.image_url
+      ? `<img loading="lazy" src="${p.image_url}" alt="${p.title}"/>`
+      : `<div class="news-card__img-placeholder" style="background:linear-gradient(135deg,${CAT_COLORS[p.category]||'#0B4F8A'},${CAT_COLORS[p.category]||'#2F7DD1'}88)">${CAT_ICONS[p.category]||'📌'}</div>`;
+
+    if (isFeatured) {
+      return `<article class="news-card news-featured" onclick="openArticle('${p.id}')">
+        <div class="news-card__img">${imgHtml}</div>
+        <div class="news-card__body">
+          <div class="news-card__meta">
+            <span class="news-card__cat">⭐ Featured · ${p.category}</span>
+            <span class="news-card__date">${date}</span>
+          </div>
+          <h2 class="news-card__title">${p.title}</h2>
+          <p class="news-card__excerpt">${p.excerpt}</p>
+          <div class="news-card__footer">
+            <span class="news-card__author">By ${p.author || 'STTMTC-K'}</span>
+            <span class="btn btn--small" style="background:var(--brand);color:#fff;padding:6px 14px;border-radius:8px;font-size:.78rem;font-weight:600;cursor:pointer;">Read More →</span>
+          </div>
+        </div>
+      </article>`;
+    }
+
+    return `<article class="news-card" onclick="openArticle('${p.id}')">
+      <div class="news-card__img">${imgHtml}</div>
+      <div class="news-card__body">
+        <div class="news-card__meta">
+          <span class="news-card__cat">${CAT_ICONS[p.category]||'📌'} ${p.category}</span>
+          <span class="news-card__date">${date}</span>
+        </div>
+        <h3 class="news-card__title">${p.title}</h3>
+        <p class="news-card__excerpt">${p.excerpt}</p>
+        <div class="news-card__footer">
+          <span class="news-card__author">By ${p.author || 'STTMTC-K'}</span>
+          <span style="font-size:.78rem;color:var(--brand-2);font-weight:600;cursor:pointer;">Read More →</span>
+        </div>
+      </div>
+    </article>`;
+  }).join('');
+}
+
+function renderEmpty() {
+  document.getElementById('news-grid').innerHTML =
+    `<div class="news-empty"><div class="icon">📰</div><h3 style="margin-bottom:8px">No posts yet</h3><p>Check back soon for the latest news and announcements.</p></div>`;
+}
+
+/* ── FILTER ─────────────────────────────────────────────── */
+function filterNews(cat, btn) {
+  activeFilter = cat;
+  document.querySelectorAll('.filter-pill').forEach(b => b.classList.remove('active'));
+  if (btn) btn.classList.add('active');
+  const filtered = cat === 'all' ? allPosts : allPosts.filter(p => p.category === cat);
+  document.getElementById('news-grid').style.display = 'grid';
+  renderPosts(filtered);
+  window.scrollTo({ top: document.getElementById('filter-bar').offsetTop - 80, behavior: 'smooth' });
+}
+
+/* ── OPEN ARTICLE MODAL ─────────────────────────────────── */
+function openArticle(id) {
+  const p = allPosts.find(x => x.id === id);
+  if (!p) return;
+
+  const date = p.published_at
+    ? new Date(p.published_at).toLocaleDateString('en-KE', {day:'2-digit',month:'long',year:'numeric'})
+    : '';
+
+  // Image
+  const imgBox = document.getElementById('modal-img');
+  imgBox.innerHTML = `<button class="article-box__close" onclick="closeArticle()">✕</button>`;
+  if (p.image_url) {
+    imgBox.innerHTML += `<img src="${p.image_url}" alt="${p.title}" style="width:100%;height:100%;object-fit:cover;display:block"/>`;
+  } else {
+    imgBox.innerHTML += `<div class="article-box__img-placeholder" style="background:linear-gradient(135deg,${CAT_COLORS[p.category]||'#0B4F8A'},${CAT_COLORS[p.category]||'#2F7DD1'}88)">${CAT_ICONS[p.category]||'📌'}</div>`;
+  }
+
+  document.getElementById('modal-cat').textContent  = `${CAT_ICONS[p.category]||''} ${p.category}`;
+  document.getElementById('modal-title').textContent = p.title;
+  document.getElementById('modal-meta').textContent  = `By ${p.author || 'STTMTC-K'}  ·  ${date}`;
+
+  const contentEl = document.getElementById('modal-content');
+  if (p.content) {
+    // Split content into paragraphs for readable rendering
+    contentEl.innerHTML = p.content
+      .split(/\n{2,}/)
+      .map(para => `<p>${para.trim().replace(/\n/g,'<br/>')}</p>`)
+      .join('');
+  } else {
+    contentEl.innerHTML = `<p>${p.excerpt}</p>`;
+  }
+
+  document.getElementById('article-modal').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeArticle() {
+  document.getElementById('article-modal').classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape') closeArticle();
+});
+
+// Init
+loadNews();
+</script>
 </body>
 </html>

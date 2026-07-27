@@ -1,0 +1,702 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>News Manager — STTMTC-K</title>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+  <style>
+    /* ── RESET & BASE ─────────────────────────────────────── */
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    :root{
+      --brand:#0B4F8A;--brand-d:#073769;--brand-2:#2F7DD1;--brand-l:#EEF5FC;
+      --success:#10B981;--success-l:#D1FAE5;--warning:#F59E0B;--warning-l:#FEF3C7;
+      --danger:#EF4444;--danger-l:#FEE2E2;
+      --bg:#F0F4F9;--surface:#fff;--text:#0F172A;--muted:#64748B;--border:#E2E8F0;
+      --radius:10px;--radius-lg:16px;--shadow:0 4px 16px rgba(11,79,138,.08);
+    }
+    body{font-family:'Segoe UI',system-ui,sans-serif;background:var(--bg);color:var(--text);font-size:.9rem;line-height:1.6}
+    a{color:var(--brand);text-decoration:none}
+    button{font-family:inherit;cursor:pointer}
+
+    /* ── LOGIN SCREEN ─────────────────────────────────────── */
+    #login-screen{
+      min-height:100vh;display:flex;align-items:center;justify-content:center;
+      background:linear-gradient(135deg,var(--brand-d),var(--brand))
+    }
+    .login-card{
+      background:#fff;border-radius:20px;padding:40px 36px;width:100%;max-width:400px;
+      box-shadow:0 20px 60px rgba(0,0,0,.2);text-align:center
+    }
+    .login-card .logo{font-size:2.5rem;margin-bottom:12px}
+    .login-card h2{font-size:1.2rem;color:var(--brand);margin-bottom:6px}
+    .login-card p{font-size:.82rem;color:var(--muted);margin-bottom:24px}
+    .login-card input{
+      width:100%;padding:11px 14px;border:1.5px solid var(--border);border-radius:var(--radius);
+      font-size:.9rem;margin-bottom:12px;outline:none;transition:border .2s
+    }
+    .login-card input:focus{border-color:var(--brand-2)}
+    .login-card button{
+      width:100%;padding:12px;background:var(--brand);color:#fff;border:none;
+      border-radius:var(--radius);font-size:.9rem;font-weight:600;transition:background .2s
+    }
+    .login-card button:hover{background:var(--brand-d)}
+    #login-error{color:var(--danger);font-size:.82rem;margin-top:10px;display:none}
+
+    /* ── MAIN APP ─────────────────────────────────────────── */
+    #app{display:none;min-height:100vh}
+
+    /* Top bar */
+    .topbar{
+      background:var(--brand-d);color:#fff;padding:14px 24px;
+      display:flex;align-items:center;justify-content:space-between;
+      box-shadow:0 2px 8px rgba(0,0,0,.2);position:sticky;top:0;z-index:100
+    }
+    .topbar-brand{display:flex;align-items:center;gap:10px;font-weight:700;font-size:1rem}
+    .topbar-brand span{font-size:1.3rem}
+    .topbar-right{display:flex;align-items:center;gap:12px;font-size:.82rem}
+    .topbar-right span{opacity:.75}
+    .btn-logout{
+      background:rgba(255,255,255,.15);color:#fff;border:1px solid rgba(255,255,255,.25);
+      padding:6px 14px;border-radius:8px;font-size:.8rem;font-weight:600;transition:background .2s
+    }
+    .btn-logout:hover{background:rgba(239,68,68,.4)}
+
+    /* Layout */
+    .layout{display:grid;grid-template-columns:260px 1fr;min-height:calc(100vh - 52px)}
+    .sidebar{background:#fff;border-right:1px solid var(--border);padding:20px 0}
+    .sidebar h3{font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--muted);padding:8px 20px 4px}
+    .sidebar-btn{
+      display:flex;align-items:center;gap:10px;width:100%;padding:11px 20px;
+      background:none;border:none;text-align:left;font-size:.88rem;font-weight:500;
+      color:var(--text);transition:all .2s;border-left:3px solid transparent
+    }
+    .sidebar-btn:hover{background:var(--brand-l);color:var(--brand)}
+    .sidebar-btn.active{background:var(--brand-l);color:var(--brand);font-weight:700;border-left-color:var(--brand)}
+    .sidebar-btn .icon{font-size:1rem;width:20px;text-align:center}
+
+    /* Content panels */
+    .content{padding:28px;overflow-y:auto}
+    .panel{display:none}.panel.active{display:block}
+
+    /* Stats row */
+    .stats-row{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-bottom:24px}
+    .stat-card{background:#fff;border-radius:var(--radius-lg);padding:18px 20px;box-shadow:var(--shadow)}
+    .stat-val{font-size:2rem;font-weight:800;color:var(--brand);line-height:1}
+    .stat-lbl{font-size:.75rem;color:var(--muted);text-transform:uppercase;letter-spacing:.07em;margin-top:4px}
+
+    /* Card */
+    .card{background:#fff;border-radius:var(--radius-lg);box-shadow:var(--shadow);overflow:hidden;margin-bottom:20px}
+    .card-header{
+      padding:16px 20px;border-bottom:1px solid var(--border);
+      display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap
+    }
+    .card-title{font-size:.92rem;font-weight:700}
+    .card-body{padding:20px}
+
+    /* Table */
+    .table-wrap{overflow-x:auto}
+    table{width:100%;border-collapse:collapse;font-size:.84rem}
+    thead tr{background:var(--bg);border-bottom:2px solid var(--border)}
+    th{padding:10px 14px;text-align:left;font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);white-space:nowrap}
+    td{padding:12px 14px;border-bottom:1px solid var(--border);vertical-align:middle}
+    tr:last-child td{border-bottom:none}
+    tr:hover td{background:var(--brand-l)}
+
+    /* Badges */
+    .badge{display:inline-block;padding:2px 10px;border-radius:100px;font-size:.7rem;font-weight:700}
+    .badge-published{background:var(--success-l);color:#065F46}
+    .badge-draft{background:var(--warning-l);color:#92400E}
+    .badge-featured{background:var(--brand-l);color:var(--brand-d)}
+
+    /* Buttons */
+    .btn{display:inline-flex;align-items:center;gap:5px;padding:7px 14px;border:none;border-radius:8px;font-family:inherit;font-size:.8rem;font-weight:600;cursor:pointer;transition:all .2s;text-decoration:none}
+    .btn-primary{background:var(--brand);color:#fff}.btn-primary:hover{background:var(--brand-d)}
+    .btn-success{background:var(--success);color:#fff}
+    .btn-warning{background:var(--warning);color:#fff}
+    .btn-danger{background:var(--danger);color:#fff}
+    .btn-ghost{background:transparent;color:var(--text);border:1.5px solid var(--border)}.btn-ghost:hover{background:var(--bg)}
+    .btn-sm{padding:4px 10px;font-size:.74rem}
+
+    /* Form */
+    .form-group{margin-bottom:16px}
+    .form-label{display:block;font-size:.78rem;font-weight:600;color:var(--text);margin-bottom:6px}
+    .form-label .req{color:var(--danger)}
+    .form-control{
+      width:100%;padding:10px 13px;border:1.5px solid var(--border);border-radius:var(--radius);
+      font-family:inherit;font-size:.88rem;color:var(--text);background:#FAFCFF;
+      transition:border .2s;outline:none;resize:vertical
+    }
+    .form-control:focus{border-color:var(--brand-2);box-shadow:0 0 0 3px rgba(47,125,209,.1)}
+    .form-row{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+    .form-hint{font-size:.74rem;color:var(--muted);margin-top:4px}
+
+    /* Toggle switch */
+    .toggle-wrap{display:flex;align-items:center;gap:10px;margin-bottom:16px}
+    .toggle-label{font-size:.84rem;font-weight:600;color:var(--text)}
+    .toggle{
+      width:44px;height:24px;background:var(--border);border-radius:100px;
+      position:relative;cursor:pointer;transition:background .2s;border:none
+    }
+    .toggle.on{background:var(--success)}
+    .toggle::after{
+      content:'';position:absolute;top:2px;left:2px;
+      width:20px;height:20px;border-radius:50%;background:#fff;
+      transition:transform .2s;box-shadow:0 1px 4px rgba(0,0,0,.2)
+    }
+    .toggle.on::after{transform:translateX(20px)}
+
+    /* Alert */
+    .alert{padding:10px 14px;border-radius:var(--radius);font-size:.82rem;margin-bottom:14px}
+    .alert-success{background:var(--success-l);color:#065F46;border:1px solid #A7F3D0}
+    .alert-danger{background:var(--danger-l);color:#991B1B;border:1px solid #FCA5A5}
+    .alert-info{background:var(--brand-l);color:var(--brand-d)}
+
+    /* Empty state */
+    .empty{text-align:center;padding:48px 20px;color:var(--muted)}
+    .empty-icon{font-size:3rem;margin-bottom:12px}
+
+    /* Preview card */
+    .preview-card{
+      border:1.5px solid var(--border);border-radius:var(--radius-lg);overflow:hidden;
+      max-width:360px;margin-top:16px
+    }
+    .preview-card__img{
+      height:180px;background:linear-gradient(135deg,var(--brand),var(--brand-2));
+      display:flex;align-items:center;justify-content:center;font-size:3rem
+    }
+    .preview-card__body{padding:16px}
+    .preview-card__cat{font-size:.68rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--brand-2);margin-bottom:6px}
+    .preview-card__title{font-size:.95rem;font-weight:700;margin-bottom:6px}
+    .preview-card__excerpt{font-size:.82rem;color:var(--muted);line-height:1.6}
+
+    /* Loading spinner */
+    .spinner{
+      width:32px;height:32px;border:3px solid var(--border);border-top-color:var(--brand);
+      border-radius:50%;animation:spin .7s linear infinite;margin:40px auto
+    }
+    @keyframes spin{to{transform:rotate(360deg)}}
+
+    /* Responsive */
+    @media(max-width:768px){
+      .layout{grid-template-columns:1fr}
+      .sidebar{display:none}
+      .stats-row{grid-template-columns:1fr 1fr}
+      .form-row{grid-template-columns:1fr}
+    }
+  </style>
+</head>
+<body>
+
+<!-- ══ LOGIN SCREEN ══════════════════════════════════════════ -->
+<div id="login-screen">
+  <div class="login-card">
+    <div class="logo">📰</div>
+    <h2>STTMTC-K News Manager</h2>
+    <p>Sign in with your staff portal credentials to manage news and announcements.</p>
+    <input type="email" id="login-email" placeholder="Staff email address" autocomplete="email"/>
+    <input type="password" id="login-password" placeholder="Password" autocomplete="current-password"/>
+    <button onclick="doLogin()">Sign In</button>
+    <div id="login-error"></div>
+  </div>
+</div>
+
+<!-- ══ MAIN APP ════════════════════════════════════════════════ -->
+<div id="app">
+  <div class="topbar">
+    <div class="topbar-brand">
+      <span>📰</span> STTMTC-K News Manager
+    </div>
+    <div class="topbar-right">
+      <span id="staff-name"></span>
+      <button class="btn-logout" onclick="doLogout()">Sign Out</button>
+    </div>
+  </div>
+
+  <div class="layout">
+    <!-- SIDEBAR -->
+    <aside class="sidebar">
+      <h3>Navigation</h3>
+      <button class="sidebar-btn active" onclick="showPanel('dashboard',this)">
+        <span class="icon">🏠</span>Dashboard
+      </button>
+      <button class="sidebar-btn" onclick="showPanel('all-posts',this)">
+        <span class="icon">📋</span>All Posts
+      </button>
+      <button class="sidebar-btn" onclick="showPanel('new-post',this);resetForm()">
+        <span class="icon">✏️</span>Write New Post
+      </button>
+      <h3 style="margin-top:16px">Quick Links</h3>
+      <button class="sidebar-btn" onclick="window.open('news.html','_blank')">
+        <span class="icon">👁</span>View Live News Page
+      </button>
+      <button class="sidebar-btn" onclick="window.open('index.html','_blank')">
+        <span class="icon">🌐</span>View Website
+      </button>
+    </aside>
+
+    <!-- CONTENT -->
+    <main class="content">
+
+      <!-- ── DASHBOARD ───────────────────────────────────── -->
+      <div class="panel active" id="panel-dashboard">
+        <h2 style="margin-bottom:6px">Welcome back 👋</h2>
+        <p style="color:var(--muted);margin-bottom:22px">Here's your news overview. Click <strong>Write New Post</strong> to add a new story.</p>
+        <div class="stats-row" id="dash-stats">
+          <div class="stat-card"><div class="stat-val" id="s-total">—</div><div class="stat-lbl">Total Posts</div></div>
+          <div class="stat-card"><div class="stat-val" id="s-pub" style="color:var(--success)">—</div><div class="stat-lbl">Published</div></div>
+          <div class="stat-card"><div class="stat-val" id="s-draft" style="color:var(--warning)">—</div><div class="stat-lbl">Drafts</div></div>
+          <div class="stat-card"><div class="stat-val" id="s-feat" style="color:var(--brand-2)">—</div><div class="stat-lbl">Featured</div></div>
+        </div>
+        <div class="card">
+          <div class="card-header">
+            <span class="card-title">📅 Recent Posts</span>
+            <button class="btn btn-primary btn-sm" onclick="showPanel('new-post',null);resetForm()">+ New Post</button>
+          </div>
+          <div class="table-wrap"><table>
+            <thead><tr><th>Title</th><th>Category</th><th>Status</th><th>Date</th><th>Actions</th></tr></thead>
+            <tbody id="recent-posts-table"><tr><td colspan="5"><div class="spinner"></div></td></tr></tbody>
+          </table></div>
+        </div>
+      </div>
+
+      <!-- ── ALL POSTS ───────────────────────────────────── -->
+      <div class="panel" id="panel-all-posts">
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:20px;flex-wrap:wrap;gap:10px">
+          <h2>All Posts</h2>
+          <button class="btn btn-primary" onclick="showPanel('new-post',null);resetForm()">+ Write New Post</button>
+        </div>
+        <!-- Filter tabs -->
+        <div style="display:flex;gap:8px;margin-bottom:16px;flex-wrap:wrap">
+          <button class="btn btn-ghost btn-sm filter-btn active" onclick="filterPosts('all',this)">All</button>
+          <button class="btn btn-ghost btn-sm filter-btn" onclick="filterPosts('published',this)">Published</button>
+          <button class="btn btn-ghost btn-sm filter-btn" onclick="filterPosts('draft',this)">Drafts</button>
+          <button class="btn btn-ghost btn-sm filter-btn" onclick="filterPosts('featured',this)">Featured</button>
+        </div>
+        <div class="card">
+          <div class="table-wrap"><table>
+            <thead><tr><th>Title</th><th>Category</th><th>Status</th><th>Featured</th><th>Published</th><th>Actions</th></tr></thead>
+            <tbody id="all-posts-table"><tr><td colspan="6"><div class="spinner"></div></td></tr></tbody>
+          </table></div>
+        </div>
+      </div>
+
+      <!-- ── NEW / EDIT POST FORM ────────────────────────── -->
+      <div class="panel" id="panel-new-post">
+        <h2 id="form-heading" style="margin-bottom:6px">✏️ Write New Post</h2>
+        <p style="color:var(--muted);margin-bottom:20px">Fill in the details below and click <strong>Save Draft</strong> or <strong>Publish Now</strong>.</p>
+
+        <div id="form-alert" style="display:none"></div>
+
+        <input type="hidden" id="edit-id"/>
+
+        <div class="form-row">
+          <div class="form-group" style="grid-column:1/-1">
+            <label class="form-label">Post Title <span class="req">*</span></label>
+            <input type="text" class="form-control" id="f-title" placeholder="e.g. September 2026 Intake Now Open"/>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label">Category <span class="req">*</span></label>
+            <select class="form-control" id="f-cat">
+              <option value="Admissions">📝 Admissions</option>
+              <option value="Academic">📚 Academic</option>
+              <option value="Events">📅 Events</option>
+              <option value="Achievement">🏅 Achievement</option>
+              <option value="Community">🌿 Community</option>
+              <option value="Notice">📢 Notice</option>
+              <option value="General" selected>📌 General</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Author</label>
+            <input type="text" class="form-control" id="f-author" placeholder="e.g. Admissions Office"/>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Short Summary (shown on the News page) <span class="req">*</span></label>
+          <textarea class="form-control" id="f-excerpt" rows="2"
+            placeholder="Write a short 1–2 sentence summary of the post. This is what visitors see on the news card before clicking Read More."></textarea>
+          <div class="form-hint">Keep it under 200 characters for best display.</div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Full Article / Announcement</label>
+          <textarea class="form-control" id="f-content" rows="10"
+            placeholder="Write the full news story here. You can use paragraph breaks. No special formatting needed."></textarea>
+          <div class="form-hint">This appears when the reader clicks "Read More". Leave blank if the summary is enough.</div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Image URL <span style="font-weight:400;color:var(--muted)">(optional)</span></label>
+          <input type="url" class="form-control" id="f-image"
+            placeholder="https://... (paste a direct link to an image)"/>
+          <div class="form-hint">Leave blank to use a default category illustration. Recommended: upload image to your website's assets/img/ folder and paste the full URL.</div>
+        </div>
+
+        <!-- Preview -->
+        <div id="preview-wrap" style="display:none">
+          <label class="form-label">Card Preview</label>
+          <div class="preview-card">
+            <div class="preview-card__img" id="prev-img">🖼️</div>
+            <div class="preview-card__body">
+              <div class="preview-card__cat" id="prev-cat">Category</div>
+              <div class="preview-card__title" id="prev-title">Post title</div>
+              <div class="preview-card__excerpt" id="prev-exc">Your excerpt will appear here.</div>
+            </div>
+          </div>
+        </div>
+
+        <div style="margin-top:8px">
+          <button class="btn btn-ghost btn-sm" onclick="togglePreview()">👁 Preview Card</button>
+        </div>
+
+        <!-- Toggles -->
+        <div style="background:var(--bg);border-radius:var(--radius-lg);padding:18px 20px;margin:20px 0;display:flex;gap:32px;flex-wrap:wrap">
+          <div class="toggle-wrap">
+            <button class="toggle" id="t-published" onclick="toggleBtn('t-published')"></button>
+            <span class="toggle-label">Publish immediately</span>
+          </div>
+          <div class="toggle-wrap">
+            <button class="toggle" id="t-featured" onclick="toggleBtn('t-featured')"></button>
+            <span class="toggle-label">Feature on homepage</span>
+          </div>
+        </div>
+
+        <div style="display:flex;gap:10px;flex-wrap:wrap">
+          <button class="btn btn-ghost" onclick="savePost(false)">💾 Save as Draft</button>
+          <button class="btn btn-primary" onclick="savePost(true)">🚀 Publish Now</button>
+          <button class="btn btn-ghost" onclick="resetForm();showPanel('all-posts',null)">Cancel</button>
+        </div>
+      </div>
+
+    </main>
+  </div>
+</div>
+
+<!-- ══ SCRIPTS ════════════════════════════════════════════════ -->
+<script>
+'use strict';
+
+const SUPABASE_URL  = 'https://czfcwayqlbpjnrtkenpy.supabase.co';
+const SUPABASE_ANON = 'YOUR_ANON_KEY_HERE'; // ← replace with real anon key
+
+const sb = supabase.createClient(SUPABASE_URL, SUPABASE_ANON);
+
+// Allowed staff roles to access this page
+const ALLOWED_ROLES = ['admin','ict','principal'];
+
+let allPosts  = [];
+let staffName = '';
+
+/* ── AUTH ────────────────────────────────────────────────── */
+async function doLogin() {
+  const email = document.getElementById('login-email').value.trim();
+  const pass  = document.getElementById('login-password').value;
+  const errEl = document.getElementById('login-error');
+  errEl.style.display = 'none';
+
+  if (!email || !pass) {
+    errEl.textContent = 'Please enter your email and password.';
+    errEl.style.display = 'block'; return;
+  }
+
+  const { data, error } = await sb.auth.signInWithPassword({ email, password: pass });
+  if (error) {
+    errEl.textContent = 'Incorrect email or password.';
+    errEl.style.display = 'block'; return;
+  }
+
+  // Check role
+  const { data: profile } = await sb.rpc('get_my_sttmtc_profile');
+  if (!profile || !ALLOWED_ROLES.includes(profile.role_name)) {
+    await sb.auth.signOut();
+    errEl.textContent = 'Access denied. Only Admin, ICT, or Principal staff can manage news.';
+    errEl.style.display = 'block'; return;
+  }
+
+  staffName = profile.full_name || email;
+  initApp();
+}
+
+async function doLogout() {
+  await sb.auth.signOut();
+  document.getElementById('app').style.display          = 'none';
+  document.getElementById('login-screen').style.display = 'flex';
+  document.getElementById('login-password').value = '';
+}
+
+// Auto-check session on load
+(async () => {
+  const { data: { session } } = await sb.auth.getSession();
+  if (session) {
+    const { data: profile } = await sb.rpc('get_my_sttmtc_profile');
+    if (profile && ALLOWED_ROLES.includes(profile.role_name)) {
+      staffName = profile.full_name || session.user.email;
+      initApp();
+    }
+  }
+})();
+
+function initApp() {
+  document.getElementById('login-screen').style.display = 'none';
+  document.getElementById('app').style.display          = 'block';
+  document.getElementById('staff-name').textContent     = staffName;
+  loadAllPosts();
+}
+
+/* ── NAVIGATION ──────────────────────────────────────────── */
+function showPanel(id, btn) {
+  document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.sidebar-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById(`panel-${id}`).classList.add('active');
+  if (btn) btn.classList.add('active');
+  if (id === 'all-posts') renderAllPostsTable(allPosts);
+  if (id === 'dashboard') renderDashboard();
+}
+
+/* ── LOAD POSTS ──────────────────────────────────────────── */
+async function loadAllPosts() {
+  const { data, error } = await sb
+    .from('sttmtc_news')
+    .select('*')
+    .order('created_at', { ascending: false });
+
+  if (error) { showAlert('form-alert', 'danger', 'Error loading posts: ' + error.message); return; }
+  allPosts = data || [];
+  renderDashboard();
+}
+
+/* ── DASHBOARD ───────────────────────────────────────────── */
+function renderDashboard() {
+  document.getElementById('s-total').textContent = allPosts.length;
+  document.getElementById('s-pub').textContent   = allPosts.filter(p => p.is_published).length;
+  document.getElementById('s-draft').textContent = allPosts.filter(p => !p.is_published).length;
+  document.getElementById('s-feat').textContent  = allPosts.filter(p => p.is_featured).length;
+
+  const tbody = document.getElementById('recent-posts-table');
+  const recent = allPosts.slice(0, 8);
+  if (!recent.length) {
+    tbody.innerHTML = '<tr><td colspan="5"><div class="empty"><div class="empty-icon">📭</div><p>No posts yet. Click Write New Post to get started.</p></div></td></tr>';
+    return;
+  }
+  tbody.innerHTML = recent.map(p => rowHtml(p, false)).join('');
+}
+
+/* ── ALL POSTS TABLE ─────────────────────────────────────── */
+function renderAllPostsTable(posts) {
+  const tbody = document.getElementById('all-posts-table');
+  if (!posts.length) {
+    tbody.innerHTML = '<tr><td colspan="6"><div class="empty"><div class="empty-icon">📭</div><p>No posts found.</p></div></td></tr>';
+    return;
+  }
+  tbody.innerHTML = posts.map(p => rowHtml(p, true)).join('');
+}
+
+function rowHtml(p, showFeatured) {
+  const date = p.published_at ? new Date(p.published_at).toLocaleDateString('en-KE', {day:'2-digit',month:'short',year:'numeric'}) : '—';
+  return `<tr>
+    <td style="max-width:260px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-weight:600">${p.title}</td>
+    <td><span class="badge" style="background:var(--brand-l);color:var(--brand)">${p.category}</span></td>
+    <td><span class="badge ${p.is_published ? 'badge-published' : 'badge-draft'}">${p.is_published ? '✅ Published' : '📝 Draft'}</span></td>
+    ${showFeatured ? `<td>${p.is_featured ? '<span class="badge badge-featured">⭐ Yes</span>' : '—'}</td>` : ''}
+    <td style="font-size:.8rem;color:var(--muted)">${date}</td>
+    <td><div style="display:flex;gap:4px;flex-wrap:wrap">
+      <button class="btn btn-ghost btn-sm" onclick="editPost('${p.id}')">✏️ Edit</button>
+      <button class="btn btn-sm ${p.is_published ? 'btn-warning' : 'btn-success'}" onclick="togglePublish('${p.id}',${p.is_published})">
+        ${p.is_published ? '⏸ Unpublish' : '🚀 Publish'}
+      </button>
+      <button class="btn btn-danger btn-sm" onclick="deletePost('${p.id}','${p.title.replace(/'/g,"\\'")}')">🗑</button>
+    </div></td>
+  </tr>`;
+}
+
+/* ── FILTER POSTS ────────────────────────────────────────── */
+function filterPosts(type, btn) {
+  document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+  if (btn) btn.classList.add('active');
+  let filtered = allPosts;
+  if (type === 'published') filtered = allPosts.filter(p => p.is_published);
+  if (type === 'draft')     filtered = allPosts.filter(p => !p.is_published);
+  if (type === 'featured')  filtered = allPosts.filter(p => p.is_featured);
+  renderAllPostsTable(filtered);
+}
+
+/* ── SAVE POST ───────────────────────────────────────────── */
+async function savePost(publishNow) {
+  const alertEl = document.getElementById('form-alert');
+  alertEl.style.display = 'none';
+
+  const title   = document.getElementById('f-title').value.trim();
+  const excerpt = document.getElementById('f-excerpt').value.trim();
+
+  if (!title)   { showAlert('form-alert','danger','Please enter a title.'); return; }
+  if (!excerpt) { showAlert('form-alert','danger','Please enter a short summary.'); return; }
+
+  const isPub  = publishNow || document.getElementById('t-published').classList.contains('on');
+  const isFeat = document.getElementById('t-featured').classList.contains('on');
+  const editId = document.getElementById('edit-id').value;
+
+  const payload = {
+    title,
+    excerpt,
+    content:      document.getElementById('f-content').value.trim() || null,
+    category:     document.getElementById('f-cat').value,
+    author:       document.getElementById('f-author').value.trim() || 'STTMTC-K',
+    image_url:    document.getElementById('f-image').value.trim() || null,
+    is_published: isPub,
+    is_featured:  isFeat,
+    published_at: isPub ? new Date().toISOString() : null,
+  };
+
+  let error;
+  if (editId) {
+    // Update existing
+    const res = await sb.from('sttmtc_news').update(payload).eq('id', editId);
+    error = res.error;
+  } else {
+    // Insert new
+    const res = await sb.from('sttmtc_news').insert(payload);
+    error = res.error;
+  }
+
+  if (error) { showAlert('form-alert','danger','Save failed: ' + error.message); return; }
+
+  showAlert('form-alert','success', editId
+    ? `✅ Post updated${isPub ? ' and published' : ' as draft'} successfully!`
+    : `✅ Post ${isPub ? 'published' : 'saved as draft'} successfully!`
+  );
+
+  resetForm();
+  await loadAllPosts();
+  setTimeout(() => showPanel('all-posts', null), 1200);
+}
+
+/* ── EDIT POST ───────────────────────────────────────────── */
+function editPost(id) {
+  const p = allPosts.find(x => x.id === id);
+  if (!p) return;
+
+  document.getElementById('form-heading').textContent  = '✏️ Edit Post';
+  document.getElementById('edit-id').value             = p.id;
+  document.getElementById('f-title').value             = p.title;
+  document.getElementById('f-excerpt').value           = p.excerpt;
+  document.getElementById('f-content').value           = p.content || '';
+  document.getElementById('f-cat').value               = p.category;
+  document.getElementById('f-author').value            = p.author || '';
+  document.getElementById('f-image').value             = p.image_url || '';
+
+  setToggle('t-published', p.is_published);
+  setToggle('t-featured',  p.is_featured);
+
+  showPanel('new-post', null);
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+/* ── TOGGLE PUBLISH ──────────────────────────────────────── */
+async function togglePublish(id, currentState) {
+  const newState = !currentState;
+  const { error } = await sb.from('sttmtc_news').update({
+    is_published: newState,
+    published_at: newState ? new Date().toISOString() : null,
+  }).eq('id', id);
+
+  if (error) { alert('Error: ' + error.message); return; }
+  await loadAllPosts();
+  renderAllPostsTable(allPosts);
+  renderDashboard();
+  toast(newState ? '✅ Post published!' : '⏸ Post unpublished.', newState ? 'success' : 'warning');
+}
+
+/* ── DELETE POST ─────────────────────────────────────────── */
+async function deletePost(id, title) {
+  if (!confirm(`Delete "${title}"?\n\nThis cannot be undone.`)) return;
+  const { error } = await sb.from('sttmtc_news').delete().eq('id', id);
+  if (error) { alert('Error: ' + error.message); return; }
+  await loadAllPosts();
+  renderAllPostsTable(allPosts);
+  renderDashboard();
+  toast('🗑 Post deleted.', 'danger');
+}
+
+/* ── FORM HELPERS ────────────────────────────────────────── */
+function resetForm() {
+  document.getElementById('form-heading').textContent = '✏️ Write New Post';
+  document.getElementById('edit-id').value   = '';
+  document.getElementById('f-title').value   = '';
+  document.getElementById('f-excerpt').value = '';
+  document.getElementById('f-content').value = '';
+  document.getElementById('f-cat').value     = 'General';
+  document.getElementById('f-author').value  = '';
+  document.getElementById('f-image').value   = '';
+  setToggle('t-published', false);
+  setToggle('t-featured',  false);
+  document.getElementById('preview-wrap').style.display = 'none';
+  document.getElementById('form-alert').style.display   = 'none';
+}
+
+function toggleBtn(id) {
+  document.getElementById(id).classList.toggle('on');
+}
+function setToggle(id, val) {
+  const el = document.getElementById(id);
+  val ? el.classList.add('on') : el.classList.remove('on');
+}
+
+function togglePreview() {
+  const wrap = document.getElementById('preview-wrap');
+  const vis  = wrap.style.display === 'none';
+  wrap.style.display = vis ? 'block' : 'none';
+  if (vis) updatePreview();
+}
+
+function updatePreview() {
+  const img = document.getElementById('f-image').value;
+  const prevImg = document.getElementById('prev-img');
+  if (img) {
+    prevImg.innerHTML = `<img src="${img}" style="width:100%;height:100%;object-fit:cover"/>`;
+  } else {
+    const icons = {Admissions:'📝',Academic:'📚',Events:'📅',Achievement:'🏅',Community:'🌿',Notice:'📢',General:'📌'};
+    prevImg.textContent = icons[document.getElementById('f-cat').value] || '📌';
+  }
+  document.getElementById('prev-cat').textContent  = document.getElementById('f-cat').value;
+  document.getElementById('prev-title').textContent = document.getElementById('f-title').value || 'Post title';
+  document.getElementById('prev-exc').textContent  = document.getElementById('f-excerpt').value || 'Your summary will appear here.';
+}
+
+// Live preview update
+['f-title','f-excerpt','f-cat','f-image'].forEach(id => {
+  const el = document.getElementById(id);
+  if (el) el.addEventListener('input', () => {
+    if (document.getElementById('preview-wrap').style.display !== 'none') updatePreview();
+  });
+});
+
+/* ── UTILITIES ───────────────────────────────────────────── */
+function showAlert(containerId, type, msg) {
+  const el = document.getElementById(containerId);
+  el.className = `alert alert-${type}`;
+  el.textContent = msg;
+  el.style.display = 'block';
+}
+
+function toast(msg, type='success') {
+  const colors = {success:'#10B981',danger:'#EF4444',warning:'#F59E0B',info:'#3A86FF'};
+  const t = document.createElement('div');
+  t.style.cssText = `position:fixed;bottom:24px;right:24px;z-index:9999;background:${colors[type]};color:#fff;padding:12px 20px;border-radius:12px;font-size:.84rem;font-weight:600;box-shadow:0 8px 24px rgba(0,0,0,.2);animation:slideUp .3s ease`;
+  t.textContent = msg;
+  if (!document.querySelector('#toast-style')) {
+    const s = document.createElement('style');
+    s.id = 'toast-style';
+    s.textContent = '@keyframes slideUp{from{transform:translateY(20px);opacity:0}to{transform:translateY(0);opacity:1}}';
+    document.head.appendChild(s);
+  }
+  document.body.appendChild(t);
+  setTimeout(() => t.remove(), 3000);
+}
+</script>
+</body>
+</html>

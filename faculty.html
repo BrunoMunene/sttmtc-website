@@ -1,187 +1,406 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <meta name="description" content="Meet the faculty and leadership of St Theresa Medical Training College – experienced administrators, clinical instructors, and nursing tutors."/>
   <title>Faculty – St Theresa Medical Training College</title>
-  <link rel="stylesheet" href="assets/css/styles.css" />
+  <link rel="stylesheet" href="assets/css/styles.css"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"/>
 </head>
 <body>
-  <div class="topbar">
-    <div class="container topbar__inner">
-      <div class="topbar__left">
-        <span class="ico">📞</span> <a href="tel:+254727811041">+254 700 626 189</a>
-        <span class="ico">✉️</span> <a href="mailto:info@sttheresamedcollege.co.ke">info@sttheresamedcollege.co.ke</a>
-      </div>
-      <div class="topbar__right">Mon - Fri: 8:00 AM - 5:00 PM</div>
+
+<div class="topbar">
+  <div class="container topbar__inner">
+    <div class="topbar__left">
+      <span class="ico">📞</span><a href="tel:+254700626189">+254 700 626 189</a>
+      <span class="ico">✉️</span><a href="mailto:info@sttheresamedcollege.co.ke">info@sttheresamedcollege.co.ke</a>
     </div>
+    <div class="topbar__right"><span>Mon – Fri: 8:00 AM – 5:00 PM</span></div>
   </div>
-<header class="header">
-    <div class="container header__inner">
-        <a class="brand" href="index.html">
-            <img src="assets/img/logo.png" alt="St Theresa Medical Training College logo" />
-            <span class="brand__text">
-                <span class="brand__name">St Theresa Medical Training College</span>
-                <span class="brand__tag">“Nurturing Excellence in Healthcare for Love & Service”</span>
-            </span>
-        </a>
+</div>
 
-        <button class="nav-toggle" id="mobile-toggle" aria-label="Open menu" aria-expanded="false">☰</button>
-
-        <nav class="nav" id="primary-nav" aria-label="Primary navigation">
-            <a href="index.html">Home</a>
-            <a href="about.html">About Us</a>
-            <a href="courses.html">Courses</a>
-            <a href="faculty.html">Faculty</a>
-            <a href="admissions.html">Admissions</a>
-            <a href="facilities.html">Facilities</a>
-            <a href="news.html">News & Events</a>
-            <a href="contact.html">Contact</a>
-            <a href="login.html" class="portal-link">Student Portal</a>
-            <a class="btn btn--small" href="admissions.html#apply">Apply Now</a>
-        </nav>
-    </div>
+<header class="header" id="site-header">
+  <div class="container header__inner">
+    <a class="brand" href="index.html">
+      <img loading="lazy" src="assets/img/logo.png" alt="St Theresa Medical Training College Logo"/>
+      <span class="brand__text">
+        <span class="brand__name">St Theresa Medical Training College</span>
+        <span class="brand__tag">"Nurturing Excellence in Healthcare for Love &amp; Service"</span>
+      </span>
+    </a>
+    <button class="nav-toggle" id="mobile-toggle" aria-label="Toggle menu" aria-expanded="false">☰</button>
+    <nav class="nav" id="primary-nav">
+      <a href="index.html">Home</a>
+      <div class="nav-item">
+        <a href="about.html">About Us</a>
+        <div class="nav-dropdown">
+          <div class="dd-label">The College</div>
+          <a href="about.html"><span class="dd-icon">🏫</span>About STTMTC-K</a>
+          <a href="about.html#vision"><span class="dd-icon">🎯</span>Vision &amp; Mission</a>
+          <a href="about.html#principal"><span class="dd-icon">👩‍⚕️</span>Principal's Message</a>
+          <div class="dd-divider"></div>
+          <a href="about.html#management"><span class="dd-icon">👥</span>Management Team</a>
+          <a href="news.html"><span class="dd-icon">📢</span>News &amp; Events</a>
+        </div>
+      </div>
+      <a href="courses.html">Courses</a>
+      <a href="faculty.html" class="nav-active">Faculty</a>
+      <div class="nav-item">
+        <a href="admissions.html">Admissions</a>
+        <div class="nav-dropdown">
+          <div class="dd-label">How to Join</div>
+          <a href="https://app.cloudschool.co.ke/admissionv2?cid=EHh39WoJGF3mbosOj1vLHg=="><span class="dd-icon">📝</span>Apply Online</a>
+          <a href="admissions.html#requirements"><span class="dd-icon">📋</span>Entry Requirements</a>
+          <a href="admissions.html#fees"><span class="dd-icon">💰</span>Fee Structure</a>
+          <div class="dd-divider"></div>
+          <div class="dd-label">Downloads</div>
+          <a href="assets/downloads/prospectus.pdf" target="_blank"><span class="dd-icon">📘</span>Prospectus</a>
+          <a href="assets/downloads/admission-form.pdf" target="_blank"><span class="dd-icon">📄</span>Admission Form</a>
+          <a href="assets/downloads/fee-structure.pdf" target="_blank"><span class="dd-icon">💳</span>Fee Structure</a>
+          <a href="assets/downloads/academic-calendar.pdf" target="_blank"><span class="dd-icon">📅</span>Academic Calendar</a>
+        </div>
+      </div>
+      <a href="facilities.html">Facilities</a>
+      <div class="nav-item">
+        <a href="#">Resources</a>
+        <div class="nav-dropdown">
+          <div class="dd-label">Student Resources</div>
+          <a href="assets/downloads/student-handbook.pdf" target="_blank"><span class="dd-icon">📖</span>Student Handbook</a>
+          <a href="assets/downloads/academic-calendar.pdf" target="_blank"><span class="dd-icon">📅</span>Academic Calendar</a>
+          <a href="assets/downloads/rules-regulations.pdf" target="_blank"><span class="dd-icon">📜</span>Rules &amp; Regulations</a>
+          <a href="assets/downloads/course-brochure.pdf" target="_blank"><span class="dd-icon">🩺</span>Nursing Brochure</a>
+          <div class="dd-divider"></div>
+          <a href="contact.html#faq"><span class="dd-icon">❓</span>FAQs</a>
+        </div>
+      </div>
+      <a href="news.html">News &amp; Events</a>
+      <a href="contact.html">Contact</a>
+      <a class="btn btn--small" href="https://app.cloudschool.co.ke/student/login" target="_blank" rel="noopener noreferrer">Student Portal</a>
+      <a class="btn btn--small" href="https://app.cloudschool.co.ke/admissionv2?cid=EHh39WoJGF3mbosOj1vLHg==">Apply Now</a>
+    </nav>
+  </div>
 </header>
 
-  <section class="hero" style="background-image: url('assets/img/fac1.jpg'); background-size: cover; background-position: center; min-height: 300px;">
-    <div class="container hero__content">
-        <div class="kicker" style="color: white;">Our Educators</div>
-        <h1 style="color: white;">Expertise and Mentorship</h1>
-        <p class="sub" style="color: white;">Guided by a team of dedicated professionals committed to your clinical and ethical growth.</p>
+<!-- HERO -->
+<section class="hero hero--small hero--clean" style="background-image:url('assets/img/stdt2.jpg');">
+  <div class="hero-caption hero-caption--sm">
+    <span class="hero-caption__tag">Our People</span>
+    <h1 class="hero-caption__title">Expertise &amp; Mentorship</h1>
+    <p class="hero-caption__desc">STTMTC-K is shaped by a team of dedicated administrators, clinical educators, and healthcare professionals — all united by a commitment to excellence, faith, and service.</p>
+    <div class="hero-caption__actions">
+      <a class="btn btn--sm" href="#academic-faculty">Meet the Faculty</a>
+      <a class="btn btn--light btn--sm" href="https://app.cloudschool.co.ke/admissionv2?cid=EHh39WoJGF3mbosOj1vLHg==">Apply Now</a>
     </div>
-  </section>
+  </div>
+</section>
 
-  <section class="section section--soft">
-    <div class="container">
-      <div class="section__head">
-        <h2>College Administration</h2>
-        <p class="lead">The leadership team ensuring academic standards and student welfare.</p>
-      </div>
+<!-- HOSPITAL MANAGEMENT -->
+<section class="section">
+  <div class="container">
+    <div class="section__head reveal">
+      <div class="kicker">Hospital &amp; College Oversight</div>
+      <h2>Hospital Management Team</h2>
+      <p class="lead">St Theresa Mission Hospital's senior leadership directly shapes the quality and scope of clinical training available to STTMTC-K students.</p>
+    </div>
+    <div class="grid grid--3">
+        <div class="feature-card reveal reveal-delay-1" style="text-align:center;padding:24px 18px;">
+          <div style="width:64px;height:64px;border-radius:50%;background:linear-gradient(135deg,var(--brand),var(--brand-2));display:flex;align-items:center;justify-content:center;margin:0 auto 12px;font-size:1.5rem;color:#fff;">✝️</div>
+          <h3 style="font-size:.94rem;margin-bottom:4px;">Rev. Sr. Agnes Mukulu</h3>
+          <p style="font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:var(--brand-2);margin-bottom:8px;">CEO — Hospital &amp; College Oversight</p>
+          <p style="font-size:.8rem;line-height:1.6;">Leads the strategic vision of St Theresa Mission Hospital and the Training College on behalf of the Little Sisters of St. Therese, Diocese of Meru. A prominent figure in Catholic health education in Meru County.</p>
+        </div>
+        <div class="feature-card reveal reveal-delay-2" style="text-align:center;padding:24px 18px;">
+          <div style="width:64px;height:64px;border-radius:50%;background:linear-gradient(135deg,var(--brand),var(--brand-2));display:flex;align-items:center;justify-content:center;margin:0 auto 12px;font-size:1.5rem;color:#fff;">🏛️</div>
+          <h3 style="font-size:.94rem;margin-bottom:4px;">Morris Kaumbuthu</h3>
+          <p style="font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:var(--brand-2);margin-bottom:8px;">Hospital Administrator</p>
+          <p style="font-size:.8rem;line-height:1.6;">Manages the day-to-day administrative and operational logistics of the hospital and training college, ensuring seamless coordination across all departments and facilities.</p>
+        </div>
+        <div class="feature-card reveal reveal-delay-3" style="text-align:center;padding:24px 18px;">
+          <div style="width:64px;height:64px;border-radius:50%;background:linear-gradient(135deg,var(--brand),var(--brand-2));display:flex;align-items:center;justify-content:center;margin:0 auto 12px;font-size:1.5rem;color:#fff;">🩺</div>
+          <h3 style="font-size:.94rem;margin-bottom:4px;">Dr. Nixon Omulimi</h3>
+          <p style="font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:var(--brand-2);margin-bottom:8px;">Medical Director</p>
+          <p style="font-size:.8rem;line-height:1.6;">Oversees all clinical and medical services across St Theresa Mission Hospital, directly shaping the quality and scope of clinical training available to STTMTC-K students.</p>
+        </div>
+        <div class="feature-card reveal reveal-delay-1" style="text-align:center;padding:24px 18px;">
+          <div style="width:64px;height:64px;border-radius:50%;background:linear-gradient(135deg,var(--brand),var(--brand-2));display:flex;align-items:center;justify-content:center;margin:0 auto 12px;font-size:1.5rem;color:#fff;">💊</div>
+          <h3 style="font-size:.94rem;margin-bottom:4px;">Timothy Mbabu</h3>
+          <p style="font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:var(--brand-2);margin-bottom:8px;">Director of Nursing Services</p>
+          <p style="font-size:.8rem;line-height:1.6;">A critical link between the hospital's clinical services and the training college's nursing students — overseeing ward assignments, clinical mentorship, and patient care standards.</p>
+        </div>
+        <div class="feature-card reveal reveal-delay-2" style="text-align:center;padding:24px 18px;">
+          <div style="width:64px;height:64px;border-radius:50%;background:linear-gradient(135deg,var(--brand),var(--brand-2));display:flex;align-items:center;justify-content:center;margin:0 auto 12px;font-size:1.5rem;color:#fff;">👥</div>
+          <h3 style="font-size:.94rem;margin-bottom:4px;">Kennedy Mburu</h3>
+          <p style="font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:var(--brand-2);margin-bottom:8px;">HR Manager</p>
+          <p style="font-size:.8rem;line-height:1.6;">Manages staff welfare, recruitment, payroll, and HR compliance across both the hospital and training college, ensuring a motivated and well-supported team.</p>
+        </div>
+        <div class="feature-card reveal reveal-delay-3" style="text-align:center;padding:24px 18px;">
+          <div style="width:64px;height:64px;border-radius:50%;background:linear-gradient(135deg,var(--brand),var(--brand-2));display:flex;align-items:center;justify-content:center;margin:0 auto 12px;font-size:1.5rem;color:#fff;">💰</div>
+          <h3 style="font-size:.94rem;margin-bottom:4px;">Lucy Maina</h3>
+          <p style="font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:var(--brand-2);margin-bottom:8px;">Finance Manager</p>
+          <p style="font-size:.8rem;line-height:1.6;">Oversees financial planning, budgeting, student fee management, and fiscal accountability for both the hospital and college operations.</p>
+        </div>
+    </div>
+  </div>
+</section>
 
-      <div class="grid grid--4">
-        <article class="card">
-          <div style="height: 250px; overflow: hidden;">
-            <img src="assets/img/frame2.jpg" alt="Sr. Mary Wanjiku" class="card__img" style="object-fit: cover; height: 100%; width: 100%;" />
-          </div>
-          <div class="card__body">
-            <span class="pill">Administration</span>
-            <h3>Sr. Mary Wanjiku</h3>
-            <p class="lead" style="margin:0; font-weight: bold; color: var(--brand);">Principal</p>
-            <div class="meta"><span>PhD, Healthcare Admin</span></div>
-          </div>
-        </article>
+<!-- COLLEGE MANAGEMENT -->
+<section class="section section--soft">
+  <div class="container">
+    <div class="section__head reveal">
+      <div class="kicker">Academic Leadership</div>
+      <h2>College Management</h2>
+    </div>
+    <div class="grid grid--3">
+        <div class="feature-card reveal reveal-delay-1" style="text-align:center;padding:24px 18px;">
+          <div style="width:64px;height:64px;border-radius:50%;background:linear-gradient(135deg,var(--brand),var(--brand-2));display:flex;align-items:center;justify-content:center;margin:0 auto 12px;font-size:1.5rem;color:#fff;">🎓</div>
+          <h3 style="font-size:.94rem;margin-bottom:4px;">Sr. Justina</h3>
+          <p style="font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:var(--brand-2);margin-bottom:8px;">Principal, STTMTC-K</p>
+          <p style="font-size:.8rem;line-height:1.6;">Leads the academic direction of STTMTC-K, overseeing all programmes and curriculum quality. Represents the college in regulatory engagements with TVETA and the Nursing Council of Kenya.</p>
+        </div>
+        <div class="feature-card reveal reveal-delay-2" style="text-align:center;padding:24px 18px;">
+          <div style="width:64px;height:64px;border-radius:50%;background:linear-gradient(135deg,var(--brand),var(--brand-2));display:flex;align-items:center;justify-content:center;margin:0 auto 12px;font-size:1.5rem;color:#fff;">📊</div>
+          <h3 style="font-size:.94rem;margin-bottom:4px;">Mr. Frankline Njagi</h3>
+          <p style="font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:var(--brand-2);margin-bottom:8px;">College Finance Officer</p>
+          <p style="font-size:.8rem;line-height:1.6;">Oversees the college's financial planning, student fee management, and administrative stability — ensuring resources are in place for smooth academic operations. MBA, Business Management.</p>
+        </div>
+        <div class="feature-card reveal reveal-delay-3" style="text-align:center;padding:24px 18px;">
+          <div style="width:64px;height:64px;border-radius:50%;background:linear-gradient(135deg,var(--brand),var(--brand-2));display:flex;align-items:center;justify-content:center;margin:0 auto 12px;font-size:1.5rem;color:#fff;">📋</div>
+          <h3 style="font-size:.94rem;margin-bottom:4px;">Mrs. Grace Muthoni</h3>
+          <p style="font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:var(--brand-2);margin-bottom:8px;">Registrar</p>
+          <p style="font-size:.8rem;line-height:1.6;">Manages student admissions, academic records, and compliance with KNEC and TVET-CDACC examining bodies. BA Education, Dip. Administration.</p>
+        </div>
+    </div>
+  </div>
+</section>
 
-        <article class="card">
-          <div style="height: 250px; overflow: hidden;">
-            <img src="assets/img/photo-1497366216548-37526070297c.jpg" alt="Dr. John Mwangi" class="card__img" style="object-fit: cover; height: 100%; width: 100%;" />
-          </div>
-          <div class="card__body">
-            <span class="pill">Administration</span>
-            <h3>Dr. John Mwangi</h3>
-            <p class="lead" style="margin:0; font-weight: bold; color: var(--brand);">Deputy Principal</p>
-            <div class="meta"><span>MSc Nursing, RN</span></div>
-          </div>
-        </article>
-
-        <article class="card">
-          <div style="height: 250px; overflow: hidden;">
-            <img src="assets/img/photo-1562774053-701939374585.jpg" alt="Mrs. Grace Muthoni" class="card__img" style="object-fit: cover; height: 100%; width: 100%;" />
-          </div>
-          <div class="card__body">
-            <span class="pill">Administration</span>
-            <h3>Mrs. Grace Muthoni</h3>
-            <p class="lead" style="margin:0; font-weight: bold; color: var(--brand);">Registrar</p>
-            <div class="meta"><span>BA Education, Dip. Admin</span></div>
-          </div>
-        </article>
-
-        <article class="card">
-            <div style="height: 250px; overflow: hidden; background: #eee; display: flex; align-items: center; justify-content: center;">
-                <span style="font-size: 4rem; opacity: 0.2;">👨‍💼</span>
-            </div>
-            <div class="card__body">
-              <span class="pill">Administration</span>
-              <h3>Mr. Peter Kariuki</h3>
-              <p class="lead" style="margin:0; font-weight: bold; color: var(--brand);">Finance Officer</p>
-              <div class="meta"><span>MBA, Management</span></div>
-            </div>
-          </article>
-      </div>
-
-      <div class="section__head" style="margin-top: 64px;">
-        <h2>Academic Faculty</h2>
-        <p class="lead">Qualified instructors with real-world clinical experience.</p>
-      </div>
-
-      <div class="grid grid--4">
-        <article class="card">
-          <div style="height: 200px; overflow: hidden;">
-            <img src="assets/img/photo-1434030216411-0b793f4b4173.jpeg" alt="Nursing Faculty" class="card__img" style="object-fit: cover; height: 100%; width: 100%;" />
-          </div>
+<!-- TEACHING FACULTY -->
+<section class="section" id="academic-faculty">
+  <div class="container">
+    <div class="section__head reveal">
+      <div class="kicker">Teaching Staff</div>
+      <h2>Teaching Faculty</h2>
+      <p class="lead">Our tutors and instructors bring extensive clinical experience directly into the classroom — training students through practice, mentorship, and real hospital exposure.</p>
+    </div>
+    <div class="grid grid--4">
+        <article class="card reveal reveal-delay-1" style="text-align:center;">
+          <div style="height:180px;background:linear-gradient(135deg,var(--brand),var(--brand-2));display:flex;align-items:center;justify-content:center;font-family:var(--font-head);font-size:2.8rem;font-weight:700;color:rgba(255,255,255,.25);">MK</div>
           <div class="card__body">
             <span class="pill">Nursing</span>
-            <h3>Sr. Annrita Mwangi</h3>
-            <p class="lead" style="margin:0">Senior Instructor</p>
-            <div class="meta"><span>BScN, RN, Midwifery</span></div>
+            <h3 style="margin:10px 0 4px;font-size:1rem;">Mr Kamala Henry</h3>
+            <p style="color:var(--brand-2);font-weight:700;font-size:.78rem;text-transform:uppercase;letter-spacing:.06em;margin-bottom:4px;">H.O.D — Nursing</p>
+            <p style="font-size:.76rem;color:var(--muted);margin-bottom:8px;">BSc. Clinical Medicine, Higher Dip. Lung Health, RCO</p>
+            <p style="font-size:.8rem;color:var(--text-body);line-height:1.6;">Directs the Nursing department and manages academic partnerships. Oversees student integration into specialised hospital rotations, diagnostics, and community health planning.</p>
           </div>
         </article>
-
-        <article class="card">
-          <div style="height: 200px; overflow: hidden;">
-            <img src="assets/img/photo-1551076805-e1869033e561.jpeg" alt="Lab Faculty" class="card__img" style="object-fit: cover; height: 100%; width: 100%;" />
+        <article class="card reveal reveal-delay-1" style="text-align:center;">
+          <div style="height:180px;background:linear-gradient(135deg,var(--brand),var(--brand-2));display:flex;align-items:center;justify-content:center;font-family:var(--font-head);font-size:2.8rem;font-weight:700;color:rgba(255,255,255,.25);">MT</div>
+          <div class="card__body">
+            <span class="pill">Nursing</span>
+            <h3 style="margin:10px 0 4px;font-size:1rem;">Mr Titus Wamalwa</h3>
+            <p style="color:var(--brand-2);font-weight:700;font-size:.78rem;text-transform:uppercase;letter-spacing:.06em;margin-bottom:4px;">Senior Clinical Instructor</p>
+            <p style="font-size:.76rem;color:var(--muted);margin-bottom:8px;">BScN, RN, Midwifery</p>
+            <p style="font-size:.8rem;color:var(--text-body);line-height:1.6;">Leads nursing education and clinical placement supervision within St Theresa Mission Hospital, shaping students' practical skills from Year 1.</p>
           </div>
+        </article>
+        <article class="card reveal reveal-delay-2" style="text-align:center;">
+          <div style="height:180px;background:linear-gradient(135deg,var(--brand),var(--brand-2));display:flex;align-items:center;justify-content:center;font-family:var(--font-head);font-size:2.8rem;font-weight:700;color:rgba(255,255,255,.25);">RN</div>
+          <div class="card__body">
+            <span class="pill">Nursing</span>
+            <h3 style="margin:10px 0 4px;font-size:1rem;">Rosemary Njoroge</h3>
+            <p style="color:var(--brand-2);font-weight:700;font-size:.78rem;text-transform:uppercase;letter-spacing:.06em;margin-bottom:4px;">Nursing Tutor</p>
+            <p style="font-size:.76rem;color:var(--muted);margin-bottom:8px;">KRN, Dip. Nursing</p>
+            <p style="font-size:.8rem;color:var(--text-body);line-height:1.6;">Academic lead for Nursing and Humanities subjects, guiding students through foundational theory and the ethics of professional healthcare practice.</p>
+          </div>
+        </article>
+        <article class="card reveal reveal-delay-2" style="text-align:center;">
+          <div style="height:180px;background:linear-gradient(135deg,var(--brand),var(--brand-2));display:flex;align-items:center;justify-content:center;font-family:var(--font-head);font-size:2.8rem;font-weight:700;color:rgba(255,255,255,.25);">MF</div>
+          <div class="card__body">
+            <span class="pill">Nursing</span>
+            <h3 style="margin:10px 0 4px;font-size:1rem;">Ms Fridah</h3>
+            <p style="color:var(--brand-2);font-weight:700;font-size:.78rem;text-transform:uppercase;letter-spacing:.06em;margin-bottom:4px;">Nursing Tutor</p>
+            <p style="font-size:.76rem;color:var(--muted);margin-bottom:8px;">KRN, Dip. Nursing</p>
+            <p style="font-size:.8rem;color:var(--text-body);line-height:1.6;">Specialises in maternal and child health nursing, guiding students through reproductive health, antenatal care, and family-centred nursing practice.</p>
+          </div>
+        </article>
+        <article class="card reveal reveal-delay-2" style="text-align:center;">
+          <div style="height:180px;background:linear-gradient(135deg,var(--brand),var(--brand-2));display:flex;align-items:center;justify-content:center;font-family:var(--font-head);font-size:2.8rem;font-weight:700;color:rgba(255,255,255,.25);">MB</div>
+          <div class="card__body">
+            <span class="pill">Nursing</span>
+            <h3 style="margin:10px 0 4px;font-size:1rem;">Mr Baraza</h3>
+            <p style="color:var(--brand-2);font-weight:700;font-size:.78rem;text-transform:uppercase;letter-spacing:.06em;margin-bottom:4px;">Nursing Tutor</p>
+            <p style="font-size:.76rem;color:var(--muted);margin-bottom:8px;">KRN, Dip. Nursing</p>
+            <p style="font-size:.8rem;color:var(--text-body);line-height:1.6;">Focuses on anatomy, physiology, and medical-surgical nursing, helping students build strong scientific foundations for clinical practice.</p>
+          </div>
+        </article>
+        <article class="card reveal reveal-delay-2" style="text-align:center;">
+          <div style="height:180px;background:linear-gradient(135deg,var(--brand),var(--brand-2));display:flex;align-items:center;justify-content:center;font-family:var(--font-head);font-size:2.8rem;font-weight:700;color:rgba(255,255,255,.25);">MT</div>
+          <div class="card__body">
+            <span class="pill">Nursing</span>
+            <h3 style="margin:10px 0 4px;font-size:1rem;">Mr Timothy</h3>
+            <p style="color:var(--brand-2);font-weight:700;font-size:.78rem;text-transform:uppercase;letter-spacing:.06em;margin-bottom:4px;">Nursing Tutor</p>
+            <p style="font-size:.76rem;color:var(--muted);margin-bottom:8px;">KRN, Dip. Nursing</p>
+            <p style="font-size:.8rem;color:var(--text-body);line-height:1.6;">Facilitates practical skills laboratories, simulation exercises, and competency assessments to prepare students for hospital attachments.</p>
+          </div>
+        </article>
+        <article class="card reveal reveal-delay-2" style="text-align:center;">
+          <div style="height:180px;background:linear-gradient(135deg,var(--brand),var(--brand-2));display:flex;align-items:center;justify-content:center;font-family:var(--font-head);font-size:2.8rem;font-weight:700;color:rgba(255,255,255,.25);">MF</div>
+          <div class="card__body">
+            <span class="pill">Nursing</span>
+            <h3 style="margin:10px 0 4px;font-size:1rem;">Ms Francisca</h3>
+            <p style="color:var(--brand-2);font-weight:700;font-size:.78rem;text-transform:uppercase;letter-spacing:.06em;margin-bottom:4px;">Nursing Tutor</p>
+            <p style="font-size:.76rem;color:var(--muted);margin-bottom:8px;">KRN, Dip. Nursing</p>
+            <p style="font-size:.8rem;color:var(--text-body);line-height:1.6;">Teaches community health nursing, health promotion, and disease prevention while supervising outreach activities in surrounding communities.</p>
+          </div>
+        </article>
+        <article class="card reveal reveal-delay-2" style="text-align:center;">
+          <div style="height:180px;background:linear-gradient(135deg,var(--brand),var(--brand-2));display:flex;align-items:center;justify-content:center;font-family:var(--font-head);font-size:2.8rem;font-weight:700;color:rgba(255,255,255,.25);">SJ</div>
+          <div class="card__body">
+            <span class="pill">Nursing</span>
+            <h3 style="margin:10px 0 4px;font-size:1rem;">Sr Justina</h3>
+            <p style="color:var(--brand-2);font-weight:700;font-size:.78rem;text-transform:uppercase;letter-spacing:.06em;margin-bottom:4px;">Nursing Tutor</p>
+            <p style="font-size:.76rem;color:var(--muted);margin-bottom:8px;">KRN, Dip. Nursing</p>
+            <p style="font-size:.8rem;color:var(--text-body);line-height:1.6;">Provides academic leadership while teaching nursing management, healthcare leadership, and professional development for future nurse leaders.</p>
+          </div>
+        </article>
+        <article class="card reveal reveal-delay-3" style="text-align:center;">
+          <div style="height:180px;background:linear-gradient(135deg,var(--brand),var(--brand-2));display:flex;align-items:center;justify-content:center;font-family:var(--font-head);font-size:2.8rem;font-weight:700;color:rgba(255,255,255,.25);">MT</div>
           <div class="card__body">
             <span class="pill">Medical Lab</span>
-            <h3>John Kimathi</h3>
-            <p class="lead" style="margin:0">Head of Department</p>
-            <div class="meta"><span>HND Med Lab, MLT</span></div>
+            <h3 style="margin:10px 0 4px;font-size:1rem;">Mr Thomas</h3>
+            <p style="color:var(--brand-2);font-weight:700;font-size:.78rem;text-transform:uppercase;letter-spacing:.06em;margin-bottom:4px;">Chief Lab Technologist</p>
+            <p style="font-size:.76rem;color:var(--muted);margin-bottom:8px;">HND Medical Lab, MLT</p>
+            <p style="font-size:.8rem;color:var(--text-body);line-height:1.6;">Heads the ISO 15189:2012 accredited Medical Laboratory department and oversees all laboratory science training, diagnostic procedures, and quality standards.</p>
           </div>
         </article>
-
-        <article class="card">
-          <div style="height: 200px; overflow: hidden;">
-            <img src="assets/img/photo-1497633762265-9d179a990aa6.jpeg" alt="Library Faculty" class="card__img" style="object-fit: cover; height: 100%; width: 100%;" />
-          </div>
+        <article class="card reveal reveal-delay-4" style="text-align:center;">
+          <div style="height:180px;background:linear-gradient(135deg,var(--brand),var(--brand-2));display:flex;align-items:center;justify-content:center;font-family:var(--font-head);font-size:2.8rem;font-weight:700;color:rgba(255,255,255,.25);">HW</div>
           <div class="card__body">
             <span class="pill">Health Records</span>
-            <h3>Hilda Wairimu</h3>
-            <p class="lead" style="margin:0">Senior Tutor</p>
-            <div class="meta"><span>BSc IT, Health Records</span></div>
+            <h3 style="margin:10px 0 4px;font-size:1rem;">Hilda Wairimu</h3>
+            <p style="color:var(--brand-2);font-weight:700;font-size:.78rem;text-transform:uppercase;letter-spacing:.06em;margin-bottom:4px;">ICT &amp; Health Records Tutor</p>
+            <p style="font-size:.76rem;color:var(--muted);margin-bottom:8px;">BSc IT, Health Records</p>
+            <p style="font-size:.8rem;color:var(--text-body);line-height:1.6;">Manages Health Records &amp; IT training and the college's digital infrastructure, including EMR systems and health information management tools.</p>
           </div>
         </article>
+    </div>
+  </div>
+</section>
 
-        <article class="card">
-            <div style="height: 200px; overflow: hidden;">
-              <img src="assets/img/photo-1497366216548-37526070297c.jpg" alt="General Studies" class="card__img" style="object-fit: cover; height: 100%; width: 100%;" />
-            </div>
-            <div class="card__body">
-              <span class="pill">Humanities</span>
-              <h3>Rosemary Njoroge</h3>
-              <p class="lead" style="margin:0">Nursing Tutor</p>
-              <div class="meta"><span>KRN, Dip. Nursing</span></div>
-            </div>
-          </article>
+<!-- TEACHING PHILOSOPHY -->
+<section class="section section--soft">
+  <div class="container">
+    <div class="section__head reveal">
+      <div class="kicker">Our Approach</div>
+      <h2>Teaching Philosophy</h2>
+      <p class="lead">Every STTMTC-K educator is guided by a shared set of principles that put student growth, patient safety, and community service at the centre of everything we do.</p>
+    </div>
+    <div class="grid grid--3">
+        <div class="feature-card reveal reveal-delay-1" style="text-align:center;padding:24px 18px;">
+          <div class="icon">🛏️</div>
+          <h3>Bedside Teaching</h3>
+          <p style="font-size:.84rem;">Students learn best at the bedside. Every ward rotation is a teaching moment — faculty accompany students into wards, not just classrooms.</p>
+        </div>
+        <div class="feature-card reveal reveal-delay-2" style="text-align:center;padding:24px 18px;">
+          <div class="icon">🔬</div>
+          <h3>Lab-Led Learning</h3>
+          <p style="font-size:.84rem;">Our ISO-certified laboratory is not just a resource — it is a daily classroom. Students run real tests under qualified technologists from Year 1.</p>
+        </div>
+        <div class="feature-card reveal reveal-delay-3" style="text-align:center;padding:24px 18px;">
+          <div class="icon">🤝</div>
+          <h3>Mentorship First</h3>
+          <p style="font-size:.84rem;">Every student is assigned a clinical mentor for the duration of their programme. The mentor relationship is the cornerstone of STTMTC-K training.</p>
+        </div>
+        <div class="feature-card reveal reveal-delay-1" style="text-align:center;padding:24px 18px;">
+          <div class="icon">✝️</div>
+          <h3>Faith-Based Formation</h3>
+          <p style="font-size:.84rem;">Professional excellence is inseparable from character. We train nurses who are not only competent but compassionate — shaped by the values of St. Therese.</p>
+        </div>
+        <div class="feature-card reveal reveal-delay-2" style="text-align:center;padding:24px 18px;">
+          <div class="icon">🌿</div>
+          <h3>Community Outreach</h3>
+          <p style="font-size:.84rem;">Twice a year, students participate in community health outreach in surrounding villages — applying public health knowledge in real community settings.</p>
+        </div>
+        <div class="feature-card reveal reveal-delay-3" style="text-align:center;padding:24px 18px;">
+          <div class="icon">📊</div>
+          <h3>Standards-Driven Assessment</h3>
+          <p style="font-size:.84rem;">All assessments align with KNEC and Kenya Nursing Council standards, ensuring students are examination-ready and career-ready at the same time.</p>
+        </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-band">
+  <div class="container reveal">
+    <h2>Learn from the Best. Become the Best.</h2>
+    <p>Our faculty's combined clinical and academic experience ensures STTMTC-K graduates are job-ready from day one.</p>
+    <div style="display:flex;gap:14px;justify-content:center;flex-wrap:wrap;">
+      <a class="btn btn--light" href="https://app.cloudschool.co.ke/admissionv2?cid=EHh39WoJGF3mbosOj1vLHg==">Apply for September 2026</a>
+      <a class="btn btn--ghost" href="contact.html">Get in Touch</a>
+    </div>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="container footer__grid">
+      <div>
+        <div class="footer__brand">
+          <img loading="lazy" src="assets/img/logo.png" alt="STTMTC-K"
+               class="footer__logo-white"
+               onerror="this.style.display='none';this.nextElementSibling.style.display='block'"/>
+          <span style="display:none;font-family:var(--font-head);font-size:1.1rem;color:#fff;font-weight:700;">STTMTC-K</span>
+          <span class="footer__brand-name">STTMTC-K</span>
+        </div>
+        <p>A constituent college of St Theresa Mission Hospital – Kiirua, Meru County. Shaping compassionate healthcare professionals since 1967.</p>
       </div>
-    </div>
-  </section>
-
-  <footer class="footer">
-    <div class="container footer__grid grid grid--4">
-      <div><h3>STTMTC</h3><p>A constituent college of St Theresa Mission Hospital – Kiirua.</p></div>
-      <div><h3>Quick Links</h3><ul><li><a href="courses.html">Courses</a></li><li><a href="admissions.html">Admissions</a></li><li><a href="contact.html">Contact</a></li></ul></div>
-      <div><h3>Contact</h3><p><strong>Phone:</strong> +254 727 811 041<br><strong>Email:</strong> info@sttheresahosp-kiirua.com</p></div>
-      <div><h3>Apply</h3><a class="btn btn--light" href="admissions.html#apply">Apply Now</a></div>
-    </div>
-   <div class="footer__bottom">
+      <div>
+        <h3>Quick Links</h3>
+        <ul>
+          <li><a href="about.html">About Us</a></li>
+          <li><a href="courses.html">Courses</a></li>
+          <li><a href="faculty.html">Faculty</a></li>
+          <li><a href="admissions.html">Admissions</a></li>
+          <li><a href="facilities.html">Facilities</a></li>
+          <li><a href="news.html">News &amp; Events</a></li>
+          <li><a href="gallery.html">Gallery</a></li>
+          <li><a href="https://app.cloudschool.co.ke/student/login" target="_blank" rel="noopener" style="color:#D4AF37;font-weight:700;">Student Portal</a></li>
+        </ul>
+      </div>
+      <div>
+        <h3>Contact</h3>
+        <p>
+          📍 Kiirua, off Meru-Nanyuki Road,<br/>Buuri Sub-County, Meru<br/><br/>
+          📞 <a href="tel:+254700626189">+254 700 626 189</a><br/>
+          📞 <a href="tel:+254703726321">+254 703 726 321</a><br/>
+          ✉️ <a href="mailto:info@sttheresamedcollege.co.ke">info@sttheresamedcollege.co.ke</a>
+        </p>
+      </div>
+      <div>
+        <h3>Apply Now</h3>
+        <p>September 2026 intake. 80 spaces — apply early.</p>
+        <a class="btn btn--light" href="https://app.cloudschool.co.ke/admissionv2?cid=EHh39WoJGF3mbosOj1vLHg==" style="margin-top:14px;display:inline-block;">Start Application</a>
+        <div style="margin-top:14px;display:flex;flex-direction:column;gap:6px;">
+          <a href="assets/downloads/prospectus.pdf" target="_blank" style="color:rgba(255,255,255,.65);font-size:.82rem;">⬇ Download Prospectus</a>
+          <a href="assets/downloads/admission-form.pdf" target="_blank" style="color:rgba(255,255,255,.65);font-size:.82rem;">⬇ Admission Form (PDF)</a>
+        </div>
+      </div>
+  </div>
+  <div class="footer__bottom">
     <div class="container footer__bottom-inner">
-        <small>© <span id="year"></span> St Theresa Medical Training College. All Rights Reserved.</small>
-        <small class="developer-credit">
-            Developed by <a href="https://yourlink.com" target="_blank" rel="noopener">Infranova Systems</a>
-        </small>
+      <small>&copy; <span id="year"></span> St Theresa Medical Training College. All Rights Reserved.</small>
+      <small class="developer-credit">Developed by <a href="https://infranovasystems.com" target="_blank" rel="noopener">Infranova Systems</a></small>
     </div>
-</div>
-  </footer>
-
+  </div>
+</footer>
+  <a href="https://wa.me/254700626189" class="wa-float" target="_blank" rel="noopener" aria-label="Chat on WhatsApp">
+    <i class="fab fa-whatsapp"></i>
+  </a>
+  <button class="back-top" id="back-top" aria-label="Back to top">↑</button>
+  <div class="lightbox" id="lightbox">
+    <span class="lightbox__close" id="lightbox-close">&times;</span>
+    <img class="lightbox__img" id="lightbox-img" src="" alt="" />
+  </div>
   <script src="assets/js/main.js"></script>
 </body>
 </html>

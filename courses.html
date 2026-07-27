@@ -1,203 +1,318 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <meta name="description" content="Community Health Nursing (KRCHN) at STTMTC-K — 3½-year diploma accredited by the Nursing Council of Kenya. Entry requirements, curriculum, fees and career outcomes."/>
   <title>Courses – St Theresa Medical Training College</title>
-  <link rel="stylesheet" href="assets/css/styles.css" />
-  <style>
-    /* Ensure the list looks clean within cards */
-    .list { padding-left: 20px; margin-bottom: 15px; }
-    .list li { font-size: 0.95rem; margin-bottom: 5px; color: var(--text-main); }
-    
-    /* Mobile Menu Logic Fix */
-    @media (max-width: 768px) {
-      .nav {
-        display: none;
-        flex-direction: column;
-        position: absolute;
-        top: 100%;
-        left: 0;
-        width: 100%;
-        background: #fff;
-        padding: 20px;
-        box-shadow: 0 10px 20px rgba(0,0,0,0.1);
-        z-index: 999;
-      }
-      .nav.is-active { display: flex; }
-      .nav a { padding: 12px 0; border-bottom: 1px solid #eee; }
-      .nav-toggle { display: block !important; cursor: pointer; }
-    }
-  </style>
+  <link rel="stylesheet" href="assets/css/styles.css"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"/>
 </head>
 <body>
 
-  <div class="topbar">
-    <div class="container topbar__inner">
-      <div class="topbar__left">
-        <span class="ico">📞</span> <a href="tel:+254727811041">+254 700 626 189</a>
-        <span class="ico">✉️</span> <a href="mailto:info@sttheresamedcollege.co.ke">info@sttheresahosp-kiirua.com</a>
+<div class="topbar">
+  <div class="container topbar__inner">
+    <div class="topbar__left">
+      <span class="ico">📞</span><a href="tel:+254700626189">+254 700 626 189</a>
+      <span class="ico">✉️</span><a href="mailto:info@sttheresamedcollege.co.ke">info@sttheresamedcollege.co.ke</a>
+    </div>
+    <div class="topbar__right"><span>Mon – Fri: 8:00 AM – 5:00 PM</span></div>
+  </div>
+</div>
+
+<header class="header" id="site-header">
+  <div class="container header__inner">
+    <a class="brand" href="index.html">
+      <img loading="lazy" src="assets/img/logo.png" alt="St Theresa Medical Training College Logo"/>
+      <span class="brand__text">
+        <span class="brand__name">St Theresa Medical Training College</span>
+        <span class="brand__tag">"Nurturing Excellence in Healthcare for Love &amp; Service"</span>
+      </span>
+    </a>
+    <button class="nav-toggle" id="mobile-toggle" aria-label="Toggle menu" aria-expanded="false">☰</button>
+    <nav class="nav" id="primary-nav">
+      <a href="index.html">Home</a>
+      <div class="nav-item">
+        <a href="about.html">About Us</a>
+        <div class="nav-dropdown">
+          <div class="dd-label">The College</div>
+          <a href="about.html"><span class="dd-icon">🏫</span>About STTMTC-K</a>
+          <a href="about.html#vision"><span class="dd-icon">🎯</span>Vision &amp; Mission</a>
+          <a href="about.html#principal"><span class="dd-icon">👩‍⚕️</span>Principal's Message</a>
+          <div class="dd-divider"></div>
+          <a href="about.html#management"><span class="dd-icon">👥</span>Management Team</a>
+          <a href="news.html"><span class="dd-icon">📢</span>News &amp; Events</a>
+        </div>
       </div>
-      <div class="topbar__right">Mon - Fri: 8:00 AM - 5:00 PM</div>
+      <a href="courses.html" class="nav-active">Courses</a>
+      <a href="faculty.html">Faculty</a>
+      <div class="nav-item">
+        <a href="admissions.html">Admissions</a>
+        <div class="nav-dropdown">
+          <div class="dd-label">How to Join</div>
+          <a href="https://app.cloudschool.co.ke/admissionv2?cid=EHh39WoJGF3mbosOj1vLHg=="><span class="dd-icon">📝</span>Apply Online</a>
+          <a href="admissions.html#requirements"><span class="dd-icon">📋</span>Entry Requirements</a>
+          <a href="admissions.html#fees"><span class="dd-icon">💰</span>Fee Structure</a>
+          <div class="dd-divider"></div>
+          <div class="dd-label">Downloads</div>
+          <a href="assets/downloads/prospectus.pdf" target="_blank"><span class="dd-icon">📘</span>Prospectus</a>
+          <a href="assets/downloads/admission-form.pdf" target="_blank"><span class="dd-icon">📄</span>Admission Form</a>
+          <a href="assets/downloads/fee-structure.pdf" target="_blank"><span class="dd-icon">💳</span>Fee Structure</a>
+          <a href="assets/downloads/academic-calendar.pdf" target="_blank"><span class="dd-icon">📅</span>Academic Calendar</a>
+        </div>
+      </div>
+      <a href="facilities.html">Facilities</a>
+      <div class="nav-item">
+        <a href="#">Resources</a>
+        <div class="nav-dropdown">
+          <div class="dd-label">Student Resources</div>
+          <a href="assets/downloads/student-handbook.pdf" target="_blank"><span class="dd-icon">📖</span>Student Handbook</a>
+          <a href="assets/downloads/academic-calendar.pdf" target="_blank"><span class="dd-icon">📅</span>Academic Calendar</a>
+          <a href="assets/downloads/rules-regulations.pdf" target="_blank"><span class="dd-icon">📜</span>Rules &amp; Regulations</a>
+          <a href="assets/downloads/course-brochure.pdf" target="_blank"><span class="dd-icon">🩺</span>Nursing Brochure</a>
+          <div class="dd-divider"></div>
+          <a href="contact.html#faq"><span class="dd-icon">❓</span>FAQs</a>
+        </div>
+      </div>
+      <a href="news.html">News &amp; Events</a>
+      <a href="contact.html">Contact</a>
+      <a class="btn btn--small" href="https://app.cloudschool.co.ke/student/login" target="_blank" rel="noopener noreferrer">Student Portal</a>
+      <a class="btn btn--small" href="https://app.cloudschool.co.ke/admissionv2?cid=EHh39WoJGF3mbosOj1vLHg==">Apply Now</a>
+    </nav>
+  </div>
+</header>
+
+<!-- HERO -->
+<section class="hero hero--clean" style="background-image:url('assets/img/students.jpeg');">
+  <div class="hero-caption hero-caption--sm">
+    <span class="hero-caption__tag">Excellence in Medical Education</span>
+    <h1 class="hero-caption__title">Our Academic Programs</h1>
+    <p class="hero-caption__desc">Rigorous training designed to shape compassionate and competent healthcare specialists — accredited by KNEC, TVET Authority, the Nursing Council of Kenya, and KMLTTB.</p>
+    <div class="hero-caption__actions">
+      <a class="btn btn--sm" href="#community-health-nursing">View Programs</a>
+      <a class="btn btn--light btn--sm" href="https://app.cloudschool.co.ke/admissionv2?cid=EHh39WoJGF3mbosOj1vLHg==">Apply Now – Sept 2026</a>
     </div>
   </div>
+</section>
 
-   <header class="header">
-    <div class="container header__inner">
-        <a class="brand" href="index.html">
-            <img src="assets/img/logo.png" alt="St Theresa Medical Training College logo" />
-            <span class="brand__text">
-                <span class="brand__name">St Theresa Medical Training College</span>
-                <span class="brand__tag">“Nurturing Excellence in Healthcare for Love & Service”</span>
-            </span>
-        </a>
-
-        <button class="nav-toggle" id="mobile-toggle" aria-label="Open menu" aria-expanded="false">☰</button>
-
-        <nav class="nav" id="primary-nav" aria-label="Primary navigation">
-            <a href="index.html">Home</a>
-            <a href="about.html">About Us</a>
-            <a href="courses.html">Courses</a>
-            <a href="faculty.html">Faculty</a>
-            <a href="admissions.html">Admissions</a>
-            <a href="facilities.html">Facilities</a>
-            <a href="news.html">News & Events</a>
-            <a href="contact.html">Contact</a>
-            <a href="login.html" class="portal-link">Student Portal</a>
-            <a class="btn btn--small" href="admissions.html#apply">Apply Now</a>
-        </nav>
+<!-- QUICK NAV PILL -->
+<section class="section" style="padding-top:32px;padding-bottom:0;">
+  <div class="container">
+    <div style="display:flex;gap:10px;flex-wrap:wrap;">
+      <a href="#programme" class="pill" style="padding:10px 22px;font-size:.85rem;background:var(--brand);color:#fff;text-decoration:none;border-radius:100px;">💉 Community Health Nursing</a>
     </div>
-</header>
-  <section class="hero hero--small" style="background-image: url('assets/img/stdt4.jpg'); background-size: cover; background-position: center;">
-    <div class="container hero__content">
-      <div class="kicker">Excellence in Medical Education</div>
-      <h1>Our Academic Programs</h1>
-      <p class="sub">Rigorous training designed to shape compassionate and competent healthcare specialists.</p>
+  </div>
+</section>
+
+<!-- PROGRAMME DETAIL -->
+<section class="section" id="programme">
+  <div class="container">
+    <div class="section__head reveal">
+      <div class="kicker">Diploma Programme</div>
+      <h2>Choose Your Healthcare Path</h2>
+      <p class="lead">STTMTC-K offers one focused, deeply resourced nursing pathway — blending academic excellence with daily clinical practice in our Level 5 hospital.</p>
     </div>
-  </section>
+    <div id="community-health-nursing" class="reveal" style="margin-bottom:56px;">
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:0;align-items:stretch;background:#fff;border-radius:var(--radius-xl);box-shadow:var(--shadow-md);overflow:hidden;">
+        <img loading="lazy" src="assets/img/stdt1.jpg" alt="Community Health Nursing students"
+             style="height:100%;min-height:400px;object-fit:cover;width:100%;display:block;"/>
+        <div style="padding:40px 36px;display:flex;flex-direction:column;justify-content:center;">
+          <span class="pill" style="margin-bottom:14px;">Diploma · 3½ Years · KRCHN</span>
+          <h2 style="margin:0 0 8px;font-size:1.5rem;">Community Health Nursing</h2>
+          <p style="color:var(--muted);font-size:.84rem;margin-bottom:16px;">Regulated by the <strong>Nursing Council of Kenya (NCK)</strong> · Examined by <strong>KNEC</strong></p>
+          <p class="lead" style="font-size:.95rem;">Master the art of healing and community wellness through intensive clinical placements in one of Kenya's most active Level 5 teaching hospitals.</p>
 
-  <section class="section">
-    <div class="container">
-      <div class="section__head">
-        <h2>Diploma & Certificate Programs</h2>
-        <p class="lead">Accredited curricula blending theoretical depth with clinical mastery.</p>
-      </div>
+          <h4 style="margin:20px 0 10px;color:var(--brand);font-size:.88rem;">📋 Entry Requirements</h4>
+          <ul class="list">
+            <li>KCSE Mean Grade <strong>C (Plain)</strong> or above</li>
+            <li><strong>C (Plain)</strong> in Biology &amp; English or Kiswahili</li>
+            <li><strong>C–</strong> in Chemistry, Physics, or Mathematics</li>
+          </ul>
 
-      <div class="grid grid--3">
-        <article class="card" id="community-health-nursing">
-          <div class="card__body">
-            <span class="pill">Nursing</span>
-            <h3>Community Health Nursing</h3>
-            <div class="meta"><span>⏱ 3 Years (Diploma)</span></div>
+          <h4 style="margin:18px 0 10px;color:var(--brand);font-size:.88rem;">🏥 Clinical Rotations Include</h4>
+          <ul class="list">
+            <li>General medicine, surgery &amp; maternity wards</li>
+            <li>Paediatrics, ICU &amp; theatre rotations</li>
+            <li>Community health outreach programmes</li>
+          </ul>
 
-            <h4 style="margin:18px 0 8px; font-size: 1rem;">Entry Requirements</h4>
-            <ul class="list">
-              <li>KCSE Mean Grade C (Plain)</li>
-              <li>C (Plain) in Biology & English/Kiswahili</li>
-              <li>C- in Chemistry/Physics/Math</li>
-            </ul>
+          <h4 style="margin:18px 0 10px;color:var(--brand);font-size:.88rem;">🎓 Career Outcomes</h4>
+          <ul class="list">
+            <li>Registered Community Health Nurse (KRCHN)</li>
+            <li>Public health officer in government facilities</li>
+            <li>Maternal &amp; child health specialist</li>
+            <li>NGO and community health programmes</li>
+          </ul>
 
-            <h4 style="margin:14px 0 8px; font-size: 1rem;">Clinical Exposure</h4>
-            <p style="font-size: 0.9rem;">Direct placement at St Theresa Mission Hospital for maternity, pediatric, and surgical rotations.</p>
+          <div style="margin-top:24px;display:flex;gap:10px;flex-wrap:wrap;align-items:center;">
+            <span class="pill pill--urgent">80 Spaces – 2026</span>
+            <span class="pill">💰 KSh 85,000 / year</span>
+            <a class="btn btn--small" href="https://app.cloudschool.co.ke/admissionv2?cid=EHh39WoJGF3mbosOj1vLHg==">Apply Now →</a>
           </div>
-          <div class="card__cta"><a class="btn" href="admissions.html#apply">Apply Now →</a></div>
-        </article>
-
-        <article class="card" id="medical-lab">
-          <div class="card__body">
-            <span class="pill">Laboratory</span>
-            <h3>Medical Lab Technology</h3>
-            <div class="meta"><span>⏱ 3 Years (Diploma)</span></div>
-
-            <h4 style="margin:18px 0 8px; font-size: 1rem;">Entry Requirements</h4>
-            <ul class="list">
-              <li>KCSE Mean Grade C (Plain)</li>
-              <li>C (Plain) in Biology, Chemistry, English/Kiswahili</li>
-              <li>C (Plain) in Mathematics/Physics</li>
-            </ul>
-
-            <h4 style="margin:14px 0 8px; font-size: 1rem;">Clinical Exposure</h4>
-            <p style="font-size: 0.9rem;">Practice in modern hematology, microbiology, and biochemistry hospital labs.</p>
-          </div>
-          <div class="card__cta"><a class="btn" href="admissions.html#apply">Apply Now →</a></div>
-        </article>
-
-        <article class="card" id="health-records">
-          <div class="card__body">
-            <span class="pill">Health ICT</span>
-            <h3>Health Records & IT</h3>
-            <div class="meta"><span>⏱ 2 Years (Certificate)</span></div>
-
-            <h4 style="margin:18px 0 8px; font-size: 1rem;">Entry Requirements</h4>
-            <ul class="list">
-              <li>KCSE Mean Grade C- (Minus)</li>
-              <li>C- (Minus) in English & Mathematics</li>
-              <li>D+ (Plus) in Biology</li>
-            </ul>
-
-            <h4 style="margin:14px 0 8px; font-size: 1rem;">Career Path</h4>
-            <p style="font-size: 0.9rem;">Training in EMR (Electronic Medical Records), medical coding, and data analytics.</p>
-          </div>
-          <div class="card__cta"><a class="btn" href="admissions.html#apply">Apply Now →</a></div>
-        </article>
+        </div>
       </div>
     </div>
-  </section>
+  </div>
+</section>
 
-  <footer class="footer">
-    <div class="container footer__grid grid grid--4">
+<!-- CAREER OUTCOMES -->
+<section class="section section--soft">
+  <div class="container">
+    <div class="section__head reveal">
+      <div class="kicker">Where Our Graduates Go</div>
+      <h2>Career Outcomes</h2>
+      <p class="lead">STTMTC-K nursing graduates are sought after across Kenya's healthcare sector — in public hospitals, private facilities, NGOs, research institutions, and community health programmes.</p>
+    </div>
+    <div class="grid grid--3">
+      <div class="feature-card reveal reveal-delay-1" style="border-left-color:var(--brand);">
+        <div class="icon">💉</div>
+        <h3>Nursing Graduates</h3>
+        <ul class="list" style="margin-top:8px;">
+          <li>Registered Community Health Nurse (KRCHN)</li>
+          <li>Public hospitals — county &amp; national level</li>
+          <li>Private clinics and mission hospitals</li>
+          <li>Maternal &amp; child health specialist roles</li>
+          <li>NGO community health programmes</li>
+          <li>International nursing migration pathways</li>
+        </ul>
+      </div>
+      <div class="feature-card reveal reveal-delay-2">
+        <div class="icon">🌿</div>
+        <h3>Community &amp; Public Health</h3>
+        <ul class="list" style="margin-top:8px;">
+          <li>County health department postings</li>
+          <li>Community health centre management</li>
+          <li>Dispensary and health post roles</li>
+          <li>USAID, WHO, UNICEF health programmes</li>
+          <li>School health and occupational nursing</li>
+        </ul>
+      </div>
+      <div class="feature-card reveal reveal-delay-3">
+        <div class="icon">📚</div>
+        <h3>Further Studies</h3>
+        <ul class="list" style="margin-top:8px;">
+          <li>Upgrade to BSc Nursing (KU, UoN, MKU)</li>
+          <li>Specialise — ICU, Theatre, Oncology</li>
+          <li>Midwifery specialisation</li>
+          <li>Public health &amp; epidemiology postgraduate</li>
+          <li>Nursing education &amp; tutorship</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FEES TABLE -->
+<section class="section" id="fees">
+  <div class="container">
+    <div class="section__head reveal">
+      <div class="kicker">At a Glance</div>
+      <h2>Programme Fees &amp; Duration</h2>
+      <p class="lead">Transparent, affordable fees for a nationally recognised qualification.</p>
+    </div>
+    <div style="overflow-x:auto;" class="reveal">
+      <table style="width:100%;border-collapse:collapse;font-size:.94rem;background:#fff;border-radius:var(--radius-lg);overflow:hidden;box-shadow:var(--shadow-md);max-width:800px;margin:0 auto;">
+        <thead>
+          <tr style="background:var(--brand);color:#fff;">
+            <th style="padding:16px 20px;text-align:left;font-weight:700;">Programme</th>
+            <th style="padding:16px 20px;text-align:center;font-weight:700;">Qualification</th>
+            <th style="padding:16px 20px;text-align:center;font-weight:700;">Duration</th>
+            <th style="padding:16px 20px;text-align:center;font-weight:700;">Annual Fees</th>
+            <th style="padding:16px 20px;text-align:center;font-weight:700;">Regulator</th>
+            <th style="padding:16px 20px;text-align:center;font-weight:700;">Spaces</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td style="padding:16px 20px;font-weight:600;color:var(--brand);">Community Health Nursing</td>
+            <td style="padding:16px 20px;text-align:center;">KRCHN Diploma</td>
+            <td style="padding:16px 20px;text-align:center;">3½ Years</td>
+            <td style="padding:16px 20px;text-align:center;font-weight:700;color:var(--brand-2);">KSh 85,000</td>
+            <td style="padding:16px 20px;text-align:center;font-size:.82rem;">NCK / KNEC</td>
+            <td style="padding:16px 20px;text-align:center;"><span class="pill pill--urgent">80</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <p style="text-align:center;margin-top:16px;font-size:.82rem;color:var(--muted);">* Annual fees. Application fee: KSh 1,000 (non-refundable). HELB loans available for eligible students.</p>
+    <div style="text-align:center;margin-top:12px;">
+      <a href="assets/downloads/fee-structure.pdf" target="_blank" class="btn btn--light btn--small">⬇ Download Full Fee Structure</a>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-band">
+  <div class="container reveal">
+    <div class="kicker" style="background:rgba(255,255,255,.15);color:#fff;">Deadline: March 31, 2026</div>
+    <h2>Secure Your Place in the 2026 Cohort</h2>
+    <p>80 spaces available. Apply online or visit our admissions office today — early applications are strongly encouraged.</p>
+    <div style="display:flex;gap:14px;justify-content:center;flex-wrap:wrap;">
+      <a class="btn btn--light" href="https://app.cloudschool.co.ke/admissionv2?cid=EHh39WoJGF3mbosOj1vLHg==">Apply Online Now</a>
+      <a class="btn btn--ghost" href="tel:+254700626189">📞 Call Admissions</a>
+    </div>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="container footer__grid">
       <div>
-        <h3>St Theresa Medical Training College</h3>
-        <p>A constituent college of St Theresa Mission Hospital – Kiirua.</p>
+        <div class="footer__brand">
+          <img loading="lazy" src="assets/img/logo.png" alt="STTMTC-K"
+               class="footer__logo-white"
+               onerror="this.style.display='none';this.nextElementSibling.style.display='block'"/>
+          <span style="display:none;font-family:var(--font-head);font-size:1.1rem;color:#fff;font-weight:700;">STTMTC-K</span>
+          <span class="footer__brand-name">STTMTC-K</span>
+        </div>
+        <p>A constituent college of St Theresa Mission Hospital – Kiirua, Meru County. Shaping compassionate healthcare professionals since 1967.</p>
       </div>
       <div>
         <h3>Quick Links</h3>
         <ul>
           <li><a href="about.html">About Us</a></li>
-          <li><a href="login.html">Student Portal</a></li>
+          <li><a href="courses.html">Courses</a></li>
+          <li><a href="faculty.html">Faculty</a></li>
+          <li><a href="admissions.html">Admissions</a></li>
           <li><a href="facilities.html">Facilities</a></li>
+          <li><a href="news.html">News &amp; Events</a></li>
+          <li><a href="gallery.html">Gallery</a></li>
+          <li><a href="https://app.cloudschool.co.ke/student/login" target="_blank" rel="noopener" style="color:#D4AF37;font-weight:700;">Student Portal</a></li>
         </ul>
       </div>
       <div>
         <h3>Contact</h3>
         <p>
-          Kiirua, Meru County<br>
-          <strong>Tel:</strong> 0727 811 041<br>
-          <strong>Email:</strong> info@sttheresahosp-kiirua.com
+          📍 Kiirua, off Meru-Nanyuki Road,<br/>Buuri Sub-County, Meru<br/><br/>
+          📞 <a href="tel:+254700626189">+254 700 626 189</a><br/>
+          📞 <a href="tel:+254703726321">+254 703 726 321</a><br/>
+          ✉️ <a href="mailto:info@sttheresamedcollege.co.ke">info@sttheresamedcollege.co.ke</a>
         </p>
       </div>
       <div>
-        <a class="btn btn--light" href="admissions.html#apply">Apply Now</a>
+        <h3>Apply Now</h3>
+        <p>September 2026 intake. 80 spaces — apply early.</p>
+        <a class="btn btn--light" href="https://app.cloudschool.co.ke/admissionv2?cid=EHh39WoJGF3mbosOj1vLHg==" style="margin-top:14px;display:inline-block;">Start Application</a>
+        <div style="margin-top:14px;display:flex;flex-direction:column;gap:6px;">
+          <a href="assets/downloads/prospectus.pdf" target="_blank" style="color:rgba(255,255,255,.65);font-size:.82rem;">⬇ Download Prospectus</a>
+          <a href="assets/downloads/admission-form.pdf" target="_blank" style="color:rgba(255,255,255,.65);font-size:.82rem;">⬇ Admission Form (PDF)</a>
+        </div>
       </div>
-    </div>
-    <div class="footer__bottom">
+  </div>
+  <div class="footer__bottom">
     <div class="container footer__bottom-inner">
-        <small>© <span id="year"></span> St Theresa Medical Training College. All Rights Reserved.</small>
-        <small class="developer-credit">
-            Developed by <a href="https://yourlink.com" target="_blank" rel="noopener">Infranova Systems</a>
-        </small>
+      <small>&copy; <span id="year"></span> St Theresa Medical Training College. All Rights Reserved.</small>
+      <small class="developer-credit">Developed by <a href="https://infranovasystems.com" target="_blank" rel="noopener">Infranova Systems</a></small>
     </div>
-</div>
-  </footer>
-
-  <script>
-    document.addEventListener('DOMContentLoaded', function() {
-      const toggle = document.getElementById('mobile-toggle');
-      const nav = document.getElementById('primary-nav');
-
-      toggle.addEventListener('click', function() {
-        nav.classList.toggle('is-active');
-        toggle.innerHTML = nav.classList.contains('is-active') ? '✕' : '☰';
-      });
-
-      // Close menu if clicking outside
-      document.addEventListener('click', function(e) {
-        if (!toggle.contains(e.target) && !nav.contains(e.target)) {
-          nav.classList.remove('is-active');
-          toggle.innerHTML = '☰';
-        }
-      });
-    });
-  </script>
+  </div>
+</footer>
+  <a href="https://wa.me/254700626189" class="wa-float" target="_blank" rel="noopener" aria-label="Chat on WhatsApp">
+    <i class="fab fa-whatsapp"></i>
+  </a>
+  <button class="back-top" id="back-top" aria-label="Back to top">↑</button>
+  <div class="lightbox" id="lightbox">
+    <span class="lightbox__close" id="lightbox-close">&times;</span>
+    <img class="lightbox__img" id="lightbox-img" src="" alt="" />
+  </div>
+  <script src="assets/js/main.js"></script>
 </body>
 </html>

@@ -333,136 +333,60 @@ p { color: var(--text-body); }
 }
 
 /* ============================================================
- /* ============================================================
-   HERO (Matched Exactly to Slide Caption Elements)
+   HERO
    ============================================================ */
 .hero {
   position: relative;
-  padding: 120px 0 80px;
+  padding: 130px 0 100px;
   color: #fff;
-  text-align: left;
+  text-align: center;
   background-size: cover;
   background-position: center;
   overflow: hidden;
-  display: flex;
-  align-items: center;
-  min-height: 480px;
 }
 
 .hero::after {
   content: '';
   position: absolute;
   inset: 0;
-  background: linear-gradient(
-    160deg, 
-    rgba(7,55,105,0.75) 0%, 
-    rgba(11,79,138,0.50) 60%, 
-    rgba(47,125,209,0.25) 100%
-  );
+ background: linear-gradient(
+ 160deg,   rgba(7,55,105,0.45) 0%,   rgba(11,79,138,0.30) 60%,   rgba(47,125,209,0.15) 100%);
   z-index: 1;
 }
 
 .hero__content {
   position: relative;
   z-index: 2;
-  width: 100%;
-  max-width: 600px; /* Matches max-width of .slide-title */
-  margin: 0;
+  text-shadow: 0 2px 16px rgba(0,0,0,0.55);
 }
 
-/* Matched to .slide-tag */
-.hero .kicker,
-.hero-tag { 
-  display: inline-block;
-  background: rgba(255, 255, 255, 0.16);
-  backdrop-filter: blur(6px);
-  -webkit-backdrop-filter: blur(6px);
-  border: 1px solid rgba(255, 255, 255, 0.28);
-  color: #fff;
-  font-size: 0.70rem;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.10em;
-  padding: 4px 14px;
-  border-radius: 100px;
-  margin-bottom: 5px;
-}
+.hero h1 { color: #fff; margin-bottom: 18px; }
+.hero .sub { color: rgba(255,255,255,0.92); font-size: 1.15rem; max-width: 620px; margin: 0 auto 28px; }
+.hero .kicker { color: rgba(255,255,255,0.85); margin-bottom: 12px; }
 
-/* Matched to .slide-title */
-.hero h1 { 
-  font-family: var(--font-head);
-  font-size: clamp(1rem, 2vw, 1.4rem);
-  font-weight: 700;
-  color: #fff;
-  line-height: 1.15;
-  margin-bottom: 5px;
-  text-shadow: 0 2px 16px rgba(0, 0, 0, 0.5);
-  max-width: 600px;
-}
+.hero__actions { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; margin-top: 28px; }
 
-/* Matched to .slide-desc */
-.hero .sub { 
-  font-size: 0.92rem;
-  color: rgba(255, 255, 255, 0.90);
-  line-height: 1.70;
-  max-width: 520px;
-  margin-bottom: 5px;
-  text-shadow: 0 1px 6px rgba(0, 0, 0, 0.35);
-}
-
-/* Actions & Buttons */
-.hero__actions { 
-  display: flex; 
-  gap: 12px; 
-  justify-content: flex-start;
-  flex-wrap: wrap; 
-  margin-top: 18px; 
-}
-
-/* Stats bar (Left-aligned & compact to fit small text) */
+/* Stats bar inside hero */
 .hero .stats {
   display: flex;
-  justify-content: flex-start;
-  gap: 32px;
-  margin-top: 24px;
-  padding: 16px 24px;
-  background: rgba(255, 255, 255, 0.1);
+  justify-content: center;
+  gap: 40px;
+  margin-top: 52px;
+  padding: 20px 32px;
+  background: rgba(255,255,255,0.1);
   backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
   border-radius: var(--radius-lg);
-  border: 1px solid rgba(255, 255, 255, 0.2);
+  border: 1px solid rgba(255,255,255,0.2);
   flex-wrap: wrap;
-  max-width: fit-content;
-  margin-inline: 0;
+  max-width: 700px;
+  margin-inline: auto;
 }
 
-.stat { 
-  text-align: left; 
-}
+.stat { text-align: center; }
+.stat strong { display: block; font-family: var(--font-head); font-size: 1.8rem; font-weight: 800; color: #fff; line-height: 1; }
+.stat span { font-size: 0.78rem; color: rgba(255,255,255,0.8); text-transform: uppercase; letter-spacing: 0.08em; margin-top: 4px; display: block; }
 
-.stat strong { 
-  display: block; 
-  font-family: var(--font-head); 
-  font-size: 1.5rem; 
-  font-weight: 800; 
-  color: #fff; 
-  line-height: 1; 
-}
-
-.stat span { 
-  font-size: 0.72rem; 
-  color: rgba(255, 255, 255, 0.85); 
-  text-transform: uppercase; 
-  letter-spacing: 0.08em; 
-  margin-top: 4px; 
-  display: block; 
-}
-
-/* Inner sub-page variant */
-.hero--small { 
-  padding: 90px 0 50px; 
-  min-height: 300px;
-}
+.hero--small { padding: 90px 0 70px; }
 
 /* ============================================================
    SECTIONS
@@ -2116,8 +2040,7 @@ img:not([src]) {
 /* ── FOOTER LOGO — WHITE ON DARK FOOTER ───────────────────── */
 /* Apply class="footer__logo-white" to footer <img> */
 .footer__logo-white {
-  /* REMOVE filter: brightness(0) invert(1); */
-  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3)); /* Adds subtle depth without hiding color */
+  filter: brightness(0) invert(1);
   opacity: 1 !important;
   max-width: 160px;
   height: auto;
@@ -2299,15 +2222,15 @@ img:not([src]) {
   letter-spacing: 0.10em;
   padding: 4px 14px;
   border-radius: 100px;
-  margin-bottom: 5px;
+  margin-bottom: 10px;
 }
 .slide-title {
   font-family: var(--font-head);
-  font-size: clamp(1rem, 2vw, 1.4rem);
+  font-size: clamp(1.7rem, 3.8vw, 2.8rem);
   font-weight: 700;
   color: #fff;
   line-height: 1.15;
-  margin-bottom: 5px;
+  margin-bottom: 10px;
   text-shadow: 0 2px 16px rgba(0,0,0,0.5);
   max-width: 600px;
 }
@@ -2316,7 +2239,7 @@ img:not([src]) {
   color: rgba(255,255,255,0.90);
   line-height: 1.70;
   max-width: 520px;
-  margin-bottom: 5px;
+  margin-bottom: 20px;
   text-shadow: 0 1px 6px rgba(0,0,0,0.35);
 }
 .slide-actions {
