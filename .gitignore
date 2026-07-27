@@ -1,0 +1,191 @@
+# ============================================================
+# STTMTC — St Theresa Medical Training College
+# .gitignore — project root
+# ============================================================
+
+
+# ════════════════════════════════════════════════════════════
+# 🔴 CRITICAL — SECRETS & CREDENTIALS
+#    These contain passwords, API keys, and JWT secrets.
+#    If committed, they MUST be rotated immediately.
+# ════════════════════════════════════════════════════════════
+
+# Environment files
+.env
+.env.local
+.env.production
+.env.staging
+.env.test
+.env.*.local
+
+# Keep the example file — it shows what variables are needed
+!.env.example
+
+
+# ════════════════════════════════════════════════════════════
+# 🟠 NODE / BACKEND
+# ════════════════════════════════════════════════════════════
+
+# Dependencies — always regenerated with `npm install`
+node_modules/
+portal-backend/node_modules/
+jspm_packages/
+
+# npm / yarn / pnpm caches
+.npm
+.yarn-integrity
+.pnp
+.pnp.js
+
+# Build output (if you add a TypeScript or bundler step later)
+dist/
+build/
+out/
+
+# Logs generated at runtime by Winston (portal-backend/logs/)
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pids/
+*.pid
+*.seed
+*.pid.lock
+
+# Runtime data
+pids/
+lib-cov/
+
+
+# ════════════════════════════════════════════════════════════
+# 🟡 FILE UPLOADS (multer / user-generated content)
+#    Never commit student or staff uploaded files.
+# ════════════════════════════════════════════════════════════
+
+uploads/
+portal-backend/uploads/
+public/uploads/
+*.pdf
+!assets/img/*.pdf
+
+# But keep the uploads directory itself (with a .gitkeep)
+!uploads/.gitkeep
+
+
+# ════════════════════════════════════════════════════════════
+# 🟡 TEST & COVERAGE OUTPUT
+# ════════════════════════════════════════════════════════════
+
+coverage/
+.nyc_output/
+jest.config.local.js
+
+# Jest cache
+.jest-cache/
+
+
+# ════════════════════════════════════════════════════════════
+# 🟡 DATABASE DUMPS & BACKUPS
+#    May contain student data (ODPC-regulated PII)
+# ════════════════════════════════════════════════════════════
+
+*.sql.bak
+*.dump
+*.sql.gz
+backups/
+db-backups/
+
+# Keep schema and seed files (no real data in those)
+!database/schema.sql
+!database/seed.sql
+!portal-backend/src/utils/security_schema.sql
+
+
+# ════════════════════════════════════════════════════════════
+# 🔵 OPERATING SYSTEM FILES
+# ════════════════════════════════════════════════════════════
+
+# macOS
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+
+# Windows
+Thumbs.db
+Thumbs.db:encryptable
+desktop.ini
+$RECYCLE.BIN/
+*.lnk
+
+# Linux
+*~
+
+
+# ════════════════════════════════════════════════════════════
+# 🔵 EDITOR & IDE FILES
+# ════════════════════════════════════════════════════════════
+
+# VS Code
+.vscode/
+!.vscode/extensions.json
+!.vscode/settings.json.example
+
+# JetBrains (WebStorm, PhpStorm)
+.idea/
+*.iml
+*.iws
+*.ipr
+
+# Vim
+*.swp
+*.swo
+*~
+.netrwhist
+
+# Emacs
+\#*\#
+/.emacs.desktop
+/.emacs.desktop.lock
+*.elc
+
+# Sublime Text
+*.sublime-workspace
+
+
+# ════════════════════════════════════════════════════════════
+# 🔵 VERCEL / DEPLOYMENT
+# ════════════════════════════════════════════════════════════
+
+.vercel
+.now
+.output
+.nitro
+
+
+# ════════════════════════════════════════════════════════════
+# 🔵 MISC
+# ════════════════════════════════════════════════════════════
+
+# Temporary files
+tmp/
+temp/
+.tmp/
+*.tmp
+*.bak
+*.orig
+*.rej
+
+# Optional: lock files (remove # if you want to ignore these)
+# package-lock.json
+# yarn.lock
+
+# SSL certificates (if stored locally for dev)
+*.pem
+*.key
+*.crt
+*.cer
+*.p12
