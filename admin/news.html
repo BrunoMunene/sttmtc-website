@@ -193,11 +193,12 @@
   <div class="login-card">
     <div class="logo">📰</div>
     <h2>STTMTC-K News Manager</h2>
-    <p>Sign in with your staff portal credentials to manage news and announcements.</p>
-    <input type="email" id="login-email" placeholder="Staff email address" autocomplete="email"/>
-    <input type="password" id="login-password" placeholder="Password" autocomplete="current-password"/>
+    <p>Enter the admin password to manage news and announcements.</p>
+    <input type="password" id="login-password" placeholder="Enter admin password"
+           autocomplete="current-password"
+           onkeydown="if(event.key==='Enter')doLogin()"/>
     <button onclick="doLogin()">Sign In</button>
-    <div id="login-error"></div>
+    <div id="login-error" style="color:var(--danger);font-size:.82rem;margin-top:10px;display:none"></div>
   </div>
 </div>
 
@@ -381,70 +382,63 @@
 <script>
 'use strict';
 
+/* ── CONFIG ──────────────────────────────────────────────────
+   Change ADMIN_PASSWORD to whatever the college prefers.
+   No coding needed — just edit the string below and redeploy.
+   ─────────────────────────────────────────────────────────── */
+const ADMIN_PASSWORD = 'STTMTC@News2026';
+
 const SUPABASE_URL  = 'https://czfcwayqlbpjnrtkenpy.supabase.co';
-const SUPABASE_ANON = 'YOUR_ANON_KEY_HERE'; // ← replace with real anon key
+const SUPABASE_ANON = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImN6ZmN3YXlxbGJwam5ydGtlbnB5Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzQ3MjIzNTQsImV4cCI6MjA5MDI5ODM1NH0.okwp6m7ALEgw3rkkbG-zTosXRF_nZpz88FvgqTlHfEk';
+const SESSION_KEY   = 'sttmtc_news_admin';
 
 const sb = supabase.createClient(SUPABASE_URL, SUPABASE_ANON);
 
-// Allowed staff roles to access this page
-const ALLOWED_ROLES = ['admin','ict','principal'];
-
-let allPosts  = [];
-let staffName = '';
+let allPosts = [];
 
 /* ── AUTH ────────────────────────────────────────────────── */
-async function doLogin() {
-  const email = document.getElementById('login-email').value.trim();
+function doLogin() {
   const pass  = document.getElementById('login-password').value;
   const errEl = document.getElementById('login-error');
   errEl.style.display = 'none';
 
-  if (!email || !pass) {
-    errEl.textContent = 'Please enter your email and password.';
-    errEl.style.display = 'block'; return;
+  if (!pass) {
+    errEl.textContent = 'Please enter the admin password.';
+    errEl.style.display = 'block';
+    return;
   }
 
-  const { data, error } = await sb.auth.signInWithPassword({ email, password: pass });
-  if (error) {
-    errEl.textContent = 'Incorrect email or password.';
-    errEl.style.display = 'block'; return;
+  if (pass !== ADMIN_PASSWORD) {
+    errEl.textContent = 'Incorrect password. Please try again.';
+    errEl.style.display = 'block';
+    document.getElementById('login-password').value = '';
+    document.getElementById('login-password').focus();
+    return;
   }
 
-  // Check role
-  const { data: profile } = await sb.rpc('get_my_sttmtc_profile');
-  if (!profile || !ALLOWED_ROLES.includes(profile.role_name)) {
-    await sb.auth.signOut();
-    errEl.textContent = 'Access denied. Only Admin, ICT, or Principal staff can manage news.';
-    errEl.style.display = 'block'; return;
-  }
-
-  staffName = profile.full_name || email;
+  // Store session for this browser tab
+  sessionStorage.setItem(SESSION_KEY, 'authenticated');
   initApp();
 }
 
-async function doLogout() {
-  await sb.auth.signOut();
+function doLogout() {
+  sessionStorage.removeItem(SESSION_KEY);
   document.getElementById('app').style.display          = 'none';
   document.getElementById('login-screen').style.display = 'flex';
   document.getElementById('login-password').value = '';
 }
 
-// Auto-check session on load
-(async () => {
-  const { data: { session } } = await sb.auth.getSession();
-  if (session) {
-    const { data: profile } = await sb.rpc('get_my_sttmtc_profile');
-    if (profile && ALLOWED_ROLES.includes(profile.role_name)) {
-      staffName = profile.full_name || session.user.email;
-      initApp();
-    }
+// Auto-restore session if already logged in
+(function checkSession() {
+  if (sessionStorage.getItem(SESSION_KEY) === 'authenticated') {
+    initApp();
   }
 })();
 
 function initApp() {
   document.getElementById('login-screen').style.display = 'none';
   document.getElementById('app').style.display          = 'block';
-  document.getElementById('staff-name').textContent     = staffName;
+  document.getElementById('staff-name').textContent     = 'News Manager';
   loadAllPosts();
 }
 
@@ -465,7 +459,10 @@ async function loadAllPosts() {
     .select('*')
     .order('created_at', { ascending: false });
 
-  if (error) { showAlert('form-alert', 'danger', 'Error loading posts: ' + error.message); return; }
+  if (error) {
+    toast('Error loading posts: ' + error.message, 'danger');
+    return;
+  }
   allPosts = data || [];
   renderDashboard();
 }
@@ -477,10 +474,10 @@ function renderDashboard() {
   document.getElementById('s-draft').textContent = allPosts.filter(p => !p.is_published).length;
   document.getElementById('s-feat').textContent  = allPosts.filter(p => p.is_featured).length;
 
-  const tbody = document.getElementById('recent-posts-table');
+  const tbody  = document.getElementById('recent-posts-table');
   const recent = allPosts.slice(0, 8);
   if (!recent.length) {
-    tbody.innerHTML = '<tr><td colspan="5"><div class="empty"><div class="empty-icon">📭</div><p>No posts yet. Click Write New Post to get started.</p></div></td></tr>';
+    tbody.innerHTML = '<tr><td colspan="5"><div class="empty"><div class="empty-icon">📭</div><p>No posts yet. Click <strong>Write New Post</strong> to get started.</p></div></td></tr>';
     return;
   }
   tbody.innerHTML = recent.map(p => rowHtml(p, false)).join('');
@@ -497,31 +494,35 @@ function renderAllPostsTable(posts) {
 }
 
 function rowHtml(p, showFeatured) {
-  const date = p.published_at ? new Date(p.published_at).toLocaleDateString('en-KE', {day:'2-digit',month:'short',year:'numeric'}) : '—';
+  const date = p.published_at
+    ? new Date(p.published_at).toLocaleDateString('en-KE', {day:'2-digit',month:'short',year:'numeric'})
+    : '—';
   return `<tr>
     <td style="max-width:260px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-weight:600">${p.title}</td>
     <td><span class="badge" style="background:var(--brand-l);color:var(--brand)">${p.category}</span></td>
     <td><span class="badge ${p.is_published ? 'badge-published' : 'badge-draft'}">${p.is_published ? '✅ Published' : '📝 Draft'}</span></td>
     ${showFeatured ? `<td>${p.is_featured ? '<span class="badge badge-featured">⭐ Yes</span>' : '—'}</td>` : ''}
     <td style="font-size:.8rem;color:var(--muted)">${date}</td>
-    <td><div style="display:flex;gap:4px;flex-wrap:wrap">
+    <td><div style="display:flex;gap:4px;flex-wrap:wrap;">
       <button class="btn btn-ghost btn-sm" onclick="editPost('${p.id}')">✏️ Edit</button>
-      <button class="btn btn-sm ${p.is_published ? 'btn-warning' : 'btn-success'}" onclick="togglePublish('${p.id}',${p.is_published})">
+      <button class="btn btn-sm ${p.is_published ? 'btn-warning' : 'btn-success'}"
+              onclick="togglePublish('${p.id}',${p.is_published})">
         ${p.is_published ? '⏸ Unpublish' : '🚀 Publish'}
       </button>
-      <button class="btn btn-danger btn-sm" onclick="deletePost('${p.id}','${p.title.replace(/'/g,"\\'")}')">🗑</button>
+      <button class="btn btn-danger btn-sm"
+              onclick="deletePost('${p.id}','${p.title.replace(/'/g,"\'")}')">🗑</button>
     </div></td>
   </tr>`;
 }
 
-/* ── FILTER POSTS ────────────────────────────────────────── */
+/* ── FILTER ──────────────────────────────────────────────── */
 function filterPosts(type, btn) {
   document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
   if (btn) btn.classList.add('active');
   let filtered = allPosts;
-  if (type === 'published') filtered = allPosts.filter(p => p.is_published);
+  if (type === 'published') filtered = allPosts.filter(p =>  p.is_published);
   if (type === 'draft')     filtered = allPosts.filter(p => !p.is_published);
-  if (type === 'featured')  filtered = allPosts.filter(p => p.is_featured);
+  if (type === 'featured')  filtered = allPosts.filter(p =>  p.is_featured);
   renderAllPostsTable(filtered);
 }
 
@@ -554,20 +555,17 @@ async function savePost(publishNow) {
 
   let error;
   if (editId) {
-    // Update existing
-    const res = await sb.from('sttmtc_news').update(payload).eq('id', editId);
-    error = res.error;
+    ({ error } = await sb.from('sttmtc_news').update(payload).eq('id', editId));
   } else {
-    // Insert new
-    const res = await sb.from('sttmtc_news').insert(payload);
-    error = res.error;
+    ({ error } = await sb.from('sttmtc_news').insert(payload));
   }
 
   if (error) { showAlert('form-alert','danger','Save failed: ' + error.message); return; }
 
-  showAlert('form-alert','success', editId
-    ? `✅ Post updated${isPub ? ' and published' : ' as draft'} successfully!`
-    : `✅ Post ${isPub ? 'published' : 'saved as draft'} successfully!`
+  showAlert('form-alert','success',
+    editId
+      ? `✅ Post updated${isPub ? ' and published' : ' as draft'} successfully!`
+      : `✅ Post ${isPub ? 'published' : 'saved as draft'} successfully!`
   );
 
   resetForm();
@@ -580,14 +578,14 @@ function editPost(id) {
   const p = allPosts.find(x => x.id === id);
   if (!p) return;
 
-  document.getElementById('form-heading').textContent  = '✏️ Edit Post';
-  document.getElementById('edit-id').value             = p.id;
-  document.getElementById('f-title').value             = p.title;
-  document.getElementById('f-excerpt').value           = p.excerpt;
-  document.getElementById('f-content').value           = p.content || '';
-  document.getElementById('f-cat').value               = p.category;
-  document.getElementById('f-author').value            = p.author || '';
-  document.getElementById('f-image').value             = p.image_url || '';
+  document.getElementById('form-heading').textContent = '✏️ Edit Post';
+  document.getElementById('edit-id').value   = p.id;
+  document.getElementById('f-title').value   = p.title;
+  document.getElementById('f-excerpt').value = p.excerpt;
+  document.getElementById('f-content').value = p.content  || '';
+  document.getElementById('f-cat').value     = p.category;
+  document.getElementById('f-author').value  = p.author   || '';
+  document.getElementById('f-image').value   = p.image_url|| '';
 
   setToggle('t-published', p.is_published);
   setToggle('t-featured',  p.is_featured);
@@ -604,7 +602,8 @@ async function togglePublish(id, currentState) {
     published_at: newState ? new Date().toISOString() : null,
   }).eq('id', id);
 
-  if (error) { alert('Error: ' + error.message); return; }
+  if (error) { toast('Error: ' + error.message, 'danger'); return; }
+
   await loadAllPosts();
   renderAllPostsTable(allPosts);
   renderDashboard();
@@ -613,9 +612,11 @@ async function togglePublish(id, currentState) {
 
 /* ── DELETE POST ─────────────────────────────────────────── */
 async function deletePost(id, title) {
-  if (!confirm(`Delete "${title}"?\n\nThis cannot be undone.`)) return;
+  if (!confirm(`Delete "${title}"?
+
+This cannot be undone.`)) return;
   const { error } = await sb.from('sttmtc_news').delete().eq('id', id);
-  if (error) { alert('Error: ' + error.message); return; }
+  if (error) { toast('Error: ' + error.message, 'danger'); return; }
   await loadAllPosts();
   renderAllPostsTable(allPosts);
   renderDashboard();
@@ -625,22 +626,18 @@ async function deletePost(id, title) {
 /* ── FORM HELPERS ────────────────────────────────────────── */
 function resetForm() {
   document.getElementById('form-heading').textContent = '✏️ Write New Post';
-  document.getElementById('edit-id').value   = '';
-  document.getElementById('f-title').value   = '';
-  document.getElementById('f-excerpt').value = '';
-  document.getElementById('f-content').value = '';
-  document.getElementById('f-cat').value     = 'General';
-  document.getElementById('f-author').value  = '';
-  document.getElementById('f-image').value   = '';
+  ['edit-id','f-title','f-excerpt','f-content','f-author','f-image'].forEach(id => {
+    document.getElementById(id).value = '';
+  });
+  document.getElementById('f-cat').value = 'General';
   setToggle('t-published', false);
   setToggle('t-featured',  false);
   document.getElementById('preview-wrap').style.display = 'none';
   document.getElementById('form-alert').style.display   = 'none';
 }
 
-function toggleBtn(id) {
-  document.getElementById(id).classList.toggle('on');
-}
+function toggleBtn(id) { document.getElementById(id).classList.toggle('on'); }
+
 function setToggle(id, val) {
   const el = document.getElementById(id);
   val ? el.classList.add('on') : el.classList.remove('on');
@@ -648,26 +645,23 @@ function setToggle(id, val) {
 
 function togglePreview() {
   const wrap = document.getElementById('preview-wrap');
-  const vis  = wrap.style.display === 'none';
-  wrap.style.display = vis ? 'block' : 'none';
-  if (vis) updatePreview();
+  const show = wrap.style.display === 'none';
+  wrap.style.display = show ? 'block' : 'none';
+  if (show) updatePreview();
 }
 
 function updatePreview() {
-  const img = document.getElementById('f-image').value;
-  const prevImg = document.getElementById('prev-img');
-  if (img) {
-    prevImg.innerHTML = `<img src="${img}" style="width:100%;height:100%;object-fit:cover"/>`;
-  } else {
-    const icons = {Admissions:'📝',Academic:'📚',Events:'📅',Achievement:'🏅',Community:'🌿',Notice:'📢',General:'📌'};
-    prevImg.textContent = icons[document.getElementById('f-cat').value] || '📌';
-  }
-  document.getElementById('prev-cat').textContent  = document.getElementById('f-cat').value;
-  document.getElementById('prev-title').textContent = document.getElementById('f-title').value || 'Post title';
-  document.getElementById('prev-exc').textContent  = document.getElementById('f-excerpt').value || 'Your summary will appear here.';
+  const img  = document.getElementById('f-image').value;
+  const prev = document.getElementById('prev-img');
+  const icons = {Admissions:'📝',Academic:'📚',Events:'📅',Achievement:'🏅',Community:'🌿',Notice:'📢',General:'📌'};
+  prev.innerHTML = img
+    ? `<img src="${img}" style="width:100%;height:100%;object-fit:cover"/>`
+    : icons[document.getElementById('f-cat').value] || '📌';
+  document.getElementById('prev-cat').textContent   = document.getElementById('f-cat').value;
+  document.getElementById('prev-title').textContent = document.getElementById('f-title').value   || 'Post title';
+  document.getElementById('prev-exc').textContent   = document.getElementById('f-excerpt').value || 'Summary will appear here.';
 }
 
-// Live preview update
 ['f-title','f-excerpt','f-cat','f-image'].forEach(id => {
   const el = document.getElementById(id);
   if (el) el.addEventListener('input', () => {
@@ -678,19 +672,19 @@ function updatePreview() {
 /* ── UTILITIES ───────────────────────────────────────────── */
 function showAlert(containerId, type, msg) {
   const el = document.getElementById(containerId);
-  el.className = `alert alert-${type}`;
-  el.textContent = msg;
+  el.className    = `alert alert-${type}`;
+  el.textContent  = msg;
   el.style.display = 'block';
 }
 
-function toast(msg, type='success') {
+function toast(msg, type = 'success') {
   const colors = {success:'#10B981',danger:'#EF4444',warning:'#F59E0B',info:'#3A86FF'};
   const t = document.createElement('div');
-  t.style.cssText = `position:fixed;bottom:24px;right:24px;z-index:9999;background:${colors[type]};color:#fff;padding:12px 20px;border-radius:12px;font-size:.84rem;font-weight:600;box-shadow:0 8px 24px rgba(0,0,0,.2);animation:slideUp .3s ease`;
+  t.style.cssText = `position:fixed;bottom:24px;right:24px;z-index:9999;background:${colors[type]||colors.success};color:#fff;padding:12px 20px;border-radius:12px;font-size:.84rem;font-weight:600;box-shadow:0 8px 24px rgba(0,0,0,.2);animation:slideUp .3s ease;max-width:320px`;
   t.textContent = msg;
-  if (!document.querySelector('#toast-style')) {
+  if (!document.getElementById('toast-kf')) {
     const s = document.createElement('style');
-    s.id = 'toast-style';
+    s.id = 'toast-kf';
     s.textContent = '@keyframes slideUp{from{transform:translateY(20px);opacity:0}to{transform:translateY(0);opacity:1}}';
     document.head.appendChild(s);
   }
