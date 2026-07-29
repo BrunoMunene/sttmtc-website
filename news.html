@@ -81,6 +81,11 @@
     display: flex; flex-direction: column;
     transition: transform .3s ease, box-shadow .3s ease;
     cursor: pointer;
+    animation: cardIn .4s ease both;
+  }
+  @keyframes cardIn {
+    from { opacity:0; transform:translateY(16px); }
+    to   { opacity:1; transform:translateY(0); }
   }
   .news-card:hover {
     transform: translateY(-5px);
@@ -460,6 +465,12 @@ async function loadNews() {
   allPosts = data;
   renderMainGrid(allPosts);
   renderEventsGrid(allPosts);
+  // Re-trigger reveal observer on static section heads
+  // (they exist in HTML before JS runs, so they were already observed,
+  //  but call again in case any were missed)
+  document.querySelectorAll('.section__head.reveal, .cta-band .reveal').forEach(el => {
+    el.classList.add('revealed');
+  });
 }
 
 /* ── MAIN GRID ─────────────────────────────────────────── */
@@ -474,7 +485,7 @@ function renderMainGrid(posts) {
     const sliderHtml = buildSlider(imgs, p.category, `main-${p.id}`);
 
     if (isFeat) {
-      return `<article class="news-card news-featured reveal" onclick="openArticle('${p.id}')">
+      return `<article class="news-card news-featured" onclick="openArticle('${p.id}')">
         <div class="news-slider" id="slider-main-${p.id}">${sliderHtml}</div>
         <div class="news-card__body">
           <div class="news-card__meta">
@@ -491,7 +502,7 @@ function renderMainGrid(posts) {
       </article>`;
     }
 
-    return `<article class="news-card reveal" onclick="openArticle('${p.id}')">
+    return `<article class="news-card" onclick="openArticle('${p.id}')">
       <div class="news-slider" id="slider-main-${p.id}">${sliderHtml}</div>
       <div class="news-card__body">
         <div class="news-card__meta">
@@ -524,7 +535,7 @@ function renderEventsGrid(posts) {
     const date  = p.published_at ? new Date(p.published_at).toLocaleDateString('en-KE',{day:'2-digit',month:'long',year:'numeric'}) : '';
     const sliderHtml = buildSlider(imgs, p.category, `ev-${p.id}`);
 
-    return `<article class="news-card news-event reveal" onclick="openArticle('${p.id}')">
+    return `<article class="news-card news-event" onclick="openArticle('${p.id}')">
       <div class="news-slider" id="slider-ev-${p.id}" style="height:auto;min-height:160px;">${sliderHtml}</div>
       <div class="news-card__body">
         <div class="news-card__meta">
