@@ -331,11 +331,44 @@
           <div class="form-hint">This appears when the reader clicks "Read More". Leave blank if the summary is enough.</div>
         </div>
 
+        <!-- MULTI-IMAGE URLs -->
         <div class="form-group">
-          <label class="form-label">Image URL <span style="font-weight:400;color:var(--muted)">(optional)</span></label>
-          <input type="url" class="form-control" id="f-image"
-            placeholder="https://... (paste a direct link to an image)"/>
-          <div class="form-hint">Leave blank to use a default category illustration. Recommended: upload image to your website's assets/img/ folder and paste the full URL.</div>
+          <label class="form-label">
+            Images
+            <span style="font-weight:400;color:var(--muted)">(optional — up to 10)</span>
+          </label>
+          <div class="form-hint" style="margin-bottom:10px;">
+            📌 Add one or more image URLs. The first image is the cover photo.
+            If you have multiple images, they will appear as a sliding gallery on the news card.
+            Paste the full image URL (e.g. <code>assets/img/lab4.jpg</code> or a full https:// link).
+          </div>
+
+          <!-- Image URL list — rows added/removed dynamically -->
+          <div id="image-url-list" style="display:flex;flex-direction:column;gap:8px;margin-bottom:10px;">
+            <div class="img-url-row" style="display:flex;gap:8px;align-items:center;">
+              <span style="font-size:.72rem;font-weight:700;color:var(--muted);width:20px;text-align:center;flex-shrink:0;">1</span>
+              <input type="url" class="form-control img-url-input"
+                placeholder="https://... or assets/img/your-photo.jpg"
+                style="flex:1"/>
+              <button type="button" class="btn btn-ghost btn-sm" onclick="removeImgRow(this)"
+                style="flex-shrink:0;color:var(--danger);" title="Remove">✕</button>
+            </div>
+          </div>
+
+          <button type="button" class="btn btn-ghost btn-sm" onclick="addImgRow()"
+            style="border-style:dashed;">
+            ＋ Add Another Image
+          </button>
+
+          <!-- Quick-add from site assets -->
+          <div style="margin-top:14px;padding:14px 16px;background:var(--bg);border-radius:var(--radius);border:1px solid var(--border);">
+            <div style="font-size:.74rem;font-weight:700;color:var(--muted);margin-bottom:8px;">
+              📁 QUICK ADD — Site Images (click to add URL)
+            </div>
+            <div style="display:flex;flex-wrap:wrap;gap:6px;" id="quick-add-imgs">
+              <!-- Quick-add buttons for all real site images -->
+            </div>
+          </div>
         </div>
 
         <!-- Preview -->
@@ -547,7 +580,7 @@ async function savePost(publishNow) {
     content:      document.getElementById('f-content').value.trim() || null,
     category:     document.getElementById('f-cat').value,
     author:       document.getElementById('f-author').value.trim() || 'STTMTC-K',
-    image_url:    document.getElementById('f-image').value.trim() || null,
+    images:       getImageUrls(),   // array of URLs
     is_published: isPub,
     is_featured:  isFeat,
     published_at: isPub ? new Date().toISOString() : null,
@@ -585,7 +618,10 @@ function editPost(id) {
   document.getElementById('f-content').value = p.content  || '';
   document.getElementById('f-cat').value     = p.category;
   document.getElementById('f-author').value  = p.author   || '';
-  document.getElementById('f-image').value   = p.image_url|| '';
+  // Load images array into multi-image rows
+  const imgs = Array.isArray(p.images) ? p.images
+    : (p.images ? JSON.parse(p.images) : []);
+  setImageUrls(imgs);
 
   setToggle('t-published', p.is_published);
   setToggle('t-featured',  p.is_featured);
@@ -624,12 +660,119 @@ This cannot be undone.`)) return;
 }
 
 /* ── FORM HELPERS ────────────────────────────────────────── */
+/* ── MULTI-IMAGE HELPERS ─────────────────────────────────── */
+// All real images available on the site
+const SITE_IMAGES = [
+  'assets/img/admn1.jpg','assets/img/admn2.jpg',
+  'assets/img/hos1.jpg',
+  'assets/img/stdt1.jpg','assets/img/stdt2.jpg',
+  'assets/img/labb1.jpeg','assets/img/lab2.jpg','assets/img/lab3.jpg',
+  'assets/img/lab4.jpg','assets/img/lab6.jpg',
+  'assets/img/labexp.jpeg','assets/img/labtraining.jpeg',
+  'assets/img/clinical-skills-lab.jpg',
+  'assets/img/lib.jpeg','assets/img/hostel.jpeg',
+  'assets/img/class1.jpeg','assets/img/stdlife.jpeg',
+  'assets/img/graduation.jpg','assets/img/campus-building.jpeg',
+];
+
+// Populate quick-add buttons on load
+(function populateQuickAdd() {
+  const wrap = document.getElementById('quick-add-imgs');
+  if (!wrap) return;
+  wrap.innerHTML = SITE_IMAGES.map(path => {
+    const name = path.split('/').pop();
+    return `<button type="button"
+      class="btn btn-ghost btn-sm"
+      style="font-size:.72rem;padding:3px 10px;"
+      onclick="quickAddImg('${path}')"
+      title="${path}">
+      🖼 ${name}
+    </button>`;
+  }).join('');
+})();
+
+function quickAddImg(url) {
+  // Fill the first empty input, or add a new row
+  const inputs = document.querySelectorAll('.img-url-input');
+  for (const inp of inputs) {
+    if (!inp.value.trim()) { inp.value = url; inp.focus(); return; }
+  }
+  addImgRow(url);
+}
+
+function addImgRow(prefillUrl = '') {
+  const list  = document.getElementById('image-url-list');
+  const idx   = list.children.length + 1;
+  const row   = document.createElement('div');
+  row.className = 'img-url-row';
+  row.style.cssText = 'display:flex;gap:8px;align-items:center;';
+  row.innerHTML = `
+    <span style="font-size:.72rem;font-weight:700;color:var(--muted);width:20px;text-align:center;flex-shrink:0;">${idx}</span>
+    <input type="url" class="form-control img-url-input"
+      placeholder="https://... or assets/img/your-photo.jpg"
+      value="${prefillUrl}"
+      style="flex:1"/>
+    <button type="button" class="btn btn-ghost btn-sm"
+      onclick="removeImgRow(this)"
+      style="flex-shrink:0;color:var(--danger);" title="Remove">✕</button>`;
+  list.appendChild(row);
+  row.querySelector('input').focus();
+  reNumberRows();
+}
+
+function removeImgRow(btn) {
+  const list = document.getElementById('image-url-list');
+  if (list.children.length <= 1) {
+    // Keep at least one row, just clear it
+    list.querySelector('.img-url-input').value = '';
+    return;
+  }
+  btn.closest('.img-url-row').remove();
+  reNumberRows();
+}
+
+function reNumberRows() {
+  document.querySelectorAll('#image-url-list .img-url-row').forEach((row, i) => {
+    const num = row.querySelector('span');
+    if (num) num.textContent = i + 1;
+  });
+}
+
+function getImageUrls() {
+  return [...document.querySelectorAll('.img-url-input')]
+    .map(inp => inp.value.trim())
+    .filter(Boolean);
+}
+
+function setImageUrls(urls) {
+  const list = document.getElementById('image-url-list');
+  list.innerHTML = ''; // clear
+  const arr = Array.isArray(urls) ? urls : [];
+  if (!arr.length) arr.push(''); // at least one empty row
+  arr.forEach((url, i) => {
+    const row = document.createElement('div');
+    row.className = 'img-url-row';
+    row.style.cssText = 'display:flex;gap:8px;align-items:center;';
+    row.innerHTML = `
+      <span style="font-size:.72rem;font-weight:700;color:var(--muted);width:20px;text-align:center;flex-shrink:0;">${i+1}</span>
+      <input type="url" class="form-control img-url-input"
+        placeholder="https://... or assets/img/your-photo.jpg"
+        value="${url}"
+        style="flex:1"/>
+      <button type="button" class="btn btn-ghost btn-sm"
+        onclick="removeImgRow(this)"
+        style="flex-shrink:0;color:var(--danger);" title="Remove">✕</button>`;
+    list.appendChild(row);
+  });
+}
+
 function resetForm() {
   document.getElementById('form-heading').textContent = '✏️ Write New Post';
-  ['edit-id','f-title','f-excerpt','f-content','f-author','f-image'].forEach(id => {
+  ['edit-id','f-title','f-excerpt','f-content','f-author'].forEach(id => {
     document.getElementById(id).value = '';
   });
   document.getElementById('f-cat').value = 'General';
+  setImageUrls([]);
   setToggle('t-published', false);
   setToggle('t-featured',  false);
   document.getElementById('preview-wrap').style.display = 'none';
@@ -651,22 +794,32 @@ function togglePreview() {
 }
 
 function updatePreview() {
-  const img  = document.getElementById('f-image').value;
-  const prev = document.getElementById('prev-img');
+  const imgs  = getImageUrls();
+  const first = imgs[0] || '';
+  const prev  = document.getElementById('prev-img');
   const icons = {Admissions:'📝',Academic:'📚',Events:'📅',Achievement:'🏅',Community:'🌿',Notice:'📢',General:'📌'};
-  prev.innerHTML = img
-    ? `<img src="${img}" style="width:100%;height:100%;object-fit:cover"/>`
-    : icons[document.getElementById('f-cat').value] || '📌';
-  document.getElementById('prev-cat').textContent   = document.getElementById('f-cat').value;
+  prev.innerHTML = first
+    ? `<img src="${first}" style="width:100%;height:100%;object-fit:cover"/>`
+    : (icons[document.getElementById('f-cat').value] || '📌');
+
+  const imgCount = imgs.length;
+  document.getElementById('prev-cat').textContent =
+    document.getElementById('f-cat').value +
+    (imgCount > 1 ? ` · ${imgCount} images` : '');
   document.getElementById('prev-title').textContent = document.getElementById('f-title').value   || 'Post title';
   document.getElementById('prev-exc').textContent   = document.getElementById('f-excerpt').value || 'Summary will appear here.';
 }
 
-['f-title','f-excerpt','f-cat','f-image'].forEach(id => {
+['f-title','f-excerpt','f-cat'].forEach(id => {
   const el = document.getElementById(id);
   if (el) el.addEventListener('input', () => {
     if (document.getElementById('preview-wrap').style.display !== 'none') updatePreview();
   });
+});
+
+// Also update preview when image URLs change
+document.getElementById('image-url-list').addEventListener('input', () => {
+  if (document.getElementById('preview-wrap').style.display !== 'none') updatePreview();
 });
 
 /* ── UTILITIES ───────────────────────────────────────────── */
